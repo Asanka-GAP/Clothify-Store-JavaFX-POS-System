@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import org.example.db.DBConnection;
 
@@ -28,6 +29,7 @@ public class AdminDashBoardController implements Initializable {
     public JFXButton clearBtn;
     public JFXButton viewBtn;
     public Text errorMsgtxt;
+    public AnchorPane adminDashboardWindow;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

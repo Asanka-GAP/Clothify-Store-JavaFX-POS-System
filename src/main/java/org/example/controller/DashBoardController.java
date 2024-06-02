@@ -4,10 +4,12 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import org.example.db.DBConnection;
@@ -15,6 +17,7 @@ import org.example.db.DBConnection;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
@@ -43,6 +46,7 @@ public class DashBoardController implements Initializable {
     public Text resetTxt;
     public Text errormsg;
     public Text validmsg;
+    public AnchorPane dashboardWindow;
 
     private int otp;
 
@@ -53,7 +57,10 @@ public class DashBoardController implements Initializable {
         validmsg.setVisible(false);
     }
 
-    public void signinBtnAction(ActionEvent actionEvent) {
+    public void signinBtnAction(ActionEvent actionEvent) throws IOException {
+
+        SceneSwitchController.getInstance().switchScene(dashboardWindow,"adminDashBoard-form.fxml");
+
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             Statement statement = connection.createStatement();
