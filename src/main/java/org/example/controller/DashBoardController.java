@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import org.example.crudUtil.CrudUtil;
 import org.example.db.DBConnection;
 
 import javax.mail.*;
@@ -59,22 +60,22 @@ public class DashBoardController implements Initializable {
 
     public void signinBtnAction(ActionEvent actionEvent) throws IOException {
 
-        SceneSwitchController.getInstance().switchScene(dashboardWindow,"adminDashBoard-form.fxml");
 
         try {
-            Connection connection = DBConnection.getInstance().getConnection();
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM user WHERE email='"+emailField.getText()+"'");
-
+            ResultSet resultSet = CrudUtil.execute("SELECT * FROM user WHERE email=?",emailField.getText());
 
             while (resultSet.next()){
 
                 String password = new String(Base64.getDecoder().decode(resultSet.getString(4)));
+                String email = resultSet.getString(3);
 
                 if (resultSet.getString(5).equals("Admin") && password.equals(passwordField.getText())){
                     System.out.println("Logged");
-                }else{
+                    SceneSwitchController.getInstance().switchScene(dashboardWindow,"adminDashBoard-form.fxml");
+                }else if (resultSet.getString(5).equals("Employee") && password.equals(passwordField.getText())){
                     System.out.println("Employee");
+                } else{
+                    new Alert(Alert.AlertType.ERROR,"Invalid Password").show();
                 }
             }
 
