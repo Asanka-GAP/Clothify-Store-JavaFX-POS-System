@@ -1,16 +1,20 @@
 package org.example.model;
 
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     private String id;
     private String name;
     private String email;
-    private String address;
-    private String role;
     private String password;
+    private String role;
+    private String address;
+
 
 }

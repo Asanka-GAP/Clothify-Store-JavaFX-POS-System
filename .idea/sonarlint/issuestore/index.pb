@@ -19,3 +19,5 @@ Y
 )src/main/java/org/example/model/User.java,7\5\75b269ee3afe6543805f4a7e7ccd331cdf316318
 o
 ?src/main/java/org/example/controller/SceneSwitchController.java,6\8\68f6844884ab8d7bf126e159673b2fc27ba5b713
+
+Osrc/main/java/org/example/controller/entityController/UserEntityController.java,8\b\8bb0890480a8f42dda08d4433a1842ae0965aeb1

@@ -3,6 +3,8 @@ package org.example.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,8 +14,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import org.example.controller.entityController.UserEntityController;
 import org.example.crudUtil.CrudUtil;
 import org.example.db.DBConnection;
+import org.example.model.User;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -58,30 +62,27 @@ public class DashBoardController implements Initializable {
         validmsg.setVisible(false);
     }
 
-    public void signinBtnAction(ActionEvent actionEvent) throws IOException {
+    public void signinBtnAction(ActionEvent actionEvent) {
 
+        ObservableList<User> list = UserEntityController.getInstance().getUserByEmail(emailField.getText());
 
-        try {
-            ResultSet resultSet = CrudUtil.execute("SELECT * FROM user WHERE email=?",emailField.getText());
+        list.forEach(user -> {
+            String password = new String(Base64.getDecoder().decode(user.getPassword()));
 
-            while (resultSet.next()){
-
-                String password = new String(Base64.getDecoder().decode(resultSet.getString(4)));
-                String email = resultSet.getString(3);
-
-                if (resultSet.getString(5).equals("Admin") && password.equals(passwordField.getText())){
-                    System.out.println("Logged");
+            if (user.getRole().equals("Admin") && password.equals(passwordField.getText())){
+                System.out.println("Logged");
+                try {
                     SceneSwitchController.getInstance().switchScene(dashboardWindow,"adminDashBoard-form.fxml");
-                }else if (resultSet.getString(5).equals("Employee") && password.equals(passwordField.getText())){
-                    System.out.println("Employee");
-                } else{
-                    new Alert(Alert.AlertType.ERROR,"Invalid Password").show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
+            }else if (user.getRole().equals("Employee") && password.equals(passwordField.getText())){
+                System.out.println("Employee");
+            } else{
+                new Alert(Alert.AlertType.ERROR,"Invalid Password").show();
             }
+        });
 
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println(e);
-        }
     }
 
     public void forgotPasswordClickAction(MouseEvent mouseEvent) {
