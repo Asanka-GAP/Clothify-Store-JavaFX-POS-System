@@ -1,10 +1,14 @@
 package org.example.bo.custom.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.example.bo.custom.UserBo;
 import org.example.controller.DashBoardController;
 import org.example.dao.DaoFactory;
 import org.example.dao.custom.impl.UserDaoImpl;
 import org.example.entity.UserEntity;
+import org.example.model.User;
 import org.example.util.DaoType;
 
 import javax.mail.*;
@@ -21,6 +25,13 @@ import java.util.regex.Pattern;
 
 public class UserBoImpl implements UserBo {
     UserDaoImpl userDaoImpl = DaoFactory.getInstance().getDao(DaoType.USER);
+
+
+    public boolean insertUser(User user) throws SQLException {
+
+        UserEntity userEntity = new ObjectMapper().convertValue(user, UserEntity.class);
+        return userDaoImpl.insert(userEntity);
+    }
 
     public UserEntity getUserByEmail(String email) {
         try {
@@ -84,5 +95,19 @@ public class UserBoImpl implements UserBo {
             Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE,null,e);
         }
         return null;
+    }
+    public boolean isValidEmail(String email){
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return email.matches(regex);
+    }
+
+    public ObservableList<User> getAllUsers() throws SQLException {
+        ObservableList<UserEntity> list = userDaoImpl.searchAll();
+        ObservableList<User> userList =FXCollections.observableArrayList();
+
+        list.forEach(userEntity -> {
+            userList.add(new ObjectMapper().convertValue(userEntity,User.class));
+        });
+        return userList;
     }
 }

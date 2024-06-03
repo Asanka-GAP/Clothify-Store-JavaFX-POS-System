@@ -1,0 +1,9 @@
+
+	java:S1125"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8¿Å‹ùı1J$4012d98b-11b4-4926-8841-15387e8f480c
+¨
+java:S1488<"`Immediately return this expression instead of assigning it to the temporary variable "isInsert".(Äİ©Íıÿÿÿÿ8ÂÅ‹ùı1J$dcc59359-d547-4318-9209-a7bd19c08eed
+r	java:S106"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8ÙÅ‹ùı1J$8eb7052c-8a4b-426d-8e69-8e8210088970
+r	java:S106D"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8ŞÅ‹ùı1J$7dba181c-4b07-468b-8b46-a921c8dd9a14
+r	java:S106M"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8áÅ‹ùı1J$835dd4c5-6d3b-46c9-b258-413a7916652c
+r	java:S106X"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8âÅ‹ùı1J$929fa326-4467-4200-924c-1f333fc84cb5
+r	java:S106d"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8È×Œùı1J$914805d4-2e9a-4c21-8fd5-a42b0a0d01a8

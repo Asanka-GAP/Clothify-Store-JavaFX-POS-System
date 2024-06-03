@@ -6,43 +6,92 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="dashboardWindow" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.DashBoardController">
+<AnchorPane fx:id="dashboardWindow" prefHeight="523.0" prefWidth="849.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.DashBoardController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#371d61" height="416.0" layoutX="-15.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="242.0" />
-      <JFXTextField fx:id="emailField" layoutX="314.0" layoutY="112.0" prefHeight="26.0" prefWidth="215.0" promptText="Email" />
-      <JFXPasswordField fx:id="passwordField" layoutX="314.0" layoutY="168.0" prefHeight="26.0" prefWidth="215.0" promptText="Password" />
-      <JFXButton fx:id="signinBtn" layoutX="336.0" layoutY="229.0" onAction="#signinBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Sign In" />
-      <Text fx:id="forgotPasswordLink" layoutX="371.0" layoutY="299.0" onMouseClicked="#forgotPasswordClickAction" strokeType="OUTSIDE" strokeWidth="0.0" text="Forgot Password">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="523.0" layoutX="-6.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="242.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.03529411926865578" green="0.125490203499794" blue="0.24705882370471954" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.32549020648002625" green="0.47058823704719543" blue="0.5843137502670288" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill></Rectangle>
+      <JFXTextField fx:id="emailField" layoutX="402.0" layoutY="195.0" prefHeight="26.0" prefWidth="300.0" promptText="Email" />
+      <JFXPasswordField fx:id="passwordField" layoutX="401.0" layoutY="247.0" prefHeight="26.0" prefWidth="300.0" promptText="Password" />
+      <JFXButton fx:id="signinBtn" layoutX="471.0" layoutY="312.0" onAction="#signinBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Sign In" />
+      <Text fx:id="forgotPasswordLink" layoutX="507.0" layoutY="387.0" onMouseClicked="#forgotPasswordClickAction" strokeType="OUTSIDE" strokeWidth="0.0" text="Forgot Password">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <FontAwesomeIconView fill="#371d61" glyphName="ADDRESS_CARD" layoutX="393.0" layoutY="90.0" size="40" />
-      <Text fill="WHITE" layoutX="48.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Clothify Store" textAlignment="CENTER" wrappingWidth="116.97471618652344">
-         <font>
-            <Font name="Calibri Italic" size="29.0" />
-         </font>
-      </Text>
-      <FontAwesomeIconView fill="WHITE" glyphName="SHOPPING_CART" layoutX="79.0" layoutY="250.0" size="60" wrappingWidth="53.94284439086914" />
-      <Rectangle fx:id="panel2" arcHeight="5.0" arcWidth="5.0" fill="#371d61" height="416.0" layoutX="360.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="242.0" />
-      <JFXButton fx:id="signinBtn2" layoutX="399.0" layoutY="185.0" onAction="#signinBtn2Action" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #fff; -fx-border-radius: 20;" text="Sign In" textFill="WHITE" />
-      <Rectangle fx:id="panel3" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="414.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="367.0" />
-      <JFXTextField fx:id="emailField2" layoutX="76.0" layoutY="96.0" prefHeight="26.0" prefWidth="215.0" promptText="Email" />
-      <JFXButton fx:id="otpBtn" layoutX="139.0" layoutY="138.0" onAction="#otpBtnAction" prefHeight="26.0" prefWidth="88.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Send OTP" />
-      <JFXPasswordField fx:id="passwordField1" layoutX="75.0" layoutY="200.0" onKeyReleased="#newPasswordKeyReleased" prefHeight="26.0" prefWidth="215.0" promptText="New Password" />
-      <JFXPasswordField fx:id="reEnterPasswordField" layoutX="76.0" layoutY="243.0" prefHeight="26.0" prefWidth="215.0" promptText="Re Enter New Password" />
-      <JFXTextField fx:id="otpTextField" layoutX="76.0" layoutY="286.0" prefHeight="26.0" prefWidth="215.0" promptText="OTP Code" />
-      <JFXButton fx:id="resetBtn" layoutX="103.0" layoutY="338.0" onAction="#resetBtnOnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Reset Password" />
-      <Text fx:id="resetTxt" fill="#371d61" layoutX="83.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reset Password">
+      <FontAwesomeIconView fill="#09203f" glyphName="ADDRESS_CARD" layoutX="495.0" layoutY="145.0" size="100" />
+      <Rectangle fx:id="panel2" arcHeight="5.0" arcWidth="5.0" height="525.0" layoutX="607.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="242.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.32549020648002625" green="0.47058823704719543" blue="0.5843137502670288" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.03529411926865578" green="0.125490203499794" blue="0.24705882370471954" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill></Rectangle>
+      <JFXButton fx:id="signinBtn2" layoutX="648.0" layoutY="302.0" onAction="#signinBtn2Action" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #fff; -fx-border-radius: 20;" text="Sign In" textFill="WHITE" />
+      <Rectangle fx:id="panel3" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="533.0" layoutX="-6.0" layoutY="-9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="614.0" />
+      <JFXTextField fx:id="emailField2" layoutX="196.0" layoutY="96.0" prefHeight="26.0" prefWidth="215.0" promptText="Email" />
+      <JFXButton fx:id="otpBtn" layoutX="260.0" layoutY="145.0" onAction="#otpBtnAction" prefHeight="26.0" prefWidth="88.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Send OTP" />
+      <JFXPasswordField fx:id="passwordField1" layoutX="132.0" layoutY="298.0" onKeyReleased="#newPasswordKeyReleased" prefHeight="26.0" prefWidth="300.0" promptText="New Password" />
+      <JFXPasswordField fx:id="reEnterPasswordField" layoutX="132.0" layoutY="330.0" prefHeight="26.0" prefWidth="300.0" promptText="Re Enter New Password" />
+      <JFXTextField fx:id="otpTextField" layoutX="132.0" layoutY="361.0" prefHeight="26.0" prefWidth="300.0" promptText="OTP Code" />
+      <JFXButton fx:id="resetBtn" layoutX="202.0" layoutY="406.0" onAction="#resetBtnOnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Reset Password" />
+      <Text fx:id="resetTxt" fill="#09203f" layoutX="203.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reset Password">
          <font>
             <Font name="Times New Roman" size="32.0" />
          </font>
       </Text>
-      <Text fx:id="errormsg" fill="#ef0404" layoutX="134.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid Password" wrappingWidth="98.39995117187505" />
-      <Text fx:id="validmsg" fill="#00a922" layoutX="134.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valid Password" wrappingWidth="98.39995117187505" />
+      <Text fx:id="errormsg" fill="#ef0404" layoutX="275.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid Password" wrappingWidth="98.39995117187505" />
+      <Text fx:id="validmsg" fill="#00a922" layoutX="275.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valid Password" wrappingWidth="98.39995117187505" />
+      <FontAwesomeIconView fx:id="mainCartIcon" fill="#21a68b" glyphName="SHOPPING_CART" layoutX="69.0" layoutY="253.0" size="100" />
+      <Text fx:id="mainTitle" fill="#ffffff00" layoutX="16.0" layoutY="228.0" stroke="WHITE" strokeType="OUTSIDE" text="Clothify Store">
+         <font>
+            <Font name="Times New Roman Bold" size="33.0" />
+         </font>
+      </Text>
+      <FontAwesomeIconView fx:id="iconCart" fill="#21a68b" glyphName="SHOPPING_CART" layoutX="682.0" layoutY="234.0" size="100" />
+      <Text fx:id="titleTxt" fill="#ffffff00" layoutX="629.0" layoutY="209.0" stroke="WHITE" strokeType="OUTSIDE" text="Clothify Store">
+         <font>
+            <Font name="Times New Roman Bold" size="33.0" />
+         </font>
+      </Text>
+      <Text layoutX="814.0" layoutY="25.0" onMouseClicked="#closeBtnAction" strokeType="OUTSIDE" strokeWidth="0.0" text="X" textAlignment="CENTER" wrappingWidth="27.07818603515625">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="CLOSED_HAND" />
+         </cursor>
+      </Text>
    </children>
 </AnchorPane>

@@ -1,0 +1,15 @@
+
+v
+java:S1121".Extract the assignment out of this expression.(ÒÛÛÅúÿÿÿÿ8ú¢áı1J$573ebe04-57e9-49de-9428-d50baff7dadd
+
+java:S1301"KReplace this "switch" statement by "if" statements to increase readability.(ÜŸ•8ú¢áı1J$25cab4e8-b05c-4231-84ba-035537482234
+á
+java:S6548
+"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(§İüáşÿÿÿÿ8—ú¢áı1J$4214cee1-dcc5-48ee-b834-8f4a8c092c5b
+u	java:S131"YComplete cases by adding the missing enum constants or add a default case to this switch.(ÜŸ•8£Ùíâı1
+W
+java:S1128"5Remove this unused import 'org.example.dao.SuperDao'.(£ú¦øÿÿÿÿ8¤Ùíâı1
+a
+java:S1128"DRemove this unused import 'org.example.dao.custom.impl.UserDaoImpl'.(Ó¸ò·8¤Ùíâı1
+W
+java:S1128"5Remove this unused import 'org.example.util.DaoType'.(â¸½§úÿÿÿÿ8¤Ùíâı1

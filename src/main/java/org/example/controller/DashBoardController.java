@@ -3,9 +3,11 @@ package org.example.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -50,6 +52,10 @@ public class DashBoardController implements Initializable {
     public Text errormsg;
     public Text validmsg;
     public AnchorPane dashboardWindow;
+    public FontAwesomeIconView iconCart;
+    public Text titleTxt;
+    public FontAwesomeIconView mainCartIcon;
+    public Text mainTitle;
 
     private int otp;
 
@@ -137,6 +143,10 @@ public class DashBoardController implements Initializable {
         otpTextField.setVisible(b);
         resetBtn.setVisible(b);
         resetTxt.setVisible(b);
+        iconCart.setVisible(b);
+        titleTxt.setVisible(b);
+        mainCartIcon.setVisible(!b);
+        mainTitle.setVisible(!b);
     }
 
     public void resetBtnOnAction(ActionEvent actionEvent) {
@@ -145,7 +155,15 @@ public class DashBoardController implements Initializable {
             if (passwordField1.getText().equals(reEnterPasswordField.getText())){
                 if (otp==Integer.parseInt(otpTextField.getText())){
                     boolean isUpdatePassword = userBoImpl.isUpdatePassword(emailField2.getText(),passwordField1.getText());
-                    if (isUpdatePassword) new Alert(Alert.AlertType.INFORMATION,"Password reset Successfully").show();
+                    if (isUpdatePassword){
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Reset Password");
+                        alert.setContentText("Password reset Successfully");
+                        alert.showAndWait();
+                        passwordField1.setText("");
+                        reEnterPasswordField.setText("");
+                        otpTextField.setText("");
+                    }
                 }else {
                     new Alert(Alert.AlertType.ERROR,"Incorrect OTP, Please Check your OTP").show();
                 }
@@ -173,6 +191,17 @@ public class DashBoardController implements Initializable {
             reEnterPasswordField.setDisable(false);
             errormsg.setVisible(false);
             validmsg.setVisible(true);
+        }
+    }
+
+    public void closeBtnAction(MouseEvent mouseEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Exit");
+        alert.setContentText("Are you sure want to exit..?");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK){
+            System.exit(0);
         }
     }
 }
