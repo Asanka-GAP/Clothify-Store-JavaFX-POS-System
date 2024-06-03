@@ -3,10 +3,7 @@ package org.example.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
@@ -14,18 +11,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import org.example.controller.entityController.UserEntityController;
-import org.example.crudUtil.CrudUtil;
-import org.example.db.DBConnection;
-import org.example.model.User;
+import org.example.bo.custom.impl.UserBoImpl;
+import org.example.entity.UserEntity;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.sql.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,24 +57,26 @@ public class DashBoardController implements Initializable {
 
     public void signinBtnAction(ActionEvent actionEvent) {
 
-        ObservableList<User> list = UserEntityController.getInstance().getUserByEmail(emailField.getText());
+        UserEntity userEntity = new UserBoImpl().getUserByEmail(emailField.getText());
 
-        list.forEach(user -> {
-            String password = new String(Base64.getDecoder().decode(user.getPassword()));
 
-            if (user.getRole().equals("Admin") && password.equals(passwordField.getText())){
+        String password = new String(Base64.getDecoder().decode(userEntity.getPassword()));
+
+            if (userEntity.getRole().equals("Admin") && password.equals(passwordField.getText())){
                 System.out.println("Logged");
                 try {
                     SceneSwitchController.getInstance().switchScene(dashboardWindow,"adminDashBoard-form.fxml");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-            }else if (user.getRole().equals("Employee") && password.equals(passwordField.getText())){
+            }else if (userEntity.getRole().equals("Employee") && password.equals(passwordField.getText())){
                 System.out.println("Employee");
+            } else if (userEntity.getId()==null) {
+                System.out.println("Null");
             } else{
                 new Alert(Alert.AlertType.ERROR,"Invalid Password").show();
             }
-        });
+
 
     }
 
@@ -97,7 +92,7 @@ public class DashBoardController implements Initializable {
     public void otpBtnAction(ActionEvent actionEvent) {
 
         Random random = new Random();
-        otp = random.nextInt(99999)+10000;
+        otp = random.nextInt(999999)+100000;
 
 
         try {

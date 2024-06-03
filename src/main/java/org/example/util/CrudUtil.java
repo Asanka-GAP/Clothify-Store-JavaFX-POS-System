@@ -1,4 +1,4 @@
-package org.example.crudUtil;
+package org.example.util;
 
 import org.example.db.DBConnection;
 

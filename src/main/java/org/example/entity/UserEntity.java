@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.entity;
 
 
 import lombok.*;
@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class UserEntity {
 
     private String id;
     private String name;
