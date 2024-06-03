@@ -11,12 +11,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import org.example.bo.BoFactory;
+import org.example.bo.SuperBo;
 import org.example.bo.custom.impl.UserBoImpl;
+import org.example.dao.custom.impl.UserDaoImpl;
 import org.example.entity.UserEntity;
+import org.example.util.BoType;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.beans.Encoder;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -48,19 +53,27 @@ public class DashBoardController implements Initializable {
 
     private int otp;
 
+    UserBoImpl userBoImpl=new UserBoImpl();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         resetPasswordField(false);
         errormsg.setVisible(false);
         validmsg.setVisible(false);
+
     }
 
     public void signinBtnAction(ActionEvent actionEvent) {
 
-        UserEntity userEntity = new UserBoImpl().getUserByEmail(emailField.getText());
+        userBoImpl=BoFactory.getInstance().getBo(BoType.USER);
+        UserEntity userEntity = userBoImpl.getUserByEmail(emailField.getText());
 
 
-        String password = new String(Base64.getDecoder().decode(userEntity.getPassword()));
+        if (userEntity==null){
+            new Alert(Alert.AlertType.ERROR,"Invalid Email Address or Password").show();
+            return;
+        }
+        String password = userBoImpl.passwordDecrypt(userEntity.getPassword());
 
             if (userEntity.getRole().equals("Admin") && password.equals(passwordField.getText())){
                 System.out.println("Logged");
@@ -76,12 +89,19 @@ public class DashBoardController implements Initializable {
             } else{
                 new Alert(Alert.AlertType.ERROR,"Invalid Password").show();
             }
-
-
     }
 
     public void forgotPasswordClickAction(MouseEvent mouseEvent) {
+        UserBoImpl userBoImpl = BoFactory.getInstance().getBo(BoType.USER);
+        UserEntity userEntity = userBoImpl.getUserByEmail(emailField.getText());
+
+        if (userEntity==null){
+            new Alert(Alert.AlertType.ERROR,"Please enter your correct email address").show();
+            return;
+        }
         resetPasswordField(true);
+        emailField2.setText(emailField.getText());
+        emailField2.setDisable(true);
 
     }
 
@@ -93,12 +113,13 @@ public class DashBoardController implements Initializable {
 
         Random random = new Random();
         otp = random.nextInt(999999)+100000;
-
+        System.out.println(otp);
 
         try {
-            sendEmail(emailField2.getText(),Integer.toString(otp));
+            userBoImpl.sendEmail(emailField2.getText(),Integer.toString(otp));
+            new Alert(Alert.AlertType.INFORMATION,"Send Email Successfully").show();
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR,"Access Denided..your Email is invalid").show();
         }
 
     }
@@ -120,67 +141,38 @@ public class DashBoardController implements Initializable {
 
     public void resetBtnOnAction(ActionEvent actionEvent) {
 
-    }
-
-    private void sendEmail(String receiveEmail,String text) throws MessagingException {
-        Properties properties = new Properties();
-
-        properties.put("mail.smtp.auth","true");
-        properties.put("mail.smtp.starttls.enable","true");
-        properties.put("mail.smtp.host","smtp.gmail.com");
-        properties.put("mail.smtp.port","587");
-
-        String myEmail = "asankapradeep0830@gmail.com";
-        String password = "tkmkeibffwnpwjcp";
-
-        Session session = Session.getInstance(properties, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(myEmail,password);
-            }
-        });
-
-        Message message = prepareMessage(session,myEmail,emailField2.getText(),text);
-
-        if (message!=null){
-            new Alert(Alert.AlertType.INFORMATION,"Send Email Successfully").show();
-        }else{
-            new Alert(Alert.AlertType.ERROR,"Please Try Again").show();
-        }
-        Transport.send(message);
-    }
-
-    private Message prepareMessage(Session session, String myEmail, String receiveEmail, String text) {
         try {
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(myEmail));
-            message.setRecipients(Message.RecipientType.TO,new InternetAddress[]{
-                    new InternetAddress(receiveEmail)
-            });
-            message.setSubject("OTP CODE");
-            message.setText(text);
+            if (passwordField1.getText().equals(reEnterPasswordField.getText())){
+                if (otp==Integer.parseInt(otpTextField.getText())){
+                    boolean isUpdatePassword = userBoImpl.isUpdatePassword(emailField2.getText(),passwordField1.getText());
+                    if (isUpdatePassword) new Alert(Alert.AlertType.INFORMATION,"Password reset Successfully").show();
+                }else {
+                    new Alert(Alert.AlertType.ERROR,"Incorrect OTP, Please Check your OTP").show();
+                }
 
-            return message;
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Password & Confirmation Password does not match..!!").show();
+            }
         }catch (Exception e){
-            Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE,null,e);
+            new Alert(Alert.AlertType.ERROR,"Invalid OTP").show();
         }
-        return null;
+
     }
 
-    public void passwordValidate(String password){
-        Pattern pattern = Pattern.compile("((?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[@#%$!&]).{8,20})");
-        Matcher matcher = pattern.matcher(password);
 
-        if (!matcher.matches()){
+
+
+
+    public void newPasswordKeyReleased(KeyEvent keyEvent) {
+        boolean isValidPassword = userBoImpl.passwordValidate(passwordField1.getText());
+        if (!isValidPassword){
             errormsg.setVisible(true);
             validmsg.setVisible(false);
+            reEnterPasswordField.setDisable(true);
         }else{
+            reEnterPasswordField.setDisable(false);
             errormsg.setVisible(false);
             validmsg.setVisible(true);
         }
-    }
-
-    public void newPasswordKeyReleased(KeyEvent keyEvent) {
-        passwordValidate(passwordField1.getText());
     }
 }

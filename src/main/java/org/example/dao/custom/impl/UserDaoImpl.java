@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDaoImpl implements UserDao {
+
+
     @Override
     public UserEntity search(String s) throws SQLException {
         UserEntity userEntity = null;
@@ -26,8 +28,9 @@ public class UserDaoImpl implements UserDao {
             }
             return userEntity;
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println(e);
         }
+        return null;
     }
 
     @Override
@@ -67,6 +70,14 @@ public class UserDaoImpl implements UserDao {
         return false;
     }
 
+    public boolean update(String email,String password) throws SQLException{
+        try {
+            return CrudUtil.execute("UPDATE user SET password=? WHERE email=?",password,email);
+        } catch (ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
     @Override
     public boolean update(UserEntity userEntity) throws SQLException {
         try {
