@@ -120,3 +120,5 @@ Q.idea/sonarlint/securityhotspotstore/2/c/2cabb939da04d3de3a200bf2b575690e1a1631
 Q.idea/sonarlint/securityhotspotstore/0/c/0c86038feff71bb82d6abd646990279c42e74fa1,2\c\2cc4d53681679560611a98a1adfb55a4c6b93a79
 Å
 Q.idea/sonarlint/securityhotspotstore/8/f/8f7a40b6f0f8d3f2a39c6040142b549bc04d0450,b\9\b96930fd6114e5f81309a35ab66f2c9561072172
+a
+1src/main/java/org/example/util/HibernateUtil.java,d\2\d220e415002e683af285f12a089f3139d7e179cb

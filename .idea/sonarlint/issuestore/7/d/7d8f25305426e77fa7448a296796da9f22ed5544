@@ -1,84 +1,84 @@
 
-	java:S112R"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8Ö¦‹ş1J$b495919a-ca88-4e71-b9bc-ecb60f731055
-	java:S112T"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8Ö¦‹ş1J$94edbc03-190d-42af-9738-a266a8039be0
+	java:S112P"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8È¾¥ş1J$6b88a720-8468-4f02-b1e1-b7681c9b3c0b
+	java:S112R"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8É¾¥ş1J$4eed3664-ed7c-428b-a869-98db16495650
 w
-java:S3740)"/Provide the parametrized type for this generic.(Æ²ü€úÿÿÿÿ8Ø¦‹ş1J$bb3dc862-0bc5-4851-ae5e-a7cf878fe837
+java:S3740("/Provide the parametrized type for this generic.(Æ²ü€úÿÿÿÿ8Ë¾¥ş1J$d7ddbc2f-ed07-4d45-aeb0-a2656e9df46a
 r
-java:S3740*"/Provide the parametrized type for this generic.(ãù®Ø8Ø¦‹ş1J$b13d6973-d2e1-4855-912f-1319f171f07e
+java:S3740)"/Provide the parametrized type for this generic.(ãù®Ø8Ë¾¥ş1J$74d660c9-c23b-41e5-a46f-95e0dd0fc596
 r
-java:S3740+"/Provide the parametrized type for this generic.(õó’°8Ø¦‹ş1J$baddc7d1-88e7-4b65-b74d-cbeebd04f41d
+java:S3740*"/Provide the parametrized type for this generic.(õó’°8Ë¾¥ş1J$3ebedafb-f647-45a5-9157-5377f91bb446
 r
-java:S3740,"/Provide the parametrized type for this generic.(©âÙı8Ø¦‹ş1J$2952b648-c700-436f-ac17-9a661e180a85
+java:S3740+"/Provide the parametrized type for this generic.(©âÙı8Ë¾¥ş1J$ffbfddba-2f6e-4f46-adec-a1ecfe42b176
 w
-java:S3740-"/Provide the parametrized type for this generic.(™û Öúÿÿÿÿ8Ø¦‹ş1J$2dd5dd92-fc49-4681-9536-407d76146550
+java:S3740,"/Provide the parametrized type for this generic.(™û Öúÿÿÿÿ8Ë¾¥ş1J$6f8520f3-8a81-4a11-a192-69bc0d473430
 ™
-java:S1104!"VMake empNametxt a static final constant or non-public and provide accessors if needed.(œ§‰ß8Ú¦‹ş1J$d0e54b62-ac8b-470a-819d-89be7afc8c55
+java:S1104 "VMake empNametxt a static final constant or non-public and provide accessors if needed.(œ§‰ß8Í¾¥ş1J$fc07453c-8c10-4302-877d-f450acd35937
 ¡
-java:S1104""YMake empAddresstxt a static final constant or non-public and provide accessors if needed.(£éıšşÿÿÿÿ8Ú¦‹ş1J$48b3bd8b-ac53-471d-b892-7bee5c5a02c2
+java:S1104!"YMake empAddresstxt a static final constant or non-public and provide accessors if needed.(£éıšşÿÿÿÿ8Í¾¥ş1J$7c6e0f29-97f4-4950-98a0-5194a8f19c27
 š
-java:S1104#"WMake empEmailtxt a static final constant or non-public and provide accessors if needed.(ı×¶ı8Ú¦‹ş1J$cbf26552-ca90-4b26-9b4d-5a9c8f75d5bd
+java:S1104""WMake empEmailtxt a static final constant or non-public and provide accessors if needed.(ı×¶ı8Í¾¥ş1J$361a014e-b37c-41e8-b9ff-eb8b8135873b
 —
-java:S1104$"TMake empIdtxt a static final constant or non-public and provide accessors if needed.(–ëõ8Ú¦‹ş1J$e4415004-84ff-4980-8c15-520dfc5ea7ea
+java:S1104#"TMake empIdtxt a static final constant or non-public and provide accessors if needed.(–ëõ8Í¾¥ş1J$cea99d5b-2296-4e1b-8625-4253235e72cf
 ¢
-java:S1104%"ZMake addEmployeeBtn a static final constant or non-public and provide accessors if needed.(¶ØÉÄşÿÿÿÿ8Ú¦‹ş1J$c4df85f9-15bb-45e5-8999-71144394b63e
+java:S1104$"ZMake addEmployeeBtn a static final constant or non-public and provide accessors if needed.(¶ØÉÄşÿÿÿÿ8Í¾¥ş1J$1510ca13-ab76-43eb-8981-d993ab7f2f69
 Ÿ
-java:S1104'"WMake errorMsgtxt a static final constant or non-public and provide accessors if needed.(çãÉ‰ÿÿÿÿÿ8Ú¦‹ş1J$847c7740-45a7-4756-ac8b-0a5ad1e00383
+java:S1104&"WMake errorMsgtxt a static final constant or non-public and provide accessors if needed.(çãÉ‰ÿÿÿÿÿ8Í¾¥ş1J$8b5cf397-4289-46bd-8bfa-db52be1dead8
 £
-java:S1104("`Make adminDashboardWindow a static final constant or non-public and provide accessors if needed.(µ«£8Ú¦‹ş1J$7afc5822-5acc-4692-a935-f803eb8bd099
+java:S1104'"`Make adminDashboardWindow a static final constant or non-public and provide accessors if needed.(µ«£8Í¾¥ş1J$decb6c64-e86f-4646-8128-6e9217a98fe9
 ¡
-java:S1104)"YMake employeeTable a static final constant or non-public and provide accessors if needed.(Æ²ü€úÿÿÿÿ8Ú¦‹ş1J$a7f18a39-b28e-4119-9440-ea85afe2f978
+java:S1104("YMake employeeTable a static final constant or non-public and provide accessors if needed.(Æ²ü€úÿÿÿÿ8Í¾¥ş1J$af535636-6d9d-46fa-a618-e536e0420074
 œ
-java:S1104*"YMake employeeIdCol a static final constant or non-public and provide accessors if needed.(ãù®Ø8Ú¦‹ş1J$b1106d43-b8a0-4eab-94e1-30e145a6a4a6
+java:S1104)"YMake employeeIdCol a static final constant or non-public and provide accessors if needed.(ãù®Ø8Í¾¥ş1J$6c79c676-4a62-4310-8f2c-2f90fe160478
 
-java:S1104+"[Make employeeNameCol a static final constant or non-public and provide accessors if needed.(õó’°8Ú¦‹ş1J$6cf0d619-3525-4928-a6d8-65026396486e
+java:S1104*"[Make employeeNameCol a static final constant or non-public and provide accessors if needed.(õó’°8Í¾¥ş1J$27ab5381-a380-4034-a3cd-2d5d10f4e5f5
 Ÿ
-java:S1104,"\Make employeeEmailCol a static final constant or non-public and provide accessors if needed.(©âÙı8Ú¦‹ş1J$2e684be8-4f9d-4b66-bb0f-a4f120a836e7
+java:S1104+"\Make employeeEmailCol a static final constant or non-public and provide accessors if needed.(©âÙı8Í¾¥ş1J$55b21459-1ef7-4795-9c9c-09f16e6ab7bc
 ¦
-java:S1104-"^Make employeeAddressCol a static final constant or non-public and provide accessors if needed.(™û Öúÿÿÿÿ8Ú¦‹ş1J$759aa96f-3c71-4f61-be86-bcd1f8829283
+java:S1104,"^Make employeeAddressCol a static final constant or non-public and provide accessors if needed.(™û Öúÿÿÿÿ8Í¾¥ş1J$4cf22aa7-2a64-4de7-91fa-cc00c79ae557
 
-java:S2095F"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8û¦‹ş1J$93e91cad-b7f3-434d-815a-146dae55f742
+java:S2095D"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ñ¾¥ş1J$26d618b1-cf83-4711-ae1a-7c1b7ac87c92
 
-java:S3655—"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(ÃÇûŞ8ü¦‹ş1J$403594ff-da61-4d17-8e41-33b176988d51
+java:S3655•"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(ÃÇûŞ8ò¾¥ş1J$c5a04076-d2c2-4b77-a752-398dcbece129
 
-java:S3655´"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(ÃÇûŞ8ü¦‹ş1J$0b2c07eb-0bba-44e6-9363-72eb3e75de35
+java:S3655²"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(ÃÇûŞ8ò¾¥ş1J$143178e0-ec2a-4512-80ea-85ec841c2dd6
 É
-java:S1186{"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(õé¾¶üÿÿÿÿ8ş¦‹ş1J$306aef43-a24e-4f23-a32c-5ae133f7c514
+java:S1186y"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(õé¾¶üÿÿÿÿ8ó¾¥ş1J$5ba5b167-83a8-442e-a3c8-a6b392377147
 É
-java:S1186~"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ş¹çµşÿÿÿÿ8ş¦‹ş1J$9dccc5ab-1511-4cbf-bb56-18a22e3feb9a
+java:S1186|"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ş¹çµşÿÿÿÿ8ó¾¥ş1J$54a6f17e-2ef8-49d4-87a4-8dac4845d1e1
 Ê
-java:S1186‹"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¢Ûğ¥ûÿÿÿÿ8ş¦‹ş1J$328fd04a-b7e2-406a-a89d-73e6cbe97f20
+java:S1186‰"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¢Ûğ¥ûÿÿÿÿ8ó¾¥ş1J$6d3e94d2-e15d-4ce8-abd3-91fbee48e55a
 Ê
-java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ü¶¼üÿÿÿÿ8ş¦‹ş1J$7edbcd3a-4e96-4f25-8b01-840665a4cfbd
+java:S1186Œ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ü¶¼üÿÿÿÿ8ó¾¥ş1J$f27c2d74-dddb-478d-bbfd-1c67c7476db9
 Ä
-java:S1186œ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(üæé.8ş¦‹ş1J$55f0ae6a-0bb8-4dbb-b363-7bb24ae60187
+java:S1186š"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(üæé.8ó¾¥ş1J$a313c797-3730-413e-bdf7-0502a8c11f7e
 Ê
-java:S1186Ÿ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Û©ŠÊşÿÿÿÿ8ş¦‹ş1J$5bbd94c5-1252-4a06-b31d-323abbfebaeb
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Û©ŠÊşÿÿÿÿ8ó¾¥ş1J$07a0a92d-4ca4-4e86-9215-4100df1cdd16
 Å
-java:S1186¢"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(™§¦¢8ş¦‹ş1J$919b0798-bcc8-4c62-a6c8-a7b7909d8e17
+java:S1186 "€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(™§¦¢8ó¾¥ş1J$53fb4eae-d042-480d-bef2-b382e33a438b
 Ê
-java:S1186¥"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Œ§Äüÿÿÿÿ8ş¦‹ş1J$93fdee97-e655-4172-b899-adc87eba39c1
+java:S1186£"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Œ§Äüÿÿÿÿ8ó¾¥ş1J$e4adb7b9-4e64-4b51-acbb-caff80717271
 Å
-java:S1186¨"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ŠÀí¿8ş¦‹ş1J$570b403c-c198-4f26-98f6-d68a4587d48d
+java:S1186¦"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ŠÀí¿8ó¾¥ş1J$327c0556-1853-4bce-8604-e080f97a3334
 Ê
-java:S1186«"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ˆÇÄşúÿÿÿÿ8ş¦‹ş1J$93eace93-a957-4ade-9ad8-e675d9178b03
-r	java:S106="+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8…§‹ş1J$78e6911d-afe4-4814-a306-094e7af88d91
+java:S1186©"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ˆÇÄşúÿÿÿÿ8ó¾¥ş1J$66fab84e-663b-4bbe-bd15-c784082e0a72
+r	java:S106<"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8ú¾¥ş1J$5bc468ca-da7e-4fc8-969e-1ea9c5ec7fd5
 ‡
-java:S2147S"DCombine this catch with the one at line 81, which has the same body.(É®£8†§‹ş1J$4e068abc-19b4-489f-a463-e81225478ff1
+java:S2147Q"DCombine this catch with the one at line 79, which has the same body.(É®£8ü¾¥ş1J$578683f0-0a87-4017-9c3d-58631e1a4a24
 u
-java:S1172Z"2Remove this unused method parameter "actionEvent".(×ş²¦8Š§‹ş1J$893a22bb-7c2f-4f3f-bed3-a173fca8c303
+java:S1172X"2Remove this unused method parameter "actionEvent".(×ş²¦8ÿ¾¥ş1J$796ea007-ef9b-4a68-9518-520ea799ea3f
 `
-java:S2119\"Save and re-use this "Random".(¼İÅf8§‹ş1J$9890ba1d-04e9-49c3-adc0-9c369fc8f3b3
+java:S2119Z"Save and re-use this "Random".(¼İÅf8¿¥ş1J$c30bcfdb-465b-4b31-9288-b39fcb9179de
 s
-java:S1172‚"/Remove this unused method parameter "keyEvent".(–Ìò8§‹ş1J$4778707c-48e6-49e6-8c94-fd25f1e2972d
+java:S1172€"/Remove this unused method parameter "keyEvent".(–Ìò8…¿¥ş1J$25a4e910-b4d8-4118-aad0-6496d22bbb7e
 †
-java:S1126„"BReplace this if-then-else statement by a single method invocation.(½ö¡8‘§‹ş1J$af9941e5-bb72-4adb-85a3-c7335517e228
+java:S1126‚"BReplace this if-then-else statement by a single method invocation.(½ö¡8‡¿¥ş1J$ba2ac102-e044-414f-a1e4-eb8f71367a43
 z
-java:S1172‘"1Remove this unused method parameter "mouseEvent".(Òğ›ªøÿÿÿÿ8’§‹ş1J$8fe27430-b8c4-4f89-9fa0-cabc5a4cfcc2
+java:S1172"1Remove this unused method parameter "mouseEvent".(Òğ›ªøÿÿÿÿ8ˆ¿¥ş1J$80a2b242-6bc8-479d-a10a-076a5190ec9f
 u
-java:S1172®"1Remove this unused method parameter "mouseEvent".(“Ê÷›8“§‹ş1J$e01386d1-5d25-4422-a61d-c6683e101c4c
+java:S1172¬"1Remove this unused method parameter "mouseEvent".(“Ê÷›8Š¿¥ş1J$a6efaf9a-ccde-431c-afc6-afd837c716d6
 }
-java:S1128":Remove this unused import 'javax.mail.MessagingException'.(ÇîŞ8•§‹ş1J$bea9d413-1091-4804-8adb-1dad68b8ed23
+java:S1128":Remove this unused import 'javax.mail.MessagingException'.(ÇîŞ8‹¿¥ş1J$27a4d8bc-e8d4-473d-8a01-b792efb8c81c
 
-java:S1128">Remove this unused import 'java.nio.charset.StandardCharsets'.(ï˜ŞÛ8•§‹ş1J$b3d632e4-8d6a-4caa-89d0-868ab9f660c4
+java:S1128">Remove this unused import 'java.nio.charset.StandardCharsets'.(ï˜ŞÛ8Œ¿¥ş1J$571ba4c2-3da6-4a28-8d85-846c07c380d4
 p
-java:S1128"-Remove this unused import 'java.util.Base64'.(ëŠ»Õ8•§‹ş1J$c9cb158b-b4ce-47ac-895a-4269a26c7431
+java:S1128"-Remove this unused import 'java.util.Base64'.(ëŠ»Õ8Œ¿¥ş1J$bd5cacb4-38e7-4d78-a68e-33888eecc88d

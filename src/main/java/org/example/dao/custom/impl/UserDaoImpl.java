@@ -5,9 +5,13 @@ import javafx.collections.ObservableList;
 import org.example.dao.custom.UserDao;
 import org.example.entity.UserEntity;
 import org.example.util.CrudUtil;
+import org.example.util.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserDaoImpl implements UserDao {
 
@@ -34,49 +38,44 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public ObservableList<UserEntity> searchAll() throws SQLException {
+    public ObservableList<UserEntity> searchAll(){
+
+        Session session = HibernateUtil.getSession();
+        session.getTransaction();
+        List<UserEntity> userList = session.createQuery("FROM user").list();
         ObservableList<UserEntity> list= FXCollections.observableArrayList();
+        session.close();
+        userList.forEach(userEntity -> {
+            list.add(userEntity);
+        });
+        return list;
 
-        try {
-            ResultSet resultSet = CrudUtil.execute("SELECT * FROM user");
-
-            while (resultSet.next()){
-                list.add(new UserEntity(resultSet.getString(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6)));
-            }
-            return list;
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
     public boolean insert(UserEntity userEntity) throws SQLException {
-        try {
-            boolean isInsert = CrudUtil.execute("INSERT INTO user VALUES (?,?,?,?,?,?)",userEntity.getId(),
-                    userEntity.getName(),
-                    userEntity.getEmail(),
-                    userEntity.getPassword(),
-                    userEntity.getRole(),
-                    userEntity.getAddress());
-            return isInsert;
-        } catch (ClassNotFoundException e) {
-            System.out.println(e);
-        }
-        return false;
+
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        session.persist(userEntity);
+        session.getTransaction().commit();
+        session.close();
+        return true;
     }
 
-    public boolean update(String email,String password) throws SQLException{
-        try {
-            return CrudUtil.execute("UPDATE user SET password=? WHERE email=?",password,email);
-        } catch (ClassNotFoundException e) {
-            System.out.println(e);
-        }
-        return false;
+    public boolean update(String email,String password){
+
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("UPDATE user SET password =:p WHERE email =:e");
+        query.setParameter("p",password);
+        query.setParameter("e",email);
+        int i = query.executeUpdate();
+        System.out.println(i);
+
+        session.getTransaction().commit();
+        session.close();
+        return i>0;
     }
     @Override
     public boolean update(UserEntity userEntity) throws SQLException {

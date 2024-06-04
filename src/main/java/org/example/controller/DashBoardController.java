@@ -56,6 +56,7 @@ public class DashBoardController implements Initializable {
     public Text titleTxt;
     public FontAwesomeIconView mainCartIcon;
     public Text mainTitle;
+    public Text notification;
 
     private int otp;
 
@@ -172,6 +173,7 @@ public class DashBoardController implements Initializable {
                 new Alert(Alert.AlertType.ERROR,"Password & Confirmation Password does not match..!!").show();
             }
         }catch (Exception e){
+            System.out.println(e);
             new Alert(Alert.AlertType.ERROR,"Invalid OTP").show();
         }
 

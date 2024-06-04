@@ -29,7 +29,6 @@ import java.util.ResourceBundle;
 
 public class AdminDashBoardController implements Initializable {
 
-
     public JFXTextField empNametxt;
     public JFXTextField empAddresstxt;
     public JFXTextField empEmailtxt;
@@ -64,7 +63,6 @@ public class AdminDashBoardController implements Initializable {
     }
 
     public void generateCustomerId() {
-
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             Statement statement = connection.createStatement();

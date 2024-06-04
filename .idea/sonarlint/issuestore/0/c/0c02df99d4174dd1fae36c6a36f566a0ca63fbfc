@@ -1,12 +1,14 @@
 
-	java:S112("FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ıˆÛ€ş1J$b5596294-b741-4733-b97e-717139df3b39
+	java:S112("FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ıˆÛ€ş1J$7ae173ba-4b82-4747-82ef-fce2c7320369
+
+java:S1130,"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(‰ÇªÓüÿÿÿÿ8éğ“•ş1
 
-java:S63538"<Use concise character class syntax '\\d' instead of '[0-9]'.(èÃš±8¨‰Û€ş1J$e9b181f3-502d-4c9d-a382-284df3e39038
+java:S63538"<Use concise character class syntax '\\d' instead of '[0-9]'.(èÃš±8¨‰Û€ş1J$b467edd3-4aa1-4d94-ba3f-c20d68796163
 m
-java:S5869d"*Remove duplicates in this character class.(ÀàÍ»8±‰Û€ş1J$0b821071-2477-42f0-b530-dce9a0e4361d
+java:S5869d"*Remove duplicates in this character class.(ÀàÍ»8±‰Û€ş1J$4664050b-b485-4a7f-a46a-2dcdaf944b69
 m
-java:S5869d"*Remove duplicates in this character class.(ÀàÍ»8±‰Û€ş1J$d98a125f-b7df-4dcc-a5d8-3439f51fd84a
+java:S5869d"*Remove duplicates in this character class.(ÀàÍ»8±‰Û€ş1J$cc7c5a52-c8e2-45da-b254-721623678897
 
-java:S5998d"LRefactor this repetition that can lead to a stack overflow for large inputs.(ÀàÍ»8²‰Û€ş1J$10537cec-a98a-49e1-875a-06efa5f4ae89
+java:S5998d"LRefactor this repetition that can lead to a stack overflow for large inputs.(ÀàÍ»8²‰Û€ş1J$14754f77-3c58-4546-a280-0dbc3274159d
 t
-java:S1602l",Remove useless curly braces around statement(›Äıÿÿÿÿ8´‰Û€ş1J$d1cee08b-dbf6-422b-aafa-7faf44e15e79
+java:S1602l",Remove useless curly braces around statement(›Äıÿÿÿÿ8´‰Û€ş1J$e2a1ed29-e66c-406f-9c10-13eb19319afe
