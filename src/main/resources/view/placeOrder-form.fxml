@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="adminDashboardWindow" prefHeight="429.0" prefWidth="849.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.PlaceOrderFormController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="523.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="238.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.11372549086809158" green="0.14901961386203766" blue="0.4431372582912445" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.006729475100942127">
+                     <color>
+                        <Color red="0.03529411926865578" green="0.125490203499794" blue="0.24705882370471954" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.32549020648002625" green="0.47058823704719543" blue="0.5843137502670288" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <JFXTextField fx:id="empNametxt" layoutX="279.0" layoutY="97.0" prefHeight="26.0" prefWidth="286.0" promptText="Employee name" />
+      <JFXTextField fx:id="empEmailtxt" layoutX="279.0" layoutY="137.0" onKeyReleased="#emailAddressKeyReleased" prefHeight="26.0" prefWidth="286.0" promptText="Email Address" />
+      <JFXTextField fx:id="empAddresstxt" layoutX="279.0" layoutY="177.0" prefHeight="26.0" prefWidth="286.0" promptText="Address" />
+      <Text fx:id="empIdLable" layoutX="280.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Id:-" />
+      <JFXButton fx:id="addEmployeeBtn" layoutX="666.0" layoutY="101.0" onAction="#addEmployeeBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Add Employee">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="actionBtn" layoutX="666.0" layoutY="168.0" onAction="#actionBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Action">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Text fx:id="errorMsgtxt" fill="#e10e0e" layoutX="565.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid Email" />
+      <JFXButton layoutX="39.0" layoutY="119.0" onAction="#placeSectionBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #fff; -fx-border-radius: 20;" text="Place Order" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="39.0" layoutY="174.0" onAction="#manageOrdersBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #fff; -fx-border-radius: 20;" text="Manage Orders" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="39.0" layoutY="229.0" onAction="#manageSuppliersBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #fff; -fx-border-radius: 20;" text="Manage Suppliers" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="39.0" layoutY="283.0" onAction="#manageCustomersBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #fff; -fx-border-radius: 20;" text="Manage Customers" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="39.0" layoutY="336.0" onAction="#manageProductsBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #fff; -fx-border-radius: 20;" text="Manage Products" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <FontAwesomeIconView fill="WHITE" glyphName="SIGN_OUT" layoutX="40.0" layoutY="465.0" onMouseClicked="#signOutBtnMouseClicked" size="40">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </FontAwesomeIconView>
+      <FontAwesomeIconView fill="WHITE" glyphName="SHOPPING_BAG" layoutX="97.0" layoutY="464.0" onMouseClicked="#shoppingBagBtnMouseClicked" size="40">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </FontAwesomeIconView>
+      <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="163.0" layoutY="465.0" onMouseClicked="#userBtnMouseClicked" size="40">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </FontAwesomeIconView>
+      <TableView fx:id="employeeTable" layoutX="262.0" layoutY="236.0" prefHeight="244.0" prefWidth="563.0">
+         <columns>
+            <TableColumn fx:id="employeeIdCol" prefWidth="107.20001220703125" text="ID" />
+            <TableColumn fx:id="employeeNameCol" prefWidth="124.79998779296875" text="Name" />
+            <TableColumn fx:id="employeeEmailCol" prefWidth="178.4000244140625" text="Email Address" />
+            <TableColumn fx:id="employeeAddressCol" minWidth="0.0" prefWidth="152.0" text="Address" />
+         </columns>
+      </TableView>
+      <FontAwesomeIconView fill="#21a68b" glyphName="SHOPPING_CART" layoutX="98.0" layoutY="75.0" onMouseClicked="#userBtnMouseClicked" size="40" />
+      <Text fill="#ffffff00" layoutX="27.0" layoutY="54.0" stroke="WHITE" strokeType="OUTSIDE" text="Clothify Store">
+         <font>
+            <Font name="Times New Roman Bold" size="30.0" />
+         </font>
+      </Text>
+      <Text fx:id="orderIdtxt" fill="#078f43" layoutX="366.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id number" />
+      <Text layoutX="803.0" layoutY="24.0" onMouseClicked="#closeBtnAction" strokeType="OUTSIDE" strokeWidth="0.0" text="X" textAlignment="CENTER" wrappingWidth="47.87811279296875">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="CLOSED_HAND" />
+         </cursor>
+      </Text>
+      <JFXButton fx:id="updayeEmployeeBtn" layoutX="666.0" layoutY="101.0" onAction="#updateEmployeeBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Update">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXComboBox fx:id="employeeIdComboBox" layoutX="279.0" layoutY="65.0" prefHeight="26.0" prefWidth="154.0" promptText="Employee Id" />
+      <JFXButton fx:id="deleteBtn" layoutX="666.0" layoutY="168.0" onAction="#deleteBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Delete">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+   </children>
+</AnchorPane>

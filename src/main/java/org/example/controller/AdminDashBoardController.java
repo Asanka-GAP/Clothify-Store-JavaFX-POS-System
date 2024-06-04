@@ -15,15 +15,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import org.example.bo.custom.impl.UserBoImpl;
-import org.example.db.DBConnection;
 import org.example.model.User;
 
-import javax.mail.MessagingException;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.sql.*;
-import java.util.Base64;
 import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -50,7 +46,7 @@ public class AdminDashBoardController implements Initializable {
     public JFXButton actionBtn;
 
     UserBoImpl userBoImpl = new UserBoImpl();
-
+    String selectedId;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -61,8 +57,9 @@ public class AdminDashBoardController implements Initializable {
             empAddresstxt.setText(user.getAddress());
             empEmailtxt.setText(user.getEmail());
 
+            selectedId = (String) newValue;
         });
-        generateCustomerId();
+        empIdtxt.setText(userBoImpl.generateEmployeeId());
         updayeEmployeeBtn.setVisible(false);
         deleteBtn.setVisible(false);
         employeeIdComboBox.setVisible(false);
@@ -72,36 +69,9 @@ public class AdminDashBoardController implements Initializable {
         employeeEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         employeeAddressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
 
-        try {
+
             employeeTable.setItems(userBoImpl.getAllUsers());
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-
     }
-
-    public void generateCustomerId() {
-        try {
-            Connection connection = DBConnection.getInstance().getConnection();
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM user ORDER BY id DESC LIMIT 1");
-
-            while (resultSet.next()) {
-                String lastOrderId = resultSet.getString(1);
-                int number = Integer.parseInt(lastOrderId.split("U")[1]);
-                number++;
-                empIdtxt.setText(String.format("U%04d", number));
-
-            }
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
 
     public void addEmployeeBtnAction(ActionEvent actionEvent) throws SQLException {
 
@@ -123,7 +93,7 @@ public class AdminDashBoardController implements Initializable {
                 alert.setTitle("Employee Added");
                 alert.setContentText("Employee Added Successfully..!");
                 alert.showAndWait();
-                generateCustomerId();
+                empIdtxt.setText(userBoImpl.generateEmployeeId());
                 empAddresstxt.setText("");
                 empEmailtxt.setText("");
                 empNametxt.setText("");
@@ -136,18 +106,16 @@ public class AdminDashBoardController implements Initializable {
 
     }
 
-    public void clearBtnAction(ActionEvent actionEvent) {
-    }
-
-    public void viewBtnAction(ActionEvent actionEvent) {
-    }
-
 
     public void emailAddressKeyReleased(KeyEvent keyEvent) {
         boolean isValidEmail = userBoImpl.isValidEmail(empEmailtxt.getText());
         if (!isValidEmail) {
             errorMsgtxt.setVisible(true);
+            addEmployeeBtn.setDisable(true);
+            updayeEmployeeBtn.setDisable(true);
         } else {
+            addEmployeeBtn.setDisable(false);
+            updayeEmployeeBtn.setDisable(false);
             errorMsgtxt.setVisible(false);
         }
     }
@@ -193,6 +161,7 @@ public class AdminDashBoardController implements Initializable {
         empNametxt.setText("");
         empAddresstxt.setText("");
         empEmailtxt.setText("");
+        empIdtxt.setText(userBoImpl.generateEmployeeId());
     }
 
     public void actionBtnAction(ActionEvent actionEvent) {
@@ -219,8 +188,52 @@ public class AdminDashBoardController implements Initializable {
     }
 
     public void updateEmployeeBtnAction(ActionEvent actionEvent) {
+        if (!empEmailtxt.getText().equals("") && !empAddresstxt.getText().equals("") && !empNametxt.getText().equals("")){
+            User user = new User(selectedId,empNametxt.getText(),empEmailtxt.getText(),null,null,empAddresstxt.getText());
+            boolean isUpdated = userBoImpl.updateUser(user);
+            if (isUpdated){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Employee Update");
+                alert.setContentText("Employee Updated Successfully");
+                alert.showAndWait();
+                empEmailtxt.setText("");
+                empAddresstxt.setText("");
+                empNametxt.setText("");
+                employeeTable.setItems(userBoImpl.getAllUsers());
+            }
+        }else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Something Missing");
+            alert.setContentText("Please Check your Form again..!!!");
+            alert.showAndWait();
+        }
     }
 
     public void deleteBtnAction(ActionEvent actionEvent) {
+
+        if (!selectedId.equals("")){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Deleting");
+            alert.setContentText("Are you sure want to delete this Employee");
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.get()==ButtonType.OK){
+                boolean isDeleted = userBoImpl.deleteUserById(selectedId);
+                if (isDeleted){
+                    Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                    alert2.setTitle("Employee Deleted");
+                    alert2.setContentText("Employee deleted successfully");
+                    alert2.showAndWait();
+                    employeeTable.setItems(userBoImpl.getAllUsers());
+                    employeeIdComboBox.setItems(userBoImpl.getAllUserIds());
+                    empAddresstxt.setText("");
+                    empNametxt.setText("");
+                    empEmailtxt.setText("");
+                }
+            }
+        }
+
+
     }
+
 }

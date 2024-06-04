@@ -1,24 +1,34 @@
 
-w
-java:S3740"/Provide the parametrized type for this generic.(ÿ‚ÇØùÿÿÿÿ8‹â¢—ş1J$6551f933-01ab-4cda-8417-d58b697182c6
 r
-java:S3740$"/Provide the parametrized type for this generic.(ÙÕÓ8Å¤—ş1J$02402023-494f-4acc-bd13-1ee2271dd357
+java:S3740"/Provide the parametrized type for this generic.(Ø·ä8ÃÆŠšş1J$36c81ffb-c2ae-436c-9c5c-6cd317220029
+w
+java:S3740"/Provide the parametrized type for this generic.(ÿ‚ÇØùÿÿÿÿ8ÃÆŠšş1J$7c9d5ae6-73c2-4f46-b10a-a5a76e1abe28
+r
+java:S3740+"/Provide the parametrized type for this generic.(ÙÕÓ8ÃÆŠšş1J$e8d95808-1c10-4c8d-8d9c-5de4f7f09365
 q
-java:S3740I"/Provide the parametrized type for this generic.(ÆÊÆ78ÍêÆ—ş1J$127fe438-8d3b-468f-bebb-4dadd6376b1b
-{
-java:S1874"3Remove this use of "createQuery"; it is deprecated.(ÿ‚ÇØùÿÿÿÿ8¨â¢—ş1J$ec633c1c-a7e7-414d-86f1-3fd5311d1442
+java:S3740P"/Provide the parametrized type for this generic.(ÆÊÆ78ÃÆŠšş1J$f92b0f7a-c6b4-4e7e-a230-fc6399e66956
+w
+java:S3740^"/Provide the parametrized type for this generic.(¼¦Úòÿÿÿÿÿ8ÃÆŠšş1J$0e0d7ad1-8311-4154-990b-cc5ce727d722
+r
+java:S3740p"/Provide the parametrized type for this generic.(¿½ˆ–8êåŠšş1J$7962e731-50e8-48d9-af3d-5ab15e8f7293
 v
-java:S1874$"3Remove this use of "createQuery"; it is deprecated.(ÙÕÓ8­â¢—ş1J$d898e876-b43b-4d2b-96a6-2ac6012d3f8b
+java:S1874"3Remove this use of "createQuery"; it is deprecated.(Ø·ä8ÙÆŠšş1J$a1c271f6-4150-408b-b008-8169631d5bc9
 {
-java:S18740"3Remove this use of "createQuery"; it is deprecated.(±×Ÿşÿÿÿÿ8é¤—ş1J$40b29aa1-4b7a-4193-a31b-648e12ef218d
+java:S1874"3Remove this use of "createQuery"; it is deprecated.(ÿ‚ÇØùÿÿÿÿ8ÚÆŠšş1J$8ba92628-1d91-49da-8bbf-33b8a0d1bd27
+v
+java:S1874+"3Remove this use of "createQuery"; it is deprecated.(ÙÕÓ8ÛÆŠšş1J$e1c8986c-f82b-409c-bf4e-68686900359c
+{
+java:S18747"3Remove this use of "createQuery"; it is deprecated.(±×Ÿşÿÿÿÿ8ßÆŠšş1J$ad61f7eb-bc7b-4883-8e54-2839863cc50e
 o
-java:S16023",Remove useless curly braces around statement(ß£¬™8ªâ¢—ş1J$0ea55658-99fd-4dba-a4ae-563f2d1b96fb
+java:S1602:",Remove useless curly braces around statement(ß£¬™8ÜÆŠšş1J$fd0aecb6-2052-455e-8d78-32d09f694a9f
 y
-java:S16123"6Replace this lambda with method reference 'list::add'.(ß£¬™8«â¢—ş1J$3d9a3afb-be6c-43d9-9dd9-a634375f7a93
+java:S1612:"6Replace this lambda with method reference 'list::add'.(ß£¬™8İÆŠšş1J$d0f1f5a1-3e6a-4ba6-8bf6-93bb09102c14
 u
-java:S1874I"3Remove this use of "createQuery"; it is deprecated.(ÆÊÆ78ÿêÆ—ş1J$8289e999-8639-44e9-85f3-d485df3aa44c
-r	java:S106M"+Replace this use of System.out by a logger.(´‹¹öşÿÿÿÿ8®â¢—ş1J$99c23db8-6309-4a27-8499-f4f45c7d9a2c
-r	java:S106Z"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8¯â¢—ş1J$c9d55533-a40c-49ef-b0fe-f5d34d895837
-r	java:S106f"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8°â¢—ş1J$6d4f0857-aa77-4e2c-b076-20fd377c3d91
-q
-java:S1128"/Remove this unused import 'java.sql.ResultSet'.(ˆóÚw8ŞÈÉ—ş1J$4104c5fe-1e59-4c0b-8b30-7d2170bf4b11
+java:S1874P"3Remove this use of "createQuery"; it is deprecated.(ÆÊÆ78áÆŠšş1J$bc1ec45f-0dde-4f9d-b8ba-1ef58ab1c5df
+r	java:S106T"+Replace this use of System.out by a logger.(´‹¹öşÿÿÿÿ8àÆŠšş1J$a0e6fa2d-c060-4cc7-82fe-5e389e32795a
+{
+java:S1874^"3Remove this use of "createQuery"; it is deprecated.(¼¦Úòÿÿÿÿÿ8âÆŠšş1J$f4aa6372-02c0-4be0-bea5-b7595bd62fb0
+v
+java:S1874p"3Remove this use of "createQuery"; it is deprecated.(¿½ˆ–8æŠšş1J$4bc0fe8a-4df7-40d5-adba-f8a107c2377a
+u
+java:S1128"2Remove this unused import 'java.sql.SQLException'.(ÛïÆŸ8Ø¨¤œş1J$66e367d8-c992-42f5-bedf-bbe1a96f19bc

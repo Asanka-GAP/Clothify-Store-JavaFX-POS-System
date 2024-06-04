@@ -1,89 +1,89 @@
 
-	java:S112Z"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8²ºõş1J$64f2b922-6d71-4d39-bd5d-b319141962c7
+	java:S112Z"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8²ºõş1J$0e71931c-7f6f-4d83-8563-0106d1953174
 
-java:S1104$"VMake emailField a static final constant or non-public and provide accessors if needed.(ÑäÇÏşÿÿÿÿ8¡ëóş1J$ec196cf0-4951-4a1d-b3ba-48e1fec694a4
+java:S1104$"VMake emailField a static final constant or non-public and provide accessors if needed.(ÑäÇÏşÿÿÿÿ8¡ëóş1J$2f94ce70-7278-4cfa-afaa-b07f37b8473d
 œ
-java:S1104%"YMake passwordField a static final constant or non-public and provide accessors if needed.(¦Ç‰š8¡ëóş1J$8476dd57-3fd5-4934-aa3f-de3bcc04badb
+java:S1104%"YMake passwordField a static final constant or non-public and provide accessors if needed.(¦Ç‰š8¡ëóş1J$f0aa1b63-ce3b-41ea-9748-7e62c33f78ef
 ˜
-java:S1104&"UMake signinBtn a static final constant or non-public and provide accessors if needed.(Ú¢ §8¡ëóş1J$6512ab6d-d26a-4b64-9894-f566c4fb73bc
+java:S1104&"UMake signinBtn a static final constant or non-public and provide accessors if needed.(Ú¢ §8¡ëóş1J$b8dc4437-30d0-471a-b86e-7c4a1659eeb3
 ¡
-java:S1104'"^Make forgotPasswordLink a static final constant or non-public and provide accessors if needed.(ıöß¼8¡ëóş1J$3e901322-7cee-4590-9997-8683ec5d7ecc
+java:S1104'"^Make forgotPasswordLink a static final constant or non-public and provide accessors if needed.(ıöß¼8¡ëóş1J$c5c0cf6b-2594-4b10-8413-4c63ae2430c5
 •
-java:S1104*"RMake panel2 a static final constant or non-public and provide accessors if needed.(’¹É…8¡ëóş1J$29d71d8a-3747-42da-9ceb-077293f213f6
+java:S1104*"RMake panel2 a static final constant or non-public and provide accessors if needed.(’¹É…8¡ëóş1J$9e2b8ce3-f67b-4473-99cd-eefc6df53852
 ™
-java:S1104+"VMake signinBtn2 a static final constant or non-public and provide accessors if needed.(êƒşë8¡ëóş1J$e2f3dbd3-297c-48fa-a937-7c8c39d234d8
+java:S1104+"VMake signinBtn2 a static final constant or non-public and provide accessors if needed.(êƒşë8¡ëóş1J$c2edca24-7587-48e2-a730-0592c630793b
 •
-java:S1104,"RMake panel3 a static final constant or non-public and provide accessors if needed.(“Ê°œ8¢ëóş1J$ab43a775-8cd7-4e59-8d70-3227c1e7cc36
+java:S1104,"RMake panel3 a static final constant or non-public and provide accessors if needed.(“Ê°œ8¢ëóş1J$cb0f809f-8f89-4a24-a4e6-69a9ce4359fb
 š
-java:S1104-"WMake emailField2 a static final constant or non-public and provide accessors if needed.(«›©¤8¢ëóş1J$ff12bac4-efbb-4f05-b7b6-a45b5c80b05e
+java:S1104-"WMake emailField2 a static final constant or non-public and provide accessors if needed.(«›©¤8¢ëóş1J$dfa96c89-b608-4067-b893-47d865d55757
 š
-java:S1104."RMake otpBtn a static final constant or non-public and provide accessors if needed.(Õ‡Çàùÿÿÿÿ8¢ëóş1J$9f2ec702-f17c-41ab-8c19-edea5a87bc3f
+java:S1104."RMake otpBtn a static final constant or non-public and provide accessors if needed.(Õ‡Çàùÿÿÿÿ8¢ëóş1J$45b20ac8-8665-45c8-86cd-4188e51f7bf0
 ¢
-java:S1104/"ZMake passwordField1 a static final constant or non-public and provide accessors if needed.(ÂÛ—¾üÿÿÿÿ8¢ëóş1J$26cfff30-dbee-4003-ac33-46d866013ffd
+java:S1104/"ZMake passwordField1 a static final constant or non-public and provide accessors if needed.(ÂÛ—¾üÿÿÿÿ8¢ëóş1J$a2edf1d5-10d1-4305-a889-f67552ffedf6
 ¨
-java:S11040"`Make reEnterPasswordField a static final constant or non-public and provide accessors if needed.(÷¯—™üÿÿÿÿ8¢ëóş1J$f5a897cb-0d5e-4cb0-a3a9-356779b6dcf9
+java:S11040"`Make reEnterPasswordField a static final constant or non-public and provide accessors if needed.(÷¯—™üÿÿÿÿ8¢ëóş1J$f3f154fd-b5db-4a07-91fc-e7c77e27b3d9
 ›
-java:S11041"XMake otpTextField a static final constant or non-public and provide accessors if needed.(ùíÁ8¢ëóş1J$0b533595-b6fc-4ed3-92b8-9c2626250f7b
+java:S11041"XMake otpTextField a static final constant or non-public and provide accessors if needed.(ùíÁ8¢ëóş1J$80afff51-ff8a-4119-bbb7-34d265c54b4e
 œ
-java:S11042"TMake resetBtn a static final constant or non-public and provide accessors if needed.(Î±Òåûÿÿÿÿ8¢ëóş1J$3f6f498e-974b-4bf9-871b-e9902b4315ee
+java:S11042"TMake resetBtn a static final constant or non-public and provide accessors if needed.(Î±Òåûÿÿÿÿ8¢ëóş1J$105e4f04-b244-47ed-b0bc-5b529eb57816
 —
-java:S11043"TMake resetTxt a static final constant or non-public and provide accessors if needed.(Úú´½8¢ëóş1J$320d1c94-91b4-4248-b52b-e36babbb8f7e
+java:S11043"TMake resetTxt a static final constant or non-public and provide accessors if needed.(Úú´½8¢ëóş1J$66863612-29e3-4fc9-a48d-5ed7e0b6e786
 œ
-java:S11044"TMake errormsg a static final constant or non-public and provide accessors if needed.(ÆìóÈøÿÿÿÿ8¢ëóş1J$a281e8f3-81ac-483c-892e-6563e029f723
+java:S11044"TMake errormsg a static final constant or non-public and provide accessors if needed.(ÆìóÈøÿÿÿÿ8¢ëóş1J$cb3df2f1-cb22-4e38-99df-c59dd9717092
 œ
-java:S11045"TMake validmsg a static final constant or non-public and provide accessors if needed.(éçó¬üÿÿÿÿ8¢ëóş1J$5d972154-2e33-410f-a466-b7a190ee6b93
+java:S11045"TMake validmsg a static final constant or non-public and provide accessors if needed.(éçó¬üÿÿÿÿ8¢ëóş1J$f8455a4b-0134-40bb-a2f4-0b95ca4d1cf8
 £
-java:S11046"[Make dashboardWindow a static final constant or non-public and provide accessors if needed.(—¥Ü´üÿÿÿÿ8¢ëóş1J$eadae401-d365-4f4b-8a63-a7438cc74de7
+java:S11046"[Make dashboardWindow a static final constant or non-public and provide accessors if needed.(—¥Ü´üÿÿÿÿ8¢ëóş1J$4b31ff82-81e0-48cd-bc26-7946ae222dfd
 —
-java:S11047"TMake iconCart a static final constant or non-public and provide accessors if needed.(ŞëŒ¬8¢ëóş1J$0027812c-74b7-43bc-88a9-be0c60f66d3d
+java:S11047"TMake iconCart a static final constant or non-public and provide accessors if needed.(ŞëŒ¬8¢ëóş1J$eca0392c-a1eb-42d3-ba66-5cc9e1e73ad4
 œ
-java:S11048"TMake titleTxt a static final constant or non-public and provide accessors if needed.(õÌ¬ñøÿÿÿÿ8¢ëóş1J$3ba6117d-218f-4a53-8ac0-7b9ce92a0b15
+java:S11048"TMake titleTxt a static final constant or non-public and provide accessors if needed.(õÌ¬ñøÿÿÿÿ8¢ëóş1J$94556b9b-c7fb-405c-aaa0-3e77492294e9
 ›
-java:S11049"XMake mainCartIcon a static final constant or non-public and provide accessors if needed.(ˆüºö8¢ëóş1J$63dfeb6d-9808-41e2-8c4d-79aad53ddce6
+java:S11049"XMake mainCartIcon a static final constant or non-public and provide accessors if needed.(ˆüºö8¢ëóş1J$7399d956-ceea-4ff4-9af9-457a14199118
 ˜
-java:S1104:"UMake mainTitle a static final constant or non-public and provide accessors if needed.(æ¸¼—8¢ëóş1J$e0af69be-8918-4e4a-8cff-8038a0ec88c5
+java:S1104:"UMake mainTitle a static final constant or non-public and provide accessors if needed.(æ¸¼—8¢ëóş1J$8678c9c0-644d-442b-955c-e4ac73f74ccf
  
-java:S1104;"XMake notification a static final constant or non-public and provide accessors if needed.(ÒæŞùÿÿÿÿ8¢ëóş1J$c21c834f-cc28-4d45-bdd7-dede3d726de7
+java:S1104;"XMake notification a static final constant or non-public and provide accessors if needed.(ÒæŞùÿÿÿÿ8¢ëóş1J$dd293fea-0da4-4b28-b61c-d6fa233af20a
 
-java:S3655Í"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(ÃÇûŞ8Àëóş1J$ca0768ba-4126-444b-abc8-364e5c313e97
+java:S3655Í"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(ÃÇûŞ8Àëóş1J$dc0c5b69-4ebe-41a6-abd0-47ff4534976b
 u
-java:S1172I"2Remove this unused method parameter "actionEvent".(½Åæ§8Çëóş1J$f3f266bd-6085-4f64-b5e5-e671eb1a9e56
-l	java:S106V"+Replace this use of System.out by a logger.(Ü™áp8Éëóş1J$ae062fc4-8d42-4075-a57b-4355235c2201
-r	java:S106]"+Replace this use of System.out by a logger.(ç…¥ÿıÿÿÿÿ8Êëóş1J$e86ffa99-9497-495a-afce-0d4059ad1afc
-m	java:S106_"+Replace this use of System.out by a logger.(Ğâ¥ù8Êëóş1J$05fb2d0d-0029-4b08-9130-c75776b730a5
+java:S1172I"2Remove this unused method parameter "actionEvent".(½Åæ§8Çëóş1J$03df4578-63e6-4f67-98bd-45516ed7c303
+l	java:S106V"+Replace this use of System.out by a logger.(Ü™áp8Éëóş1J$4c2ddfeb-b0c1-4d6f-a2e5-dcca5a24c0c9
+r	java:S106]"+Replace this use of System.out by a logger.(ç…¥ÿıÿÿÿÿ8Êëóş1J$99a61ec9-f023-4eee-81f6-1444fef80760
+m	java:S106_"+Replace this use of System.out by a logger.(Ğâ¥ù8Êëóş1J$defc1e0b-c88b-4171-869b-17f267a93adb
 y
-java:S1172e"1Remove this unused method parameter "mouseEvent".(¦¥€ìúÿÿÿÿ8Ëëóş1J$fe44c003-5e7c-4719-b0e6-4b8e1667b08b
+java:S1172e"1Remove this unused method parameter "mouseEvent".(¦¥€ìúÿÿÿÿ8Ëëóş1J$cd4969f5-e37a-4508-bc87-b3fb64934ca3
 €
-java:S1117f">Rename "userBoImpl" which hides the field declared at line 63.(‡¬-8Ìëóş1J$d0836c05-f79b-416d-b7f3-ccf619fbd64a
+java:S1117f">Rename "userBoImpl" which hides the field declared at line 63.(‡¬-8Ìëóş1J$3bf4f9bf-526d-4a3d-b409-12031559b3a5
 z
-java:S1172s"2Remove this unused method parameter "actionEvent".(ÿ ‹öùÿÿÿÿ8Íëóş1J$32193c20-20a0-4812-a7ce-267a678a75c1
+java:S1172s"2Remove this unused method parameter "actionEvent".(ÿ ‹öùÿÿÿÿ8Íëóş1J$ab32548f-b20b-49d2-9d29-7f409cb02f74
 t
-java:S1172w"2Remove this unused method parameter "actionEvent".(À¨Úh8Íëóş1J$828f5ed7-c9e4-4f97-a0ca-c8bb57498cbc
+java:S1172w"2Remove this unused method parameter "actionEvent".(À¨Úh8Íëóş1J$2d8e128c-8d2f-487d-af0a-dbd6f8ffe4d5
 `
-java:S2119y"Save and re-use this "Random".(¼İÅf8Ğëóş1J$a948c190-132b-4da8-baaf-f8f96d91121c
-l	java:S106{"+Replace this use of System.out by a logger.(›ÑQ8Ğëóş1J$e169f186-cecc-4a97-8732-d3f90470f6ff
+java:S2119y"Save and re-use this "Random".(¼İÅf8Ğëóş1J$f5861019-c779-45b7-a9f8-ac325d061a7a
+l	java:S106{"+Replace this use of System.out by a logger.(›ÑQ8Ğëóş1J$06d37f78-6e21-427b-a8f3-a1da5d9586e4
 {
-java:S1172™"2Remove this unused method parameter "actionEvent".(úÏ•ùÿÿÿÿ8Òëóş1J$c46a3dc6-416f-42d6-b3a8-53ff043cebe7
-s	java:S106°"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8¦éÇ”ş1J$e16810ae-3635-4d9b-8399-aaa2e54b1018
+java:S1172™"2Remove this unused method parameter "actionEvent".(úÏ•ùÿÿÿÿ8Òëóş1J$f1d61368-3be0-4e21-b823-9c152eb338de
+s	java:S106°"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8¦éÇ”ş1J$c00e93e3-138c-4e51-bae5-70a8f373d84b
 x
-java:S1172º"/Remove this unused method parameter "keyEvent".(”·ª›ûÿÿÿÿ8Ôëóş1J$4c80a871-28ac-4a99-a871-5f6b33480555
+java:S1172º"/Remove this unused method parameter "keyEvent".(”·ª›ûÿÿÿÿ8Ôëóş1J$cc5589a4-3ea9-4eeb-83da-209365712603
 u
-java:S1172Ç"1Remove this unused method parameter "mouseEvent".(“Ê÷›8Õëóş1J$93f51df8-a3f8-461b-82e1-10bb87e0e1b0
+java:S1172Ç"1Remove this unused method parameter "mouseEvent".(“Ê÷›8Õëóş1J$663b9224-2609-4d13-9dff-8afe698fcbb9
 v
-java:S1128"3Remove this unused import 'org.example.bo.SuperBo'.(’ôÔÒ8öğöş1J$2f3447aa-9ea5-4563-8c94-67175bcbc9d7
+java:S1128"3Remove this unused import 'org.example.bo.SuperBo'.(’ôÔÒ8öğöş1J$5c4efbae-513b-4b20-8b01-0707150a4f28
 ‡
-java:S1128"DRemove this unused import 'org.example.dao.custom.impl.UserDaoImpl'.(Ó¸ò·8öğöş1J$9d707bab-3007-4bb9-89ae-f19eef40be7f
+java:S1128"DRemove this unused import 'org.example.dao.custom.impl.UserDaoImpl'.(Ó¸ò·8öğöş1J$d084f231-f3c1-4f55-9764-e914aa81908a
 ˆ
-java:S1128"@Remove this unused import 'javax.mail.internet.InternetAddress'.(–¹“êûÿÿÿÿ8öğöş1J$b615ef64-ae6f-4603-9729-b8c08e7c7af7
+java:S1128"@Remove this unused import 'javax.mail.internet.InternetAddress'.(–¹“êûÿÿÿÿ8öğöş1J$f2b6bd8e-4716-4b87-adab-5ff1799a27af
 „
-java:S1128"<Remove this unused import 'javax.mail.internet.MimeMessage'.(«ÀÔ€şÿÿÿÿ8öğöş1J$ea067cd6-0cbb-4bb8-9bfa-fe47908c6259
+java:S1128"<Remove this unused import 'javax.mail.internet.MimeMessage'.(«ÀÔ€şÿÿÿÿ8öğöş1J$7dd01d37-4df2-41a9-9440-2726d6a58e4d
 w
-java:S1128"/Remove this unused import 'java.beans.Encoder'.(ÿ¼õ‹ûÿÿÿÿ8öğöş1J$20d6a158-17b9-4b76-896e-3ca2c6ecc5cc
+java:S1128"/Remove this unused import 'java.beans.Encoder'.(ÿ¼õ‹ûÿÿÿÿ8öğöş1J$884d49df-a2c4-448e-93b7-d3ac3a594a40
 w
-java:S1128"4Remove this unused import 'java.util.logging.Level'.(…µÛ¶8öğöş1J$73786b9d-9950-48f5-9ab8-6872ffcf1340
+java:S1128"4Remove this unused import 'java.util.logging.Level'.(…µÛ¶8öğöş1J$f963811f-3b95-4146-9afd-4b6ceead25e7
 x
-java:S1128"5Remove this unused import 'java.util.logging.Logger'.(ƒ¥óš8÷ğöş1J$c0483a65-3193-48e8-81c7-b347c7e9a165
+java:S1128"5Remove this unused import 'java.util.logging.Logger'.(ƒ¥óš8÷ğöş1J$192e2ed5-89b9-4d0c-996c-05c8a7213e08
 w
-java:S1128 "4Remove this unused import 'java.util.regex.Matcher'.(ëÅ›ã8÷ğöş1J$8c8004fc-2ed0-4f4b-8855-4ea0b9ba28f9
+java:S1128 "4Remove this unused import 'java.util.regex.Matcher'.(ëÅ›ã8÷ğöş1J$89f8b5e7-4562-4a61-a611-9e491205828d
 |
-java:S1128!"4Remove this unused import 'java.util.regex.Pattern'.(Ã•…Äúÿÿÿÿ8÷ğöş1J$447235b1-7a35-4df7-9de6-62b934ad8ede
+java:S1128!"4Remove this unused import 'java.util.regex.Pattern'.(Ã•…Äúÿÿÿÿ8÷ğöş1J$32d0ef54-45b7-474a-85ea-de41dcddd4a4

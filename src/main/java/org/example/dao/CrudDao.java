@@ -4,13 +4,13 @@ import java.sql.SQLException;
 
 public interface CrudDao<T,S> extends SuperDao{
 
-    T search(S s) throws SQLException;
+    T search(S s);
 
-    ObservableList<T> searchAll() throws SQLException;
+    ObservableList<T> searchAll();
 
-    boolean insert(T t) throws SQLException;
+    boolean insert(T t);
 
-    boolean update(T t) throws SQLException;
+    boolean update(T t);
 
     boolean delete(S s);
 }

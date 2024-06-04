@@ -1,5 +1,6 @@
 package org.example.bo;
 
+import org.example.bo.custom.impl.CustomerBoImpl;
 import org.example.bo.custom.impl.OrderBoImpl;
 import org.example.bo.custom.impl.UserBoImpl;
 import org.example.dao.SuperDao;
@@ -19,6 +20,7 @@ public class BoFactory {
         switch (type){
             case USER:return (T)new UserBoImpl();
             case ORDER:return (T)new OrderBoImpl();
+            case CUSTOMER:return (T)new CustomerBoImpl();
         }
         return null;
     }

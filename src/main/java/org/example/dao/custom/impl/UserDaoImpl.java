@@ -4,18 +4,25 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.dao.custom.UserDao;
 import org.example.entity.UserEntity;
-import org.example.util.CrudUtil;
 import org.example.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
 
 
+    public String getLatestId(){
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+
+        Query query = session.createQuery("SELECT id FROM user ORDER BY id DESC LIMIT 1");
+        String id = (String) query.uniqueResult();
+        session.close();
+        return id;
+    }
     public UserEntity searchById(String id){
         Session session = HibernateUtil.getSession();
         session.getTransaction();
@@ -28,7 +35,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public UserEntity search(String s) throws SQLException {
+    public UserEntity search(String s){
 
         Session session = HibernateUtil.getSession();
         session.getTransaction();
@@ -81,26 +88,32 @@ public class UserDaoImpl implements UserDao {
         return i>0;
     }
     @Override
-    public boolean update(UserEntity userEntity) throws SQLException {
-        try {
-            return CrudUtil.execute("UPDATE user SET name=?,address=?,email=? WHERE id=?",userEntity.getName()
-                    ,userEntity.getAddress(),userEntity.getEmail(),userEntity.getId());
+    public boolean update(UserEntity userEntity){
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("UPDATE user SET name =:name,address =:address,email =:email WHERE id =:id");
+        query.setParameter("name",userEntity.getName());
+        query.setParameter("address",userEntity.getAddress());
+        query.setParameter("email",userEntity.getEmail());
+        query.setParameter("id",userEntity.getId());
 
-        } catch (ClassNotFoundException e) {
-            System.out.println(e);
-        }
-        return false;
+        int i = query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+
+        return i>0;
     }
 
     @Override
     public boolean delete(String id) {
-        try {
 
-            return CrudUtil.execute("DELETE * FROM WHERE id=?",id);
-
-        } catch (SQLException | ClassNotFoundException e) {
-            System.out.println(e);
-        }
-        return false;
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("DELETE FROM user WHERE id=:id");
+        query.setParameter("id",id);
+        int i = query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+        return i>0;
     }
 }

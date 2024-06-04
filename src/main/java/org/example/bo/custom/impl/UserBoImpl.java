@@ -15,7 +15,6 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
-import java.sql.SQLException;
 import java.util.Base64;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -27,21 +26,17 @@ public class UserBoImpl implements UserBo {
     UserDaoImpl userDaoImpl = DaoFactory.getInstance().getDao(DaoType.USER);
 
 
-    public boolean insertUser(User user) throws SQLException {
+    public boolean insertUser(User user){
 
         UserEntity userEntity = new ObjectMapper().convertValue(user, UserEntity.class);
         return userDaoImpl.insert(userEntity);
     }
 
     public UserEntity getUserByEmail(String email) {
-        try {
-            return userDaoImpl.search(email);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return userDaoImpl.search(email);
     }
 
-    public boolean isUpdatePassword(String email,String password) throws SQLException {
+    public boolean isUpdatePassword(String email,String password){
         String encryptPassword=passwordEncrypt(password);
         return userDaoImpl.update(email,encryptPassword);
     }
@@ -116,7 +111,7 @@ public class UserBoImpl implements UserBo {
         UserEntity userEntity = userDaoImpl.searchById(id);
         return new ObjectMapper().convertValue(userEntity,User.class);
     }
-    public ObservableList<User> getAllUsers() throws SQLException {
+    public ObservableList<User> getAllUsers(){
         ObservableList<UserEntity> list = userDaoImpl.searchAll();
         ObservableList<User> userList =FXCollections.observableArrayList();
 
@@ -124,5 +119,23 @@ public class UserBoImpl implements UserBo {
             userList.add(new ObjectMapper().convertValue(userEntity,User.class));
         });
         return userList;
+    }
+
+    public boolean updateUser(User user){
+        UserEntity userEntity = new ObjectMapper().convertValue(user, UserEntity.class);
+
+        return userDaoImpl.update(userEntity);
+    }
+    public boolean deleteUserById(String id){
+        return userDaoImpl.delete(id);
+    }
+
+    public String generateEmployeeId() {
+
+        String lastEmployeeId = userDaoImpl.getLatestId();
+
+        int number = Integer.parseInt(lastEmployeeId.split("U")[1]);
+        number++;
+        return String.format("U%04d", number);
     }
 }

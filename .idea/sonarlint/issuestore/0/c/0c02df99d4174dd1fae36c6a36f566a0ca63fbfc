@@ -1,20 +1,13 @@
 
-	java:S112("FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8·ø¯—ş1J$4fe09220-f833-4288-b4c9-c70f7343407a
-¶
-java:S1130"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(‹¢¥¦ùÿÿÿÿ8ôø¯—ş1J$37b45c8c-e0f2-44e9-a4cd-67f22e47eedd
-¶
-java:S1130,"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(‰ÇªÓüÿÿÿÿ8ù¯—ş1J$4d5d50a9-fb6f-4aa7-9f4f-a7b92cb55e1b
 
-java:S63538"<Use concise character class syntax '\\d' instead of '[0-9]'.(èÃš±8“ù¯—ş1J$1a8db173-fdca-4c43-9b6d-a18f6432e999
+java:S63533"<Use concise character class syntax '\\d' instead of '[0-9]'.(èÃš±8ªœµœş1J$8cf925d6-fc05-4387-9902-464c3e5a5600
 m
-java:S5869d"*Remove duplicates in this character class.(ÀàÍ»8ù¯—ş1J$9ec60f07-0141-4b15-9f76-e15e41306520
+java:S5869_"*Remove duplicates in this character class.(ÀàÍ»8²œµœş1J$401a98fa-bf62-4e62-8aef-952ef9e16723
 m
-java:S5869d"*Remove duplicates in this character class.(ÀàÍ»8ù¯—ş1J$367a1529-8b00-4a59-ac79-08fa73802368
+java:S5869_"*Remove duplicates in this character class.(ÀàÍ»8²œµœş1J$b82ef447-f5a6-45a1-ad59-c9a116e06225
 
-java:S5998d"LRefactor this repetition that can lead to a stack overflow for large inputs.(ÀàÍ»8Ÿù¯—ş1J$8e67a320-9444-4fce-812b-6a553fea6e90
+java:S5998_"LRefactor this repetition that can lead to a stack overflow for large inputs.(ÀàÍ»8´œµœş1J$e632f81a-00e2-4ccb-909e-3a920d138c6e
 t
-java:S1602m",Remove useless curly braces around statement(›Äıÿÿÿÿ8¡ù¯—ş1J$b8ab69a7-29ee-4c91-aac4-4d88769b7a94
-¶
-java:S1130w"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(‘ÅÆÒùÿÿÿÿ8£ù¯—ş1J$44229363-9eeb-4035-93a3-b9e369e9bf36
+java:S1602h",Remove useless curly braces around statement(›Äıÿÿÿÿ8µœµœş1J$b3e70c82-96f8-4c2f-a62a-2add9f321a27
 t
-java:S1602{",Remove useless curly braces around statement(›Äıÿÿÿÿ8£ù¯—ş1J$8224f4bf-b33b-45f2-a792-a04e47b2691b
+java:S1602v",Remove useless curly braces around statement(›Äıÿÿÿÿ8·œµœş1J$8a619e96-aaf1-48a5-b70b-b50c579291d1

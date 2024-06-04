@@ -1,0 +1,72 @@
+package org.example.bo.custom.impl;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import org.example.bo.custom.CustomerBo;
+import org.example.dao.DaoFactory;
+import org.example.dao.custom.impl.CustomerDaoImpl;
+import org.example.entity.CustomerEntity;
+import org.example.model.Customer;
+import org.example.util.DaoType;
+
+public class CustomerBoImpl implements CustomerBo {
+
+    CustomerDaoImpl customerDaoImpl = DaoFactory.getInstance().getDao(DaoType.CUSTOMER);
+
+    public String generateCustomerId(){
+        String lastEmployeeId = customerDaoImpl.getLatestId();
+
+        int number = Integer.parseInt(lastEmployeeId.split("C")[1]);
+        number++;
+        return String.format("C%04d", number);
+    }
+
+    public boolean insertCustomer(Customer customer) {
+
+        CustomerEntity customerEntity = new ObjectMapper().convertValue(customer, CustomerEntity.class);
+
+        return  customerDaoImpl.insert(customerEntity);
+
+    }
+
+    public ObservableList<Customer> getAllCustomer() {
+        ObservableList<CustomerEntity> customerEntities = customerDaoImpl.searchAll();
+
+        ObservableList<Customer> customerList = FXCollections.observableArrayList();
+
+        customerEntities.forEach(customerEntity -> {
+            customerList.add(new ObjectMapper().convertValue(customerEntity, Customer.class));
+        });
+        return customerList;
+    }
+
+    public boolean isValidEmail(String email){
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return email.matches(regex);
+    }
+
+    public Customer getUserById(String id) {
+        CustomerEntity customerEntity = customerDaoImpl.search(id);
+
+        return new ObjectMapper().convertValue(customerEntity, Customer.class);
+    }
+
+    public ObservableList<String> getAllCustomerIds() {
+        ObservableList<CustomerEntity> customerEntities = customerDaoImpl.searchAll();
+        ObservableList<String> idList = FXCollections.observableArrayList();
+
+        customerEntities.forEach(customerEntity -> {
+            idList.add(customerEntity.getId());
+        });
+        return idList;
+    }
+
+    public boolean updateCustomer(Customer customer) {
+        return customerDaoImpl.update(new ObjectMapper().convertValue(customer, CustomerEntity.class));
+    }
+
+    public boolean deleteCustomerById(String id) {
+        return customerDaoImpl.delete(id);
+    }
+}

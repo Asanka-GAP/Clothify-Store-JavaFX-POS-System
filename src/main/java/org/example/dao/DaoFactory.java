@@ -1,5 +1,6 @@
 package org.example.dao;
 
+import org.example.dao.custom.impl.CustomerDaoImpl;
 import org.example.dao.custom.impl.UserDaoImpl;
 import org.example.util.DaoType;
 
@@ -15,6 +16,7 @@ public class DaoFactory {
     public <T extends SuperDao>T getDao(DaoType type){
         switch (type){
             case USER:return (T)new UserDaoImpl();
+            case CUSTOMER:return (T)new CustomerDaoImpl();
         }
         return null;
     }
