@@ -1,15 +1,24 @@
 
+w
+java:S3740"/Provide the parametrized type for this generic.(ÿ‚ÇØùÿÿÿÿ8‹â¢—ş1J$6551f933-01ab-4cda-8417-d58b697182c6
+r
+java:S3740$"/Provide the parametrized type for this generic.(ÙÕÓ8Å¤—ş1J$02402023-494f-4acc-bd13-1ee2271dd357
 q
-java:S3740F"/Provide the parametrized type for this generic.(ÆÊÆ78½»¯•ş1J$e848f1b4-39f8-413a-b27b-acfcfe7338d8
-r	java:S106#"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8Ú»¯•ş1J$06373ee3-cb0c-434f-9ca3-5f654ebc3da6
+java:S3740I"/Provide the parametrized type for this generic.(ÆÊÆ78ÍêÆ—ş1J$127fe438-8d3b-468f-bebb-4dadd6376b1b
 {
-java:S1874-"3Remove this use of "createQuery"; it is deprecated.(±×Ÿşÿÿÿÿ8İ»¯•ş1J$b2ddd0d3-c55f-425d-82bf-9021aad83b70
+java:S1874"3Remove this use of "createQuery"; it is deprecated.(ÿ‚ÇØùÿÿÿÿ8¨â¢—ş1J$ec633c1c-a7e7-414d-86f1-3fd5311d1442
+v
+java:S1874$"3Remove this use of "createQuery"; it is deprecated.(ÙÕÓ8­â¢—ş1J$d898e876-b43b-4d2b-96a6-2ac6012d3f8b
+{
+java:S18740"3Remove this use of "createQuery"; it is deprecated.(±×Ÿşÿÿÿÿ8é¤—ş1J$40b29aa1-4b7a-4193-a31b-648e12ef218d
 o
-java:S16020",Remove useless curly braces around statement(ß£¬™8Ş»¯•ş1J$a3bfe0ba-791a-40f7-9aea-c12418a2f9bc
+java:S16023",Remove useless curly braces around statement(ß£¬™8ªâ¢—ş1J$0ea55658-99fd-4dba-a4ae-563f2d1b96fb
 y
-java:S16120"6Replace this lambda with method reference 'list::add'.(ß£¬™8à»¯•ş1J$102bb98b-5e05-40d9-85c5-06914319b4d3
+java:S16123"6Replace this lambda with method reference 'list::add'.(ß£¬™8«â¢—ş1J$3d9a3afb-be6c-43d9-9dd9-a634375f7a93
 u
-java:S1874F"3Remove this use of "createQuery"; it is deprecated.(ÆÊÆ78å»¯•ş1J$5dfc565a-690f-4ceb-813b-6ec491db6ed2
-r	java:S106J"+Replace this use of System.out by a logger.(´‹¹öşÿÿÿÿ8æ»¯•ş1J$05cc3064-8242-4676-bbd6-99f65a49a5c5
-r	java:S106W"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8è»¯•ş1J$fdf05d25-f0aa-4f16-aa2b-7592e10a5427
-r	java:S106c"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8ê»¯•ş1J$51989cd7-dd47-4d42-982f-3bb74252cda7
+java:S1874I"3Remove this use of "createQuery"; it is deprecated.(ÆÊÆ78ÿêÆ—ş1J$8289e999-8639-44e9-85f3-d485df3aa44c
+r	java:S106M"+Replace this use of System.out by a logger.(´‹¹öşÿÿÿÿ8®â¢—ş1J$99c23db8-6309-4a27-8499-f4f45c7d9a2c
+r	java:S106Z"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8¯â¢—ş1J$c9d55533-a40c-49ef-b0fe-f5d34d895837
+r	java:S106f"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8°â¢—ş1J$6d4f0857-aa77-4e2c-b076-20fd377c3d91
+q
+java:S1128"/Remove this unused import 'java.sql.ResultSet'.(ˆóÚw8ŞÈÉ—ş1J$4104c5fe-1e59-4c0b-8b30-7d2170bf4b11

@@ -101,6 +101,21 @@ public class UserBoImpl implements UserBo {
         return email.matches(regex);
     }
 
+    public ObservableList<String> getAllUserIds(){
+        ObservableList<UserEntity> list = userDaoImpl.searchAll();
+
+        ObservableList<String> idList = FXCollections.observableArrayList();
+
+        list.forEach(userEntity -> {
+            idList.add(userEntity.getId());
+        });
+        return idList;
+    }
+
+    public User getUserById(String id){
+        UserEntity userEntity = userDaoImpl.searchById(id);
+        return new ObjectMapper().convertValue(userEntity,User.class);
+    }
     public ObservableList<User> getAllUsers() throws SQLException {
         ObservableList<UserEntity> list = userDaoImpl.searchAll();
         ObservableList<User> userList =FXCollections.observableArrayList();

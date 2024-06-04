@@ -16,25 +16,28 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
 
 
+    public UserEntity searchById(String id){
+        Session session = HibernateUtil.getSession();
+        session.getTransaction();
+
+        Query query = session.createQuery("FROM user WHERE id=:id");
+        query.setParameter("id",id);
+        UserEntity userEntity = (UserEntity) query.uniqueResult();
+        session.close();
+        return userEntity;
+    }
+
     @Override
     public UserEntity search(String s) throws SQLException {
-        UserEntity userEntity = null;
-        try {
-            ResultSet resultSet = CrudUtil.execute("SELECT * FROM user WHERE email=?",s);
-            while (resultSet.next()){
-                userEntity= new UserEntity(resultSet.getString(1)
-                                            ,resultSet.getString(2)
-                                            ,resultSet.getString(3)
-                                            ,resultSet.getString(4)
-                                            ,resultSet.getString(5)
-                                            ,resultSet.getString(6)
-                );
-            }
-            return userEntity;
-        } catch (ClassNotFoundException e) {
-            System.out.println(e);
-        }
-        return null;
+
+        Session session = HibernateUtil.getSession();
+        session.getTransaction();
+
+        Query query = session.createQuery("FROM user WHERE email=:email");
+        query.setParameter("email",s);
+        UserEntity userEntity = (UserEntity) query.uniqueResult();
+        session.close();
+        return userEntity;
     }
 
     @Override
@@ -53,7 +56,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean insert(UserEntity userEntity) throws SQLException {
+    public boolean insert(UserEntity userEntity){
 
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();

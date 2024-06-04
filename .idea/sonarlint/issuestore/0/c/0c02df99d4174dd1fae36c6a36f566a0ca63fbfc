@@ -1,14 +1,20 @@
 
-	java:S112("FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ıˆÛ€ş1J$7ae173ba-4b82-4747-82ef-fce2c7320369
-
-java:S1130,"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(‰ÇªÓüÿÿÿÿ8éğ“•ş1
+	java:S112("FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8·ø¯—ş1J$4fe09220-f833-4288-b4c9-c70f7343407a
+¶
+java:S1130"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(‹¢¥¦ùÿÿÿÿ8ôø¯—ş1J$37b45c8c-e0f2-44e9-a4cd-67f22e47eedd
+¶
+java:S1130,"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(‰ÇªÓüÿÿÿÿ8ù¯—ş1J$4d5d50a9-fb6f-4aa7-9f4f-a7b92cb55e1b
 
-java:S63538"<Use concise character class syntax '\\d' instead of '[0-9]'.(èÃš±8¨‰Û€ş1J$b467edd3-4aa1-4d94-ba3f-c20d68796163
+java:S63538"<Use concise character class syntax '\\d' instead of '[0-9]'.(èÃš±8“ù¯—ş1J$1a8db173-fdca-4c43-9b6d-a18f6432e999
 m
-java:S5869d"*Remove duplicates in this character class.(ÀàÍ»8±‰Û€ş1J$4664050b-b485-4a7f-a46a-2dcdaf944b69
+java:S5869d"*Remove duplicates in this character class.(ÀàÍ»8ù¯—ş1J$9ec60f07-0141-4b15-9f76-e15e41306520
 m
-java:S5869d"*Remove duplicates in this character class.(ÀàÍ»8±‰Û€ş1J$cc7c5a52-c8e2-45da-b254-721623678897
+java:S5869d"*Remove duplicates in this character class.(ÀàÍ»8ù¯—ş1J$367a1529-8b00-4a59-ac79-08fa73802368
 
-java:S5998d"LRefactor this repetition that can lead to a stack overflow for large inputs.(ÀàÍ»8²‰Û€ş1J$14754f77-3c58-4546-a280-0dbc3274159d
+java:S5998d"LRefactor this repetition that can lead to a stack overflow for large inputs.(ÀàÍ»8Ÿù¯—ş1J$8e67a320-9444-4fce-812b-6a553fea6e90
 t
-java:S1602l",Remove useless curly braces around statement(›Äıÿÿÿÿ8´‰Û€ş1J$e2a1ed29-e66c-406f-9c10-13eb19319afe
+java:S1602m",Remove useless curly braces around statement(›Äıÿÿÿÿ8¡ù¯—ş1J$b8ab69a7-29ee-4c91-aac4-4d88769b7a94
+¶
+java:S1130w"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(‘ÅÆÒùÿÿÿÿ8£ù¯—ş1J$44229363-9eeb-4035-93a3-b9e369e9bf36
+t
+java:S1602{",Remove useless curly braces around statement(›Äıÿÿÿÿ8£ù¯—ş1J$8224f4bf-b33b-45f2-a792-a04e47b2691b

@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -42,12 +43,29 @@ public class AdminDashBoardController implements Initializable {
     public TableColumn employeeNameCol;
     public TableColumn employeeEmailCol;
     public TableColumn employeeAddressCol;
+    public JFXButton updayeEmployeeBtn;
+    public JFXComboBox employeeIdComboBox;
+    public JFXButton deleteBtn;
+    public Text empIdLable;
+    public JFXButton actionBtn;
 
     UserBoImpl userBoImpl = new UserBoImpl();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        employeeIdComboBox.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue) -> {
+            User user = userBoImpl.getUserById((String) newValue);
+
+            empNametxt.setText(user.getName());
+            empAddresstxt.setText(user.getAddress());
+            empEmailtxt.setText(user.getEmail());
+
+        });
         generateCustomerId();
+        updayeEmployeeBtn.setVisible(false);
+        deleteBtn.setVisible(false);
+        employeeIdComboBox.setVisible(false);
         errorMsgtxt.setVisible(false);
         employeeIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         employeeNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -152,6 +170,7 @@ public class AdminDashBoardController implements Initializable {
     }
 
     public void customerDetailsBtnAction(ActionEvent actionEvent) {
+
     }
 
     public void suppliersDetailsBtnAction(ActionEvent actionEvent) {
@@ -164,9 +183,28 @@ public class AdminDashBoardController implements Initializable {
     }
 
     public void manageEmployeeBtnAction(ActionEvent actionEvent) {
+        empIdLable.setVisible(true);
+        addEmployeeBtn.setVisible(true);
+        actionBtn.setVisible(true);
+        empIdtxt.setVisible(true);
+        deleteBtn.setVisible(false);
+        updayeEmployeeBtn.setVisible(false);
+        employeeIdComboBox.setVisible(false);
+        empNametxt.setText("");
+        empAddresstxt.setText("");
+        empEmailtxt.setText("");
     }
 
     public void actionBtnAction(ActionEvent actionEvent) {
+        empIdLable.setVisible(false);
+        addEmployeeBtn.setVisible(false);
+        actionBtn.setVisible(false);
+        empIdtxt.setVisible(false);
+        deleteBtn.setVisible(true);
+        updayeEmployeeBtn.setVisible(true);
+        employeeIdComboBox.setVisible(true);
+        employeeIdComboBox.setItems(userBoImpl.getAllUserIds());
+
     }
 
     public void closeBtnAction(MouseEvent mouseEvent) {
@@ -178,5 +216,11 @@ public class AdminDashBoardController implements Initializable {
         if (result.get() == ButtonType.OK) {
             System.exit(0);
         }
+    }
+
+    public void updateEmployeeBtnAction(ActionEvent actionEvent) {
+    }
+
+    public void deleteBtnAction(ActionEvent actionEvent) {
     }
 }
