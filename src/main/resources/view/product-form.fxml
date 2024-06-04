@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="customerWindow" prefHeight="429.0" prefWidth="849.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.ProductFormController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="523.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="238.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.11372549086809158" green="0.14901961386203766" blue="0.4431372582912445" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.006729475100942127">
+                     <color>
+                        <Color red="0.03529411926865578" green="0.125490203499794" blue="0.24705882370471954" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.32549020648002625" green="0.47058823704719543" blue="0.5843137502670288" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <JFXTextField fx:id="productNameTxt" layoutX="279.0" layoutY="85.0" prefHeight="26.0" prefWidth="220.0" promptText="Product Name" />
+      <JFXTextField fx:id="qtyTxt" layoutX="279.0" layoutY="122.0" onKeyReleased="#qtyKeyReleased" prefHeight="26.0" prefWidth="220.0" promptText="QTY" />
+      <JFXTextField fx:id="categoryTxt" layoutX="426.0" layoutY="-64.0" prefHeight="26.0" prefWidth="220.0" promptText="Category" />
+      <Text fx:id="cusIdLable" layoutX="280.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product id:-" />
+      <JFXButton fx:id="addProductBtn" layoutX="286.0" layoutY="174.0" onAction="#addProductOnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Add Product">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="actionBtn" layoutX="574.0" layoutY="174.0" onAction="#actionBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Action">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Text fx:id="errorMsgtxt" fill="#e10e0e" layoutX="400.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid QTY" />
+      <JFXButton layoutX="39.0" layoutY="119.0" onAction="#placeSectionBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #fff; -fx-border-radius: 20;" text="Place Order" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="39.0" layoutY="174.0" onAction="#manageOrdersBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #fff; -fx-border-radius: 20;" text="Manage Orders" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="39.0" layoutY="229.0" onAction="#manageSuppliersBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #fff; -fx-border-radius: 20;" text="Manage Suppliers" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="39.0" layoutY="283.0" onAction="#manageCustomersBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #fff; -fx-border-radius: 20;" text="Manage Customers" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="39.0" layoutY="336.0" onAction="#manageProductsBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #fff; -fx-border-radius: 20;" text="Manage Products" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <FontAwesomeIconView fill="WHITE" glyphName="SIGN_OUT" layoutX="40.0" layoutY="465.0" onMouseClicked="#signOutBtnMouseClicked" size="40">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </FontAwesomeIconView>
+      <FontAwesomeIconView fill="WHITE" glyphName="SHOPPING_BAG" layoutX="97.0" layoutY="464.0" onMouseClicked="#shoppingBagBtnMouseClicked" size="40">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </FontAwesomeIconView>
+      <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="163.0" layoutY="465.0" onMouseClicked="#userBtnMouseClicked" size="40">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </FontAwesomeIconView>
+      <TableView fx:id="productTable" layoutX="262.0" layoutY="236.0" prefHeight="244.0" prefWidth="384.0">
+         <columns>
+            <TableColumn fx:id="proIdCol" prefWidth="73.60003662109375" text="ID" />
+            <TableColumn fx:id="cusAddressCol" minWidth="0.0" prefWidth="0.0" text="Category" />
+            <TableColumn fx:id="proNameCol" prefWidth="87.2000732421875" text="Name" />
+            <TableColumn fx:id="proCategoryCol" prefWidth="78.39996337890625" text="Category" />
+            <TableColumn fx:id="proSizeCol" prefWidth="83.19992065429688" text="Size" />
+            <TableColumn fx:id="proQTYCol" prefWidth="59.20001220703125" text="QTY" />
+         </columns>
+      </TableView>
+      <FontAwesomeIconView fill="#21a68b" glyphName="SHOPPING_CART" layoutX="98.0" layoutY="75.0" onMouseClicked="#userBtnMouseClicked" size="40" />
+      <Text fill="#ffffff00" layoutX="27.0" layoutY="54.0" stroke="WHITE" strokeType="OUTSIDE" text="Clothify Store">
+         <font>
+            <Font name="Times New Roman Bold" size="30.0" />
+         </font>
+      </Text>
+      <Text fx:id="proIdTxt" fill="#078f43" layoutX="362.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id number" />
+      <Text layoutX="803.0" layoutY="24.0" onMouseClicked="#closeBtnAction" strokeType="OUTSIDE" strokeWidth="0.0" text="X" textAlignment="CENTER" wrappingWidth="47.87811279296875">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="CLOSED_HAND" />
+         </cursor>
+      </Text>
+      <JFXButton fx:id="updateBtn" layoutX="286.0" layoutY="174.0" onAction="#updateOnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Update">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXComboBox fx:id="productIdComboBox" layoutX="279.0" layoutY="59.0" prefHeight="26.0" prefWidth="154.0" promptText="Product Id" />
+      <JFXButton fx:id="deleteBtn" layoutX="574.0" layoutY="174.0" onAction="#deleteBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Delete">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXTextField fx:id="sizeTxt" layoutX="544.0" layoutY="121.0" onKeyReleased="#sizeKeyReleased" prefHeight="26.0" prefWidth="220.0" promptText="Size" />
+      <JFXButton layoutX="543.0" layoutY="55.0" onAction="#imageUploadOnAction" prefHeight="27.0" prefWidth="220.0" style="-fx-border-color: #000; -fx-background-color: #09203f;" text="Upload image" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <ImageView fx:id="imageView" fitHeight="218.0" fitWidth="181.0" layoutX="654.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="218.0" layoutX="654.0" layoutY="249.0" stroke="BLACK" strokeType="INSIDE" width="181.0" />
+      <Text fx:id="sizeError" fill="#e10e0e" layoutX="674.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid Size" />
+      <JFXComboBox fx:id="categoryComboBox" layoutX="544.0" layoutY="91.0" prefHeight="26.0" prefWidth="220.0" promptText="Category" />
+   </children>
+</AnchorPane>

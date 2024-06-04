@@ -138,3 +138,17 @@ c
 3src/main/java/org/example/bo/custom/CustomerBo.java,f\7\f7d3021128099b99cfac1cb4f2ccb9431053557d
 l
 <src/main/java/org/example/bo/custom/impl/CustomerBoImpl.java,2\9\29081a5c0510067a527913abf14f2861ad15455c
+o
+?src/main/java/org/example/controller/ProductFormController.java,0\0\00d8e2750916f3892be75ddb80685099e31168ff
+c
+3src/main/java/org/example/entity/ProductEntity.java,5\b\5b226111c351847a53d9796fe7769a5762cac461
+\
+,src/main/java/org/example/model/Product.java,8\b\8b491c8a2221815583197829223fcfbf64a481f3
+d
+4src/main/java/org/example/dao/custom/ProductDao.java,1\5\1570086eed2407c8eedc89ebfc8e618cb2f4f415
+m
+=src/main/java/org/example/dao/custom/impl/ProductDaoImpl.java,5\d\5d9bc8b6685d7351d0addf811537b887610b286c
+b
+2src/main/java/org/example/bo/custom/ProductBo.java,8\6\86b7265b2cba69fc78bac7eb724389369a273f58
+k
+;src/main/java/org/example/bo/custom/impl/ProductBoImpl.java,1\9\19ecdd96c215da256fc7b50e35608c6d9a5e53a5

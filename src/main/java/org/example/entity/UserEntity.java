@@ -6,8 +6,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
 
-@Getter
+
+
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "user")
