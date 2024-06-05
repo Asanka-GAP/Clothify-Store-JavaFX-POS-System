@@ -2,6 +2,7 @@ package org.example.bo;
 
 import org.example.bo.custom.impl.CustomerBoImpl;
 import org.example.bo.custom.impl.OrderBoImpl;
+import org.example.bo.custom.impl.PlaceOrderBoImpl;
 import org.example.bo.custom.impl.UserBoImpl;
 import org.example.dao.SuperDao;
 import org.example.dao.custom.impl.UserDaoImpl;
@@ -21,6 +22,7 @@ public class BoFactory {
             case USER:return (T)new UserBoImpl();
             case ORDER:return (T)new OrderBoImpl();
             case CUSTOMER:return (T)new CustomerBoImpl();
+            case CART:return (T)new PlaceOrderBoImpl();
         }
         return null;
     }

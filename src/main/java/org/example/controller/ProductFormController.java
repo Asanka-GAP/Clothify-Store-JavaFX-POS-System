@@ -308,7 +308,7 @@ public class ProductFormController implements Initializable {
         proIdTxt.setText(productBoImpl.generateProductId());
         updateBtn.setVisible(false);
         deleteBtn.setVisible(false);
-        productIdComboBox.setVisible(false);
+        productIdComboBox.setVisible(true);
         errorMsgtxt.setVisible(false);
         sizeError.setVisible(false);
         categoryComboBox.setItems(categoryLoad());
@@ -323,6 +323,7 @@ public class ProductFormController implements Initializable {
         proSizeCol.setCellValueFactory(new PropertyValueFactory<>("size"));
 
         productTable.setItems(productBoImpl.getAllProducts());
+        productIdComboBox.setItems(productBoImpl.getAllProductIds());
 
     }
 

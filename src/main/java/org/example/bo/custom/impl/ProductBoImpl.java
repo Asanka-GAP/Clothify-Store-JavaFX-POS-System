@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import org.example.bo.custom.ProductBo;
 import org.example.dao.DaoFactory;
 import org.example.dao.custom.impl.ProductDaoImpl;
+import org.example.entity.CustomerEntity;
 import org.example.entity.ProductEntity;
 import org.example.model.Product;
 import org.example.util.DaoType;
@@ -51,5 +52,10 @@ public class ProductBoImpl implements ProductBo {
 
     public boolean deleteProduct(String id) {
         return productDaoImpl.delete(id);
+    }
+
+
+    public ObservableList<String> getAllProductIds() {
+        return productDaoImpl.searchAllIds();
     }
 }

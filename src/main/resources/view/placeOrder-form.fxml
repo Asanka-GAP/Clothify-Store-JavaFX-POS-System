@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="adminDashboardWindow" prefHeight="429.0" prefWidth="849.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.PlaceOrderFormController">
+<AnchorPane fx:id="placeOrderWindow" prefHeight="429.0" prefWidth="849.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.PlaceOrderFormController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="523.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="238.0">
          <fill>
@@ -40,21 +40,11 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <JFXTextField fx:id="empNametxt" layoutX="279.0" layoutY="97.0" prefHeight="26.0" prefWidth="286.0" promptText="Employee name" />
-      <JFXTextField fx:id="empEmailtxt" layoutX="279.0" layoutY="137.0" onKeyReleased="#emailAddressKeyReleased" prefHeight="26.0" prefWidth="286.0" promptText="Email Address" />
-      <JFXTextField fx:id="empAddresstxt" layoutX="279.0" layoutY="177.0" prefHeight="26.0" prefWidth="286.0" promptText="Address" />
-      <Text fx:id="empIdLable" layoutX="280.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Id:-" />
-      <JFXButton fx:id="addEmployeeBtn" layoutX="666.0" layoutY="101.0" onAction="#addEmployeeBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Add Employee">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
-      <JFXButton fx:id="actionBtn" layoutX="666.0" layoutY="168.0" onAction="#actionBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Action">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
-      <Text fx:id="errorMsgtxt" fill="#e10e0e" layoutX="565.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid Email" />
+      <JFXTextField fx:id="cusNameTxt" layoutX="279.0" layoutY="97.0" prefHeight="26.0" prefWidth="214.0" promptText="Customer Name" />
+      <JFXTextField fx:id="cusEmailTxt" layoutX="279.0" layoutY="137.0" prefHeight="26.0" prefWidth="214.0" promptText="Email Address" />
+      <JFXTextField fx:id="cusAddressTxt" layoutX="279.0" layoutY="177.0" prefHeight="26.0" prefWidth="214.0" promptText="Address" />
+      <Text fx:id="empIdLable" layoutX="280.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Id:-" />
+      <Text fx:id="errorMsgtxt" fill="#e10e0e" layoutX="659.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid QTY" />
       <JFXButton layoutX="39.0" layoutY="119.0" onAction="#placeSectionBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #fff; -fx-border-radius: 20;" text="Place Order" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -95,21 +85,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </FontAwesomeIconView>
-      <TableView fx:id="employeeTable" layoutX="262.0" layoutY="236.0" prefHeight="244.0" prefWidth="563.0">
-         <columns>
-            <TableColumn fx:id="employeeIdCol" prefWidth="107.20001220703125" text="ID" />
-            <TableColumn fx:id="employeeNameCol" prefWidth="124.79998779296875" text="Name" />
-            <TableColumn fx:id="employeeEmailCol" prefWidth="178.4000244140625" text="Email Address" />
-            <TableColumn fx:id="employeeAddressCol" minWidth="0.0" prefWidth="152.0" text="Address" />
-         </columns>
-      </TableView>
       <FontAwesomeIconView fill="#21a68b" glyphName="SHOPPING_CART" layoutX="98.0" layoutY="75.0" onMouseClicked="#userBtnMouseClicked" size="40" />
       <Text fill="#ffffff00" layoutX="27.0" layoutY="54.0" stroke="WHITE" strokeType="OUTSIDE" text="Clothify Store">
          <font>
             <Font name="Times New Roman Bold" size="30.0" />
          </font>
       </Text>
-      <Text fx:id="orderIdtxt" fill="#078f43" layoutX="366.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id number" />
+      <Text fx:id="orderIdtxt" fill="#078f43" layoutX="366.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id number" />
       <Text layoutX="803.0" layoutY="24.0" onMouseClicked="#closeBtnAction" strokeType="OUTSIDE" strokeWidth="0.0" text="X" textAlignment="CENTER" wrappingWidth="47.87811279296875">
          <font>
             <Font name="System Bold" size="16.0" />
@@ -118,16 +100,100 @@
             <Cursor fx:constant="CLOSED_HAND" />
          </cursor>
       </Text>
-      <JFXButton fx:id="updayeEmployeeBtn" layoutX="666.0" layoutY="101.0" onAction="#updateEmployeeBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Update">
+      <JFXComboBox fx:id="cusIdComboBox" layoutX="279.0" layoutY="65.0" prefHeight="26.0" prefWidth="213.0" promptText="Customer Id" />
+      <JFXTextField fx:id="productNameTxt" layoutX="526.0" layoutY="100.0" prefHeight="26.0" prefWidth="214.0" promptText="Product Name" />
+      <JFXTextField fx:id="orderingQtyTxt" layoutX="526.0" layoutY="140.0" onKeyReleased="#orderQTYKeyReleased" prefHeight="26.0" prefWidth="214.0" promptText="Ordering QTY" />
+      <JFXComboBox fx:id="proIdComboBox" layoutX="526.0" layoutY="68.0" prefHeight="26.0" prefWidth="213.0" promptText="Product Id" />
+      <FontAwesomeIconView fx:id="cartBtn" glyphName="SHOPPING_CART" layoutX="779.0" layoutY="108.0" onMouseClicked="#addToCartOnAction" size="40" stroke="#130000" strokeWidth="0.0" wrappingWidth="47.87811279296875">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.48317631224764457">
+                     <color>
+                        <Color red="0.05882352963089943" green="0.6078431606292725" blue="0.05882352963089943" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.05882352963089943" green="0.6078431606292725" blue="0.05882352963089943" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
-      </JFXButton>
-      <JFXComboBox fx:id="employeeIdComboBox" layoutX="279.0" layoutY="65.0" prefHeight="26.0" prefWidth="154.0" promptText="Employee Id" />
-      <JFXButton fx:id="deleteBtn" layoutX="666.0" layoutY="168.0" onAction="#deleteBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Delete">
+      </FontAwesomeIconView>
+      <FontAwesomeIconView fx:id="olaceOrderBtn" glyphName="SHOPPING_BAG" layoutX="783.0" layoutY="155.0" onMouseClicked="#placeOrderOnAction" selectionFill="#fcb72d" size="38">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
-      </JFXButton>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.006729475100942127">
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5746971736204577">
+                     <color>
+                        <Color red="0.5372549295425415" green="0.14509804546833038" blue="0.24313725531101227" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.5372549295425415" green="0.14509804546833038" blue="0.24313725531101227" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </FontAwesomeIconView>
+      <Text fill="#057b38" layoutX="663.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total :-">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="totalTxt" fill="#8f0764" layoutX="719.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00000.00">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#057b38" layoutX="526.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available QTY :">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Text>
+      <Text fx:id="availableQTYTxt" fill="#8f0764" layoutX="608.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="categoryTxt" fill="#07238f" layoutX="684.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Text>
+      <TableView fx:id="cartTable" layoutX="266.0" layoutY="227.0" prefHeight="253.0" prefWidth="554.0">
+        <columns>
+          <TableColumn fx:id="cartIdCol" prefWidth="75.0" text="Cart Id" />
+          <TableColumn fx:id="cusNameCol" prefWidth="129.5999755859375" text="Customer Name" />
+            <TableColumn fx:id="productNameCol" prefWidth="143.99996948242188" text="Product Name" />
+            <TableColumn fx:id="qtyCol" prefWidth="73.5999755859375" text="QTY" />
+            <TableColumn fx:id="amountCol" prefWidth="130.4000244140625" text="Amount" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

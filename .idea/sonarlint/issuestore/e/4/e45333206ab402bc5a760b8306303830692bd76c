@@ -1,12 +1,13 @@
 
 v
-java:S1121".Extract the assignment out of this expression.(ÒÛÛÅúÿÿÿÿ8Ä¥²œş1J$7bdba8a4-13a2-487b-8d8c-b849558f5659
+java:S1121".Extract the assignment out of this expression.(ÒÛÛÅúÿÿÿÿ8á¼ûÇş1J$8f50a138-78a5-4f84-8f10-0c9b2a0a3ff2
 á
-java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(§İüáşÿÿÿÿ8É¥²œş1J$22ecffa9-d43f-43d8-9969-8f0cd81c47e6
-u	java:S131"YComplete cases by adding the missing enum constants or add a default case to this switch.(ÜŸ•8Ú¬» ş1
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(§İüáşÿÿÿÿ8è¼ûÇş1J$c28151a1-78af-42db-8493-180d8287bc48
+u	java:S131"YComplete cases by adding the missing enum constants or add a default case to this switch.(ÜŸ•8”ÁËş1
 W
-java:S1128"5Remove this unused import 'org.example.dao.SuperDao'.(£ú¦øÿÿÿÿ8à¬» ş1
+java:S1128"5Remove this unused import 'org.example.dao.SuperDao'.(£ú¦øÿÿÿÿ8ÁËş1
 a
-java:S1128"DRemove this unused import 'org.example.dao.custom.impl.UserDaoImpl'.(Ó¸ò·8á¬» ş1
+java:S1128"DRemove this unused import 'org.example.dao.custom.impl.UserDaoImpl'.(Ó¸ò·8ÁËş1
 W
-java:S1128	"5Remove this unused import 'org.example.util.DaoType'.(â¸½§úÿÿÿÿ8á¬» ş1
+java:S1128
+"5Remove this unused import 'org.example.util.DaoType'.(â¸½§úÿÿÿÿ8ÁËş1

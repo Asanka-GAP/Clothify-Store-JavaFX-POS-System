@@ -90,4 +90,17 @@ public class ProductDaoImpl implements ProductDao {
 
         return id;
     }
+
+    public ObservableList<String> searchAllIds() {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        List<String> list = session.createQuery("SELECT id FROM product").list();
+        session.close();
+        ObservableList<String> idList = FXCollections.observableArrayList();
+
+        list.forEach(s -> {
+            idList.add(s);
+        });
+        return idList;
+    }
 }

@@ -1,5 +1,5 @@
 package org.example.util;
 
 public enum BoType {
-    USER,PRODUCT,ORDER,CUSTOMER
+    USER,PRODUCT,ORDER,CUSTOMER,CART
 }
