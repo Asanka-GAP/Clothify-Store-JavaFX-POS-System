@@ -43,7 +43,6 @@
       </Rectangle>
       <JFXTextField fx:id="productNameTxt" layoutX="279.0" layoutY="85.0" prefHeight="26.0" prefWidth="220.0" promptText="Product Name" />
       <JFXTextField fx:id="qtyTxt" layoutX="279.0" layoutY="122.0" onKeyReleased="#qtyKeyReleased" prefHeight="26.0" prefWidth="220.0" promptText="QTY" />
-      <JFXTextField fx:id="categoryTxt" layoutX="426.0" layoutY="-64.0" prefHeight="26.0" prefWidth="220.0" promptText="Category" />
       <Text fx:id="cusIdLable" layoutX="280.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product id:-" />
       <JFXButton fx:id="addProductBtn" layoutX="286.0" layoutY="174.0" onAction="#addProductOnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Add Product">
          <cursor>
@@ -96,7 +95,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </FontAwesomeIconView>
-      <TableView fx:id="productTable" layoutX="262.0" layoutY="236.0" prefHeight="244.0" prefWidth="384.0">
+      <TableView fx:id="productTable" layoutX="262.0" layoutY="236.0" onMouseClicked="#tableMouseClickedAction" prefHeight="244.0" prefWidth="384.0">
          <columns>
             <TableColumn fx:id="proIdCol" prefWidth="73.60003662109375" text="ID" />
             <TableColumn fx:id="cusAddressCol" minWidth="0.0" prefWidth="0.0" text="Category" />
