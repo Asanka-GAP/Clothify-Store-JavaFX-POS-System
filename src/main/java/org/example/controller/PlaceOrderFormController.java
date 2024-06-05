@@ -2,7 +2,8 @@ package org.example.controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -18,8 +20,8 @@ import org.example.bo.BoFactory;
 import org.example.bo.custom.impl.CustomerBoImpl;
 import org.example.bo.custom.impl.OrderBoImpl;
 import org.example.bo.custom.impl.PlaceOrderBoImpl;
-import org.example.bo.custom.impl.ProductBoImpl;
 import org.example.model.Customer;
+import org.example.model.OrderHasItem;
 import org.example.model.Product;
 import org.example.util.BoType;
 
@@ -48,7 +50,7 @@ public class PlaceOrderFormController implements Initializable {
     private TableColumn<?, ?> cartIdCol;
 
     @FXML
-    private TableView<?> cartTable;
+    private TableView<OrderHasItem> cartTable;
 
     @FXML
     private Text categoryTxt;
@@ -84,9 +86,19 @@ public class PlaceOrderFormController implements Initializable {
     @FXML
     private Text totalTxt;
 
+    ObservableList<OrderHasItem> cartList = FXCollections.observableArrayList();
     boolean isCustomerSelect,isProductSelect,isQtyValid;
+     int cid =1;
     @FXML
     void addToCartOnAction(MouseEvent event) {
+
+        if (isQtyValid && isProductSelect && isCustomerSelect){
+            OrderHasItem cart = new OrderHasItem(cid++,cusNameTxt.getText(),productNameTxt.getText(),Integer.parseInt(orderingQtyTxt.getText()),Double.parseDouble(totalTxt.getText()));
+
+            cartList.add(cart);
+
+            cartTable.setItems(cartList);
+        }
 
     }
 
@@ -151,6 +163,12 @@ public class PlaceOrderFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        productNameCol.setCellValueFactory(new PropertyValueFactory<>("productId"));
+        cartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        cusNameCol.setCellValueFactory(new PropertyValueFactory<>("orderId"));
+        qtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
 
         errorMsgtxt.setVisible(false);
         isCustomerSelect = false;

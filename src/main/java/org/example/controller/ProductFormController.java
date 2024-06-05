@@ -38,6 +38,9 @@ public class ProductFormController implements Initializable {
     public ImageView imageView;
     public Text sizeError;
     public JFXComboBox categoryComboBox;
+    public JFXTextField priceTxt;
+    public Text priceError;
+    public TableColumn priceCol;
     @FXML
     private JFXButton actionBtn;
 
@@ -102,7 +105,7 @@ public class ProductFormController implements Initializable {
 
     byte[] image;
     String category;
-    boolean isAction,isMouseClick;
+    boolean isAction,isMouseClick,isPriceValid;
     @FXML
     void actionBtnAction(ActionEvent event) {
 
@@ -116,8 +119,8 @@ public class ProductFormController implements Initializable {
     @FXML
     void addProductOnAction(ActionEvent event) {
 
-            if (!productNameTxt.getText().equals("") && !qtyTxt.getText().equals("") && !sizeTxt.getText().equals("") && image != null) {
-                Product product = new Product(proIdTxt.getText(), productNameTxt.getText(), Integer.parseInt(sizeTxt.getText()), Integer.parseInt(qtyTxt.getText()), category, image);
+            if (isPriceValid && !productNameTxt.getText().equals("") && !qtyTxt.getText().equals("") && !sizeTxt.getText().equals("") && image != null) {
+                Product product = new Product(proIdTxt.getText(), productNameTxt.getText(), Integer.parseInt(sizeTxt.getText()), Integer.parseInt(qtyTxt.getText()), category,image,Double.parseDouble(priceTxt.getText()));
                 boolean isAdd = productBoImpl.addProduct(product);
                 if (isAdd) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -128,6 +131,7 @@ public class ProductFormController implements Initializable {
                     productNameTxt.setText("");
                     qtyTxt.setText("");
                     sizeTxt.setText("");
+                    priceTxt.setText("");
                     proIdTxt.setText(productBoImpl.generateProductId());
                     productTable.setItems(productBoImpl.getAllProducts());
                 }
@@ -174,6 +178,7 @@ public class ProductFormController implements Initializable {
                     productNameTxt.setText("");
                     qtyTxt.setText("");
                     sizeTxt.setText("");
+                    priceTxt.setText("");
                     productTable.setItems(productBoImpl.getAllProducts());
                     image = null;
                 }
@@ -223,6 +228,7 @@ public class ProductFormController implements Initializable {
         productNameTxt.setText("");
         qtyTxt.setText("");
         sizeTxt.setText("");
+        priceTxt.setText("");
         image = null;
     }
 
@@ -265,8 +271,8 @@ public class ProductFormController implements Initializable {
     @FXML
     void updateOnAction(ActionEvent event) {
 
-        if (isMouseClick && !productNameTxt.getText().equals("") && !qtyTxt.getText().equals("") && !sizeTxt.getText().equals("") && image!=null){
-            Product product = new Product(proIdTxt.getText(),productNameTxt.getText(),Integer.parseInt(sizeTxt.getText()),Integer.parseInt(qtyTxt.getText()),category,image);
+        if (isPriceValid && isMouseClick && !productNameTxt.getText().equals("") && !qtyTxt.getText().equals("") && !sizeTxt.getText().equals("") && image!=null){
+            Product product = new Product(proIdTxt.getText(),productNameTxt.getText(),Integer.parseInt(sizeTxt.getText()),Integer.parseInt(qtyTxt.getText()),category,image,Double.parseDouble(priceTxt.getText()));
             boolean isUpdate = productBoImpl.updateProduct(product);
 
             if (isUpdate){
@@ -303,6 +309,9 @@ public class ProductFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
+        isPriceValid = false;
+        priceError.setVisible(false);
         isAction = false;
         isMouseClick = false;
         proIdTxt.setText(productBoImpl.generateProductId());
@@ -321,10 +330,10 @@ public class ProductFormController implements Initializable {
         proNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         proQTYCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
         proSizeCol.setCellValueFactory(new PropertyValueFactory<>("size"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         productTable.setItems(productBoImpl.getAllProducts());
-        productIdComboBox.setItems(productBoImpl.getAllProductIds());
-
+        productIdComboBox.setVisible(false);
     }
 
     public void sizeKeyReleased(KeyEvent keyEvent) {
@@ -364,5 +373,18 @@ public class ProductFormController implements Initializable {
 
 
 
+    }
+
+    public void priceKeyReleased(KeyEvent keyEvent) {
+        try{
+            Double.parseDouble(priceTxt.getText());
+            priceError.setVisible(false);
+            addProductBtn.setDisable(false);
+            isPriceValid =true;
+
+        }catch (Exception e){
+            priceError.setVisible(true);
+            addProductBtn.setDisable(true);
+        }
     }
 }
