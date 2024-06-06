@@ -14,8 +14,8 @@ import java.util.Date;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "order")
-@Table(name = "order")
+@Entity(name = "order_table")
+@Table(name = "order_table")
 public class OrderEntity {
 
     @Id
@@ -23,5 +23,5 @@ public class OrderEntity {
     private String cusId;
     private String status;
     private Date date;
-    private Double amount;
+    private double amount;
 }

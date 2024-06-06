@@ -13,8 +13,8 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "order_has_item")
-@Table(name = "order_has_item")
+@Entity(name = "order_has_items")
+@Table(name = "order_has_items")
 public class OrderHasItemEntity {
     @Id
     private Integer id;

@@ -1,6 +1,7 @@
 package org.example.bo.custom.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.bo.custom.PlaceOrderBo;
 import org.example.dao.DaoFactory;
@@ -23,4 +24,16 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
         ProductEntity productEntity = productDao.search(newValue);
         return new ObjectMapper().convertValue(productEntity, Product.class);
     }
+
+    public ObservableList<Product> getAllProducts() {
+        ObservableList<ProductEntity> list = productDao.searchAll();
+        ObservableList<Product> products = FXCollections.observableArrayList();
+
+        list.forEach(productEntity -> {
+            products.add(new ObjectMapper().convertValue(productEntity, Product.class));
+        });
+        return products;
+    }
+
+
 }

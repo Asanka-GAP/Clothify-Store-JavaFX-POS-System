@@ -1,13 +1,6 @@
 
 v
-java:S1121".Extract the assignment out of this expression.(ÒÛÛÅúÿÿÿÿ8á¼ûÇş1J$8f50a138-78a5-4f84-8f10-0c9b2a0a3ff2
+java:S1121".Extract the assignment out of this expression.(ÒÛÛÅúÿÿÿÿ8«Ûëş1J$f03eb6fa-bb70-498d-b3b4-af2eca230f00
 á
-java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(§İüáşÿÿÿÿ8è¼ûÇş1J$c28151a1-78af-42db-8493-180d8287bc48
-u	java:S131"YComplete cases by adding the missing enum constants or add a default case to this switch.(ÜŸ•8”ÁËş1
-W
-java:S1128"5Remove this unused import 'org.example.dao.SuperDao'.(£ú¦øÿÿÿÿ8ÁËş1
-a
-java:S1128"DRemove this unused import 'org.example.dao.custom.impl.UserDaoImpl'.(Ó¸ò·8ÁËş1
-W
-java:S1128
-"5Remove this unused import 'org.example.util.DaoType'.(â¸½§úÿÿÿÿ8ÁËş1
+java:S6548	"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(§İüáşÿÿÿÿ8’«Ûëş1J$288a25db-898e-4ed9-90e2-96a25da9c9e0
+›	java:S131"YComplete cases by adding the missing enum constants or add a default case to this switch.(ÜŸ•8•«Ûëş1J$70f805f7-8eb0-4fd2-b1a7-5679068e5dcf

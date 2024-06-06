@@ -2,6 +2,9 @@ package org.example.controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,16 +19,21 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.impl.CustomerBoImpl;
 import org.example.bo.custom.impl.OrderBoImpl;
 import org.example.bo.custom.impl.PlaceOrderBoImpl;
 import org.example.model.Customer;
+import org.example.model.Order;
 import org.example.model.OrderHasItem;
 import org.example.model.Product;
 import org.example.util.BoType;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -38,8 +46,9 @@ public class PlaceOrderFormController implements Initializable {
     public JFXTextField cusAddressTxt;
     public Text priceTxt;
     public Text pId;
+    public Text timeLbl;
+    public Text dateLbl;
     CustomerBoImpl customerBoImpl = BoFactory.getInstance().getBo(BoType.CUSTOMER);
-    OrderBoImpl orderBoImpl = BoFactory.getInstance().getBo(BoType.ORDER);
     PlaceOrderBoImpl placeOrderBoImpl = BoFactory.getInstance().getBo(BoType.CART);
 
     @FXML
@@ -89,38 +98,64 @@ public class PlaceOrderFormController implements Initializable {
     private Text totalTxt;
 
     ObservableList<OrderHasItem> cartList = FXCollections.observableArrayList();
-    boolean isCustomerSelect,isProductSelect,isQtyValid;
+
+    ObservableList<Product> productsList = FXCollections.observableArrayList();
+    boolean isCustomerSelect,isProductSelect,isQtyValid,isRowSelect;
      int cid =1;
      String productId;
     boolean isAlreadyAdd =false;
+    int index;
+    Product product;
+    int oid=1;
 
     @FXML
     void addToCartOnAction(MouseEvent event) {
 
-        if (isQtyValid && isProductSelect && isCustomerSelect){
-            int qty = Integer.parseInt(orderingQtyTxt.getText());
-            double totalAmount = Double.parseDouble(priceTxt.getText())*qty;
+        if (Integer.parseInt(orderingQtyTxt.getText())>Integer.parseInt(availableQTYTxt.getText())){
+            new Alert(Alert.AlertType.ERROR,"Your ordering quantity is out of exceed").show();
+        }else {
 
-            double total = Double.parseDouble(totalTxt.getText());
-            total += totalAmount;
-            totalTxt.setText(Double.toString(total)+"0");
+            if (isQtyValid && isProductSelect && isCustomerSelect) {
+                int qty = Integer.parseInt(orderingQtyTxt.getText());
+                double totalAmount = Double.parseDouble(priceTxt.getText()) * qty;
 
-            if (isAlreadyAdd){
-                cartList.forEach(orderHasItem -> {
-                    if (orderHasItem.getOrderId().equals(pId.getText())){
+                double total = Double.parseDouble(totalTxt.getText());
+                total += totalAmount;
+                totalTxt.setText(Double.toString(total) + "0");
+
+                for (int i = 0; i < cartList.size(); i++) {
+                    OrderHasItem orderHasItem = cartList.get(i);
+                    if (orderHasItem.getProductId().equals(pId.getText())) {
                         double amount = orderHasItem.getAmount();
                         int newQty = orderHasItem.getQty();
                         newQty += qty;
                         amount += totalAmount;
-                        orderHasItem.setAmount(amount);
-                        orderHasItem.setQty(newQty);
+
+                        OrderHasItem updateOrderHasItem = new OrderHasItem(orderHasItem.getId(), cusNameTxt.getText(), pId.getText(), newQty, amount);
+
+                        cartList.set(i, updateOrderHasItem);
+                        isAlreadyAdd = true;
+                        break;
+                    }
+                }
+                if (!isAlreadyAdd) {
+                    OrderHasItem cart = new OrderHasItem(cid++, cusNameTxt.getText(), pId.getText(), qty, totalAmount);
+                    cartList.add(cart);
+                }
+                cartTable.setItems(cartList);
+                isAlreadyAdd = false;
+
+                productsList.forEach(product1 -> {
+                    if (product1.getId().equals(pId.getText())) {
+                        int newQ = product1.getQty();
+                        newQ -= Integer.parseInt(orderingQtyTxt.getText());
+                        product1.setQty(newQ);
+                        availableQTYTxt.setText(Integer.toString(product1.getQty()));
                     }
                 });
-            }else {
-                OrderHasItem cart = new OrderHasItem(cid++,cusNameTxt.getText(),pId.getText(),qty,totalAmount);
-                cartList.add(cart);
+
             }
-            cartTable.setItems(cartList);
+            orderingQtyTxt.setText("");
         }
 
     }
@@ -162,6 +197,20 @@ public class PlaceOrderFormController implements Initializable {
     @FXML
     void placeOrderOnAction(MouseEvent event) {
 
+        Date date = new Date();
+        Order order = new Order("X0001","P0001","Pending",date,2000.0);
+
+        boolean issave = new OrderBoImpl().saveOrder(order);
+
+        //placeOrderBoImpl.saveOrder(order);
+//        ObservableList<OrderHasItem> orderHasItemObservableList =FXCollections.observableArrayList();
+//
+//        cartList.forEach(orderHasItem -> {
+//            orderHasItemObservableList.add(new OrderHasItem(oid,"X0001",orderHasItem.getProductId(),orderHasItem.getQty(),orderHasItem.getAmount()));
+//        });
+
+
+
     }
 
     @FXML
@@ -187,12 +236,18 @@ public class PlaceOrderFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        loadDateTime();
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("productId"));
         cartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         cusNameCol.setCellValueFactory(new PropertyValueFactory<>("orderId"));
         qtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
         amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
 
+        productsList = placeOrderBoImpl.getAllProducts();
+
+        pId.setVisible(false);
+        isRowSelect = false;
+        isAlreadyAdd =false;
         priceTxt.setVisible(false);
         errorMsgtxt.setVisible(false);
         isCustomerSelect = false;
@@ -205,16 +260,26 @@ public class PlaceOrderFormController implements Initializable {
         productNameTxt.setDisable(true);
         cusNameTxt.setDisable(true);
 
+        //orderIdtxt.setText(bo.generateOrderId());
+
         cusIdComboBox.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue) -> {
             isCustomerSelect = true;
             Customer customer = customerBoImpl.getUserById(newValue);
             cusNameTxt.setText(customer.getName());
             cusAddressTxt.setText(customer.getAddress());
             cusEmailTxt.setText(customer.getEmail());
+            cusIdComboBox.setDisable(true);
         });
         proIdComboBox.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue) -> {
             isProductSelect = true;
-            Product product = placeOrderBoImpl.getProductById((String) newValue);
+            //Product product = placeOrderBoImpl.getProductById((String) newValue);
+
+            productsList.forEach(product1 -> {
+                if (product1.getId().equals((String) newValue)){
+                    product = product1;
+                }
+            });
+
             productNameTxt.setText(product.getName());
             availableQTYTxt.setText(Integer.toString(product.getQty()));
             categoryTxt.setText(product.getCategory());
@@ -222,11 +287,8 @@ public class PlaceOrderFormController implements Initializable {
             productId = product.getId();
             pId.setText(product.getId());
             priceTxt.setVisible(true);
-            cartList.forEach(orderHasItem -> {
-                if (orderHasItem.getProductId().equals(pId.getText())){
-                    isAlreadyAdd = true;
-                }
-            });
+
+
         });
     }
 
@@ -245,5 +307,54 @@ public class PlaceOrderFormController implements Initializable {
             errorMsgtxt.setVisible(true);
         }
     }
+
+    public void deleteFromCartOnAction(MouseEvent mouseEvent) {
+
+        if (isRowSelect){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Remove From Cart");
+            alert.setContentText("Are you sure want to remove this item");
+            Optional<ButtonType> type = alert.showAndWait();
+
+            if (type.get()==ButtonType.OK) {
+                cartList.remove(index);
+                cartTable.setItems(cartList);
+                isRowSelect = false;
+                return;
+            }
+        }
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Not Row Selected");
+        alert.setContentText("Please select the row if you want to remove");
+        alert.showAndWait();
+    }
+
+    public void tableMouseClickedAction(MouseEvent mouseEvent) {
+         index = cartTable.getSelectionModel().getSelectedIndex();
+
+         isRowSelect = true;
+
+        if(index < 0){
+            return;
+        }
+    }
+
+    private void loadDateTime(){
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        dateLbl.setText(format.format(date));
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.ZERO,e->{
+            LocalTime localTime = LocalTime.now();
+            timeLbl.setText(
+                    localTime.getHour()+" : "+localTime.getMinute()+" : "+localTime.getSecond()
+            );
+        }),
+                new KeyFrame(Duration.seconds(1))
+        );
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+    }
+
 
 }

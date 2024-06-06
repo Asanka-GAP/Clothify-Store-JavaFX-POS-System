@@ -3,6 +3,8 @@ package org.example.dao.custom.impl;
 import javafx.collections.ObservableList;
 import org.example.dao.custom.OrderDao;
 import org.example.entity.OrderEntity;
+import org.example.util.HibernateUtil;
+import org.hibernate.Session;
 
 public class OrderDaoImpl implements OrderDao {
     @Override
@@ -17,7 +19,12 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public boolean insert(OrderEntity orderEntity) {
-        return false;
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        session.persist((OrderEntity)orderEntity);
+        session.getTransaction().commit();
+        session.close();
+        return true;
     }
 
     @Override
