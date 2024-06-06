@@ -195,5 +195,15 @@
             <TableColumn fx:id="amountCol" prefWidth="130.4000244140625" text="Amount" />
         </columns>
       </TableView>
+      <Text fx:id="priceTxt" fill="#07238f" layoutX="683.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="pId" fill="#07238f" layoutX="779.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pID">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

@@ -36,6 +36,8 @@ public class PlaceOrderFormController implements Initializable {
     public JFXTextField cusNameTxt;
     public JFXTextField cusEmailTxt;
     public JFXTextField cusAddressTxt;
+    public Text priceTxt;
+    public Text pId;
     CustomerBoImpl customerBoImpl = BoFactory.getInstance().getBo(BoType.CUSTOMER);
     OrderBoImpl orderBoImpl = BoFactory.getInstance().getBo(BoType.ORDER);
     PlaceOrderBoImpl placeOrderBoImpl = BoFactory.getInstance().getBo(BoType.CART);
@@ -89,14 +91,35 @@ public class PlaceOrderFormController implements Initializable {
     ObservableList<OrderHasItem> cartList = FXCollections.observableArrayList();
     boolean isCustomerSelect,isProductSelect,isQtyValid;
      int cid =1;
+     String productId;
+    boolean isAlreadyAdd =false;
+
     @FXML
     void addToCartOnAction(MouseEvent event) {
 
         if (isQtyValid && isProductSelect && isCustomerSelect){
-            OrderHasItem cart = new OrderHasItem(cid++,cusNameTxt.getText(),productNameTxt.getText(),Integer.parseInt(orderingQtyTxt.getText()),Double.parseDouble(totalTxt.getText()));
+            int qty = Integer.parseInt(orderingQtyTxt.getText());
+            double totalAmount = Double.parseDouble(priceTxt.getText())*qty;
 
-            cartList.add(cart);
+            double total = Double.parseDouble(totalTxt.getText());
+            total += totalAmount;
+            totalTxt.setText(Double.toString(total)+"0");
 
+            if (isAlreadyAdd){
+                cartList.forEach(orderHasItem -> {
+                    if (orderHasItem.getOrderId().equals(pId.getText())){
+                        double amount = orderHasItem.getAmount();
+                        int newQty = orderHasItem.getQty();
+                        newQty += qty;
+                        amount += totalAmount;
+                        orderHasItem.setAmount(amount);
+                        orderHasItem.setQty(newQty);
+                    }
+                });
+            }else {
+                OrderHasItem cart = new OrderHasItem(cid++,cusNameTxt.getText(),pId.getText(),qty,totalAmount);
+                cartList.add(cart);
+            }
             cartTable.setItems(cartList);
         }
 
@@ -170,6 +193,7 @@ public class PlaceOrderFormController implements Initializable {
         qtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
         amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
 
+        priceTxt.setVisible(false);
         errorMsgtxt.setVisible(false);
         isCustomerSelect = false;
         isProductSelect = false;
@@ -194,6 +218,15 @@ public class PlaceOrderFormController implements Initializable {
             productNameTxt.setText(product.getName());
             availableQTYTxt.setText(Integer.toString(product.getQty()));
             categoryTxt.setText(product.getCategory());
+            priceTxt.setText(Double.toString(product.getPrice()));
+            productId = product.getId();
+            pId.setText(product.getId());
+            priceTxt.setVisible(true);
+            cartList.forEach(orderHasItem -> {
+                if (orderHasItem.getProductId().equals(pId.getText())){
+                    isAlreadyAdd = true;
+                }
+            });
         });
     }
 

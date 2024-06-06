@@ -43,7 +43,7 @@
       </Rectangle>
       <JFXTextField fx:id="productNameTxt" layoutX="279.0" layoutY="85.0" prefHeight="26.0" prefWidth="220.0" promptText="Product Name" />
       <JFXTextField fx:id="qtyTxt" layoutX="279.0" layoutY="122.0" onKeyReleased="#qtyKeyReleased" prefHeight="26.0" prefWidth="220.0" promptText="QTY" />
-      <Text fx:id="cusIdLable" layoutX="280.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product id:-" />
+      <Text fx:id="cusIdLable" layoutX="280.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product id:-" />
       <JFXButton fx:id="addProductBtn" layoutX="286.0" layoutY="174.0" onAction="#addProductOnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Add Product">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -111,7 +111,7 @@
             <Font name="Times New Roman Bold" size="30.0" />
          </font>
       </Text>
-      <Text fx:id="proIdTxt" fill="#078f43" layoutX="362.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id number" />
+      <Text fx:id="proIdTxt" fill="#078f43" layoutX="362.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id number" />
       <Text layoutX="803.0" layoutY="24.0" onMouseClicked="#closeBtnAction" strokeType="OUTSIDE" strokeWidth="0.0" text="X" textAlignment="CENTER" wrappingWidth="47.87811279296875">
          <font>
             <Font name="System Bold" size="16.0" />
@@ -125,7 +125,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXComboBox fx:id="productIdComboBox" layoutX="279.0" layoutY="59.0" prefHeight="26.0" prefWidth="154.0" promptText="Product Id" />
       <JFXButton fx:id="deleteBtn" layoutX="479.0" layoutY="174.0" onAction="#deleteBtnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #000; -fx-border-radius: 20;" text="Delete">
          <cursor>
             <Cursor fx:constant="HAND" />

@@ -11,6 +11,11 @@ import org.example.entity.ProductEntity;
 import org.example.model.Product;
 import org.example.util.DaoType;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 public class ProductBoImpl implements ProductBo {
@@ -58,4 +63,26 @@ public class ProductBoImpl implements ProductBo {
     public ObservableList<String> getAllProductIds() {
         return productDaoImpl.searchAllIds();
     }
+
+    //------------------------------------------------------------------------------
+    public BufferedImage byteArrayToBufferedImage(byte[] byteArray) throws IOException {
+        ByteArrayInputStream bais = new ByteArrayInputStream(byteArray);
+        return ImageIO.read(bais);
+    }
+
+    public InputStream bufferedImageToInputStream(BufferedImage bufferedImage) throws IOException{
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(bufferedImage,"png",baos);
+        return new ByteArrayInputStream(baos.toByteArray());
+    }
+
+
+    public static byte[] bufferedImageToByteArray(BufferedImage bufferedImage, String format) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(bufferedImage, format, baos);
+        return baos.toByteArray();
+    }
+
+
+
 }

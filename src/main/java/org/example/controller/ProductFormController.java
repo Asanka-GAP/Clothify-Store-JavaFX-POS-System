@@ -26,6 +26,7 @@ import org.example.bo.custom.impl.ProductBoImpl;
 import org.example.model.Product;
 
 import javax.swing.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.sql.Blob;
@@ -34,7 +35,6 @@ import java.util.ResourceBundle;
 
 public class ProductFormController implements Initializable {
 
-    public JFXComboBox productIdComboBox;
     public ImageView imageView;
     public Text sizeError;
     public JFXComboBox categoryComboBox;
@@ -317,7 +317,6 @@ public class ProductFormController implements Initializable {
         proIdTxt.setText(productBoImpl.generateProductId());
         updateBtn.setVisible(false);
         deleteBtn.setVisible(false);
-        productIdComboBox.setVisible(true);
         errorMsgtxt.setVisible(false);
         sizeError.setVisible(false);
         categoryComboBox.setItems(categoryLoad());
@@ -333,7 +332,6 @@ public class ProductFormController implements Initializable {
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         productTable.setItems(productBoImpl.getAllProducts());
-        productIdComboBox.setVisible(false);
     }
 
     public void sizeKeyReleased(KeyEvent keyEvent) {
@@ -364,6 +362,15 @@ public class ProductFormController implements Initializable {
             qtyTxt.setText(Integer.toString(product.getQty()));
             sizeTxt.setText(Integer.toString(product.getSize()));
             proIdTxt.setText(product.getId());
+//            System.out.println(product.getImage());
+//
+//            image = product.getImage();
+//            System.out.println(productBoImpl.getExampleByteArray());
+//            BufferedImage bufferedImage = productBoImpl.byteArrayToBufferedImage(image);
+//            InputStream inputStream = productBoImpl.bufferedImageToInputStream(bufferedImage);
+//            Image image1 = new Image(inputStream);
+//
+//            imageView.setImage(image1);
 
             if (!product.getId().equals("")){
                 isMouseClick = true;
