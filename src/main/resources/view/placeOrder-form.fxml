@@ -91,7 +91,7 @@
             <Font name="Times New Roman Bold" size="30.0" />
          </font>
       </Text>
-      <Text fx:id="orderIdtxt" fill="#078f43" layoutX="366.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id number" />
+      <Text fx:id="orderIdtxt" fill="#078f43" layoutX="339.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id number" />
       <Text layoutX="803.0" layoutY="24.0" onMouseClicked="#closeBtnAction" strokeType="OUTSIDE" strokeWidth="0.0" text="X" textAlignment="CENTER" wrappingWidth="47.87811279296875">
          <font>
             <Font name="System Bold" size="16.0" />
@@ -190,7 +190,7 @@
         <columns>
           <TableColumn fx:id="cartIdCol" prefWidth="75.0" text="Cart Id" />
           <TableColumn fx:id="cusNameCol" prefWidth="129.5999755859375" text="Customer Name" />
-            <TableColumn fx:id="productNameCol" prefWidth="143.99996948242188" text="Product Name" />
+            <TableColumn fx:id="productNameCol" prefWidth="143.99996948242188" text="Product Id" />
             <TableColumn fx:id="qtyCol" prefWidth="73.5999755859375" text="QTY" />
             <TableColumn fx:id="amountCol" prefWidth="130.4000244140625" text="Amount" />
         </columns>

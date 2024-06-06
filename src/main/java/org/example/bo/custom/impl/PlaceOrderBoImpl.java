@@ -5,9 +5,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.bo.custom.PlaceOrderBo;
 import org.example.dao.DaoFactory;
+import org.example.dao.custom.impl.OrderDaoImpl;
 import org.example.dao.custom.impl.PlaceOrderDaoImpl;
 import org.example.dao.custom.impl.ProductDaoImpl;
 import org.example.entity.ProductEntity;
+import org.example.model.OrderHasItem;
 import org.example.model.Product;
 import org.example.util.DaoType;
 
@@ -35,5 +37,18 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
         return products;
     }
 
+    public String generateOrderId() {
+        String id = new OrderDaoImpl().getLatestOrderId();
 
+        int number = Integer.parseInt(id.split("X")[1]);
+        number++;
+        return String.format("X%04d", number);
+    }
+    public boolean saveOrderDetails(ObservableList<OrderHasItem> orderHasItemObservableList) {
+        return placeOrderDao.saveAll(orderHasItemObservableList);
+    }
+
+    public int getLatestCartId(){
+        return placeOrderDao.getLatestId()+1;
+    }
 }

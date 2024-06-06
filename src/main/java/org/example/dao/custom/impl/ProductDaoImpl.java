@@ -104,4 +104,17 @@ public class ProductDaoImpl implements ProductDao {
         });
         return idList;
     }
+
+    public void updateQty(String productId, int qty) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("UPDATE product SET qty=qty-:qty WHERE id=:id");
+        query.setParameter("qty",qty);
+        query.setParameter("id",productId);
+
+        int i = query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+
+    }
 }

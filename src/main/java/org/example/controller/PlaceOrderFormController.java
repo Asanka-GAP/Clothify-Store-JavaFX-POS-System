@@ -50,6 +50,7 @@ public class PlaceOrderFormController implements Initializable {
     public Text dateLbl;
     CustomerBoImpl customerBoImpl = BoFactory.getInstance().getBo(BoType.CUSTOMER);
     PlaceOrderBoImpl placeOrderBoImpl = BoFactory.getInstance().getBo(BoType.CART);
+    OrderBoImpl orderBoImpl = BoFactory.getInstance().getBo(BoType.ORDER);
 
     @FXML
     private TableColumn<?, ?> amountCol;
@@ -102,12 +103,12 @@ public class PlaceOrderFormController implements Initializable {
     ObservableList<Product> productsList = FXCollections.observableArrayList();
     boolean isCustomerSelect,isProductSelect,isQtyValid,isRowSelect;
      int cid =1;
-     String productId;
+     String productId,customerId;
     boolean isAlreadyAdd =false;
     int index;
     Product product;
-    int oid=1;
-
+    int oid;
+    int num =1;
     @FXML
     void addToCartOnAction(MouseEvent event) {
 
@@ -197,19 +198,36 @@ public class PlaceOrderFormController implements Initializable {
     @FXML
     void placeOrderOnAction(MouseEvent event) {
 
+
+
         Date date = new Date();
-        Order order = new Order("X0001","P0001","Pending",date,2000.0);
+        Order order = new Order(orderIdtxt.getText(),customerId,"Pending",date,Double.parseDouble(totalTxt.getText()));
 
-        boolean issave = new OrderBoImpl().saveOrder(order);
-
-        //placeOrderBoImpl.saveOrder(order);
-//        ObservableList<OrderHasItem> orderHasItemObservableList =FXCollections.observableArrayList();
-//
-//        cartList.forEach(orderHasItem -> {
-//            orderHasItemObservableList.add(new OrderHasItem(oid,"X0001",orderHasItem.getProductId(),orderHasItem.getQty(),orderHasItem.getAmount()));
-//        });
+       boolean isSaved = orderBoImpl.saveOrder(order);
 
 
+        ObservableList<OrderHasItem> orderHasItemObservableList =FXCollections.observableArrayList();
+
+        cartList.forEach(orderHasItem -> {
+
+            orderHasItemObservableList.add(new OrderHasItem(oid++, orderIdtxt.getText(),orderHasItem.getProductId(),orderHasItem.getQty(),orderHasItem.getAmount()));
+        });
+
+
+        boolean isSavedOrderDetails = placeOrderBoImpl.saveOrderDetails(orderHasItemObservableList);
+        if (isSavedOrderDetails && isSaved){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Order Placed..!!!");
+            alert.setContentText("Order Placed Successfully");
+            alert.showAndWait();
+            productsList = placeOrderBoImpl.getAllProducts();
+            orderIdtxt.setText(placeOrderBoImpl.generateOrderId());
+            cartList.clear();
+            cartTable.setItems(null);
+            oid= placeOrderBoImpl.getLatestCartId();
+            cid = 1;
+            cusIdComboBox.setDisable(false);
+        }
 
     }
 
@@ -243,6 +261,7 @@ public class PlaceOrderFormController implements Initializable {
         qtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
         amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
 
+        oid = placeOrderBoImpl.getLatestCartId();
         productsList = placeOrderBoImpl.getAllProducts();
 
         pId.setVisible(false);
@@ -260,7 +279,7 @@ public class PlaceOrderFormController implements Initializable {
         productNameTxt.setDisable(true);
         cusNameTxt.setDisable(true);
 
-        //orderIdtxt.setText(bo.generateOrderId());
+        orderIdtxt.setText(placeOrderBoImpl.generateOrderId());
 
         cusIdComboBox.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue) -> {
             isCustomerSelect = true;
@@ -268,11 +287,13 @@ public class PlaceOrderFormController implements Initializable {
             cusNameTxt.setText(customer.getName());
             cusAddressTxt.setText(customer.getAddress());
             cusEmailTxt.setText(customer.getEmail());
+            customerId = newValue;
             cusIdComboBox.setDisable(true);
         });
         proIdComboBox.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue) -> {
             isProductSelect = true;
             //Product product = placeOrderBoImpl.getProductById((String) newValue);
+
 
             productsList.forEach(product1 -> {
                 if (product1.getId().equals((String) newValue)){

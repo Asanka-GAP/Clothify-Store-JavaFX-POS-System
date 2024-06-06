@@ -5,6 +5,7 @@ import org.example.dao.custom.OrderDao;
 import org.example.entity.OrderEntity;
 import org.example.util.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 public class OrderDaoImpl implements OrderDao {
     @Override
@@ -35,5 +36,17 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public boolean delete(String s) {
         return false;
+    }
+
+    public String getLatestOrderId() {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+
+        Query query = session.createQuery("SELECT id FROM order_table ORDER BY id DESC LIMIT 1");
+        String id = (String) query.uniqueResult();
+
+        session.close();
+
+        return id;
     }
 }
