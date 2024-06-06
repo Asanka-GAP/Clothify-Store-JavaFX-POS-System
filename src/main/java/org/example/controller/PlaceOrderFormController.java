@@ -103,11 +103,12 @@ public class PlaceOrderFormController implements Initializable {
     ObservableList<Product> productsList = FXCollections.observableArrayList();
     boolean isCustomerSelect,isProductSelect,isQtyValid,isRowSelect;
      int cid =1;
-     String productId,customerId;
+     String productId,customerId,selectdColPID;
     boolean isAlreadyAdd =false;
     int index;
     Product product;
-    int oid;
+    int oid,seletedRowQty;
+
     int num =1;
     @FXML
     void addToCartOnAction(MouseEvent event) {
@@ -341,6 +342,14 @@ public class PlaceOrderFormController implements Initializable {
                 cartList.remove(index);
                 cartTable.setItems(cartList);
                 isRowSelect = false;
+                productsList.forEach(product1 -> {
+                    if (product1.getId().equals(selectdColPID)) {
+                        int newQ = product1.getQty();
+                        newQ += seletedRowQty;
+                        product1.setQty(newQ);
+                        availableQTYTxt.setText("");
+                    }
+                });
                 return;
             }
         }
@@ -353,8 +362,9 @@ public class PlaceOrderFormController implements Initializable {
     public void tableMouseClickedAction(MouseEvent mouseEvent) {
          index = cartTable.getSelectionModel().getSelectedIndex();
 
+        selectdColPID = productNameCol.getCellData(index).toString();
+        seletedRowQty = (int) qtyCol.getCellData(index);
          isRowSelect = true;
-
         if(index < 0){
             return;
         }
