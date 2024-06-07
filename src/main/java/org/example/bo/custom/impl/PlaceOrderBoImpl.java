@@ -51,4 +51,8 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
     public int getLatestCartId(){
         return placeOrderDao.getLatestId()+1;
     }
+
+    public ObservableList<OrderHasItem> getAllOrderedProducts() {
+        return placeOrderDao.getAll();
+    }
 }

@@ -18,4 +18,8 @@ public class OrderBoImpl implements OrderBo {
     public String getLatestOrderId() {
         return orderDaoImpl.getLatestOrderId();
     }
+
+    public Order getOrderById(String orderId) {
+        return new ObjectMapper().convertValue(orderDaoImpl.search(orderId),Order.class);
+    }
 }

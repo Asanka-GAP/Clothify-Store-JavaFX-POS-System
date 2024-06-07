@@ -1,6 +1,7 @@
 package org.example.dao.custom.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.dao.DaoFactory;
 import org.example.dao.custom.PlaceOrderDao;
@@ -10,6 +11,8 @@ import org.example.util.DaoType;
 import org.example.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+
+import java.util.List;
 
 public class PlaceOrderDaoImpl implements PlaceOrderDao {
 
@@ -69,5 +72,19 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
         session.close();
 
         return id;
+    }
+
+    public ObservableList<OrderHasItem> getAll() {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        List<OrderHasItemEntity> list = session.createQuery("FROM order_has_items").list();
+        session.close();
+        ObservableList<OrderHasItem> observableList = FXCollections.observableArrayList();
+
+        list.forEach(orderHasItemEntity -> {
+            observableList.add(new ObjectMapper().convertValue(orderHasItemEntity, OrderHasItem.class));
+        });
+
+        return observableList;
     }
 }

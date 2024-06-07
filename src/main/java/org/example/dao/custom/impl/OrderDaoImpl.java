@@ -10,11 +10,16 @@ import org.hibernate.query.Query;
 public class OrderDaoImpl implements OrderDao {
     @Override
     public OrderEntity search(String s) {
-        return null;
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("FROM order_table WHERE id=:id");
+        query.setParameter("id",s);
+        return (OrderEntity)query.uniqueResult();
     }
 
     @Override
     public ObservableList<OrderEntity> searchAll() {
+
         return null;
     }
 

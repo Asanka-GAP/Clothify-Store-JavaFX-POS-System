@@ -293,8 +293,6 @@ public class PlaceOrderFormController implements Initializable {
         });
         proIdComboBox.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue) -> {
             isProductSelect = true;
-            //Product product = placeOrderBoImpl.getProductById((String) newValue);
-
 
             productsList.forEach(product1 -> {
                 if (product1.getId().equals((String) newValue)){
