@@ -250,6 +250,7 @@ public class ManageOrderFormController implements Initializable {
                     alert1.setTitle("Cart Update");
                     alert1.setContentText("Your Update Successfully");
                     alert1.showAndWait();
+                    orderingQtyTxt.setText("");
                 }
             }
         }

@@ -19,8 +19,8 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
     ProductDaoImpl productDao = DaoFactory.getInstance().getDao(DaoType.PRODUCT);
     OrderDaoImpl orderDao = DaoFactory.getInstance().getDao(DaoType.ORDER);
     public ObservableList<String> getProductIds() {
-        return productDao.searchAllIds();
 
+        return productDao.searchAllIds();
     }
 
     public Product getProductById(String newValue) {
