@@ -22,4 +22,8 @@ public class OrderBoImpl implements OrderBo {
     public Order getOrderById(String orderId) {
         return new ObjectMapper().convertValue(orderDaoImpl.search(orderId),Order.class);
     }
+
+    public boolean deleteOrderById(String id) {
+        return orderDaoImpl.delete(id);
+    }
 }

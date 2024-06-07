@@ -17,6 +17,7 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
 
     PlaceOrderDaoImpl placeOrderDao = DaoFactory.getInstance().getDao(DaoType.CART);
     ProductDaoImpl productDao = DaoFactory.getInstance().getDao(DaoType.PRODUCT);
+    OrderDaoImpl orderDao = DaoFactory.getInstance().getDao(DaoType.ORDER);
     public ObservableList<String> getProductIds() {
         return productDao.searchAllIds();
 
@@ -54,5 +55,32 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
 
     public ObservableList<OrderHasItem> getAllOrderedProducts() {
         return placeOrderDao.getAll();
+    }
+
+    public boolean deleteById(String id) {
+        return placeOrderDao.deleteByOrderId(id);
+    }
+
+    public ObservableList<OrderHasItem> getProductIdsByOrderId(String id) {
+
+        return placeOrderDao.getProductIdsByOrderId(id);
+    }
+
+
+    public boolean increseQty(ObservableList<OrderHasItem> productIdList) {
+        return productDao.increseQty(productIdList);
+    }
+
+    public boolean updateNewQty(String id,int qty) {
+        productDao.updateQty(id,qty);
+        return true;
+    }
+
+    public boolean updateOrderAmount(String id, double newAmount) {
+        return orderDao.updateAmountById(id,newAmount);
+    }
+
+    public boolean updateCartById(int id, int i, double newAmount) {
+        return placeOrderDao.updateQtyAndAmount(id,i,newAmount);
     }
 }

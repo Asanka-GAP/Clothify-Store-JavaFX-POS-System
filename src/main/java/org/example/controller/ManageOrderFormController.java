@@ -4,6 +4,8 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -93,8 +95,8 @@ public class ManageOrderFormController implements Initializable {
 
     @FXML
     private Text totalTxt;
-    private boolean isRowSelect;
-    int index,seletedRowQty;
+    private boolean isRowSelect,isQtyValid;
+    int index,seletedRowQty,selectedCartId;
     String selectdColPID;
 
     PlaceOrderBoImpl placeOrderBoImpl = BoFactory.getInstance().getBo(BoType.CART);
@@ -110,6 +112,10 @@ public class ManageOrderFormController implements Initializable {
         amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
 
         cartTable.setItems(placeOrderBoImpl.getAllOrderedProducts());
+
+        isQtyValid =false;
+        errorMsgtxt.setVisible(false);
+        isRowSelect = false;
         loadDateTime();
     }
 
@@ -155,6 +161,21 @@ public class ManageOrderFormController implements Initializable {
     @FXML
     void orderQTYKeyReleased(KeyEvent event) {
 
+        if (isRowSelect){
+            try {
+                int qty = Integer.parseInt(orderingQtyTxt.getText());
+                errorMsgtxt.setVisible(false);
+                isQtyValid = true;
+                if (qty>Integer.parseInt(availableQTYTxt.getText()) || qty<1){
+                    isQtyValid =false;
+                    errorMsgtxt.setVisible(true);
+                }
+            }catch (Exception e){
+                isQtyValid = false;
+                errorMsgtxt.setVisible(true);
+            }
+        }
+
     }
 
     @FXML
@@ -176,36 +197,62 @@ public class ManageOrderFormController implements Initializable {
     void tableMouseClickedAction(MouseEvent event) {
         index = cartTable.getSelectionModel().getSelectedIndex();
 
-        selectdColPID = productNameCol.getCellData(index).toString();
-        String orderId = orderIdCol.getCellData(index).toString();
-        seletedRowQty = (int) qtyCol.getCellData(index);
+        try {
+            isRowSelect = true;
+            selectdColPID = productNameCol.getCellData(index).toString();
+            String orderId = orderIdCol.getCellData(index).toString();
+            seletedRowQty = (int) qtyCol.getCellData(index);
+            selectedCartId =(int) cartIdCol.getCellData(index);
 
-        Order order = orderBoImpl.getOrderById(orderId);
-        Customer customer = customerBoImpl.getUserById(order.getCusId());
-        Product product = placeOrderBoImpl.getProductById(selectdColPID);
+            Order order = orderBoImpl.getOrderById(orderId);
+            Customer customer = customerBoImpl.getUserById(order.getCusId());
+            Product product = placeOrderBoImpl.getProductById(selectdColPID);
 
-        cusIdTxt.setText(customer.getId());
-        cusNameTxt.setText(customer.getName());
-        cusEmailTxt.setText(customer.getEmail());
-        cusAddressTxt.setText(customer.getAddress());
+            cusIdTxt.setText(customer.getId());
+            cusNameTxt.setText(customer.getName());
+            cusEmailTxt.setText(customer.getEmail());
+            cusAddressTxt.setText(customer.getAddress());
 
-        orderIDtxt.setText(order.getId());
+            orderIDtxt.setText(order.getId());
 
-        productIdTxt.setText(product.getId());
-        productNameTxt.setText(product.getName());
-        priceTxt.setText(Double.toString(product.getPrice()));
-        availableQTYTxt.setText(Integer.toString(product.getQty()));
-        categoryTxt.setText(product.getCategory());
-        isRowSelect = true;
-        if(index < 0){
-            return;
-        }
+            productIdTxt.setText(product.getId());
+            productNameTxt.setText(product.getName());
+            priceTxt.setText(Double.toString(product.getPrice()));
+            availableQTYTxt.setText(Integer.toString(product.getQty()));
+            categoryTxt.setText(product.getCategory());
+            isRowSelect = true;
+            if (index < 0) {
+                return;
+            }
+        }catch (Exception e){}
 
     }
 
     @FXML
     void updateOrderOnAction(MouseEvent event) {
 
+        if (isRowSelect && isQtyValid){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Update Order");
+            alert.setContentText("Are you want to Update this order ?");
+            Optional<ButtonType> type = alert.showAndWait();
+
+            if (type.get()==ButtonType.OK){
+                boolean isUpdateQty = placeOrderBoImpl.updateNewQty(selectdColPID,Integer.parseInt(orderingQtyTxt.getText()));
+                double newAmount = Double.parseDouble(priceTxt.getText())*Integer.parseInt(orderingQtyTxt.getText());
+
+                boolean isUpdateOrderAmount = placeOrderBoImpl.updateOrderAmount(orderIDtxt.getText(),newAmount);
+                boolean isUpdateCart = placeOrderBoImpl.updateCartById(selectedCartId,Integer.parseInt(orderingQtyTxt.getText()),newAmount);
+
+                if (isUpdateOrderAmount && isUpdateCart && isUpdateQty){
+                    cartTable.setItems(placeOrderBoImpl.getAllOrderedProducts());
+                    Alert alert1= new Alert(Alert.AlertType.INFORMATION);
+                    alert1.setTitle("Cart Update");
+                    alert1.setContentText("Your Update Successfully");
+                    alert1.showAndWait();
+                }
+            }
+        }
     }
 
     @FXML
@@ -230,5 +277,36 @@ public class ManageOrderFormController implements Initializable {
     }
 
     public void deleteWholeOrderOnAction(MouseEvent mouseEvent) {
+
+        if (isRowSelect) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Entire Order");
+            alert.setContentText("Are you sure want wo delete this whole order ?");
+            Optional<ButtonType> type = alert.showAndWait();
+
+            if (type.get() == ButtonType.OK) {
+
+                ObservableList<OrderHasItem> productIdList = FXCollections.observableArrayList();
+
+                productIdList = placeOrderBoImpl.getProductIdsByOrderId(orderIDtxt.getText());
+
+
+                boolean isUpdateQty = placeOrderBoImpl.increseQty(productIdList);
+
+                boolean isDeleted = orderBoImpl.deleteOrderById(orderIDtxt.getText());
+
+                boolean isDeleted2 = placeOrderBoImpl.deleteById(orderIDtxt.getText());
+
+                if (isDeleted2 && isDeleted && isUpdateQty) {
+                    Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                    alert1.setTitle("Order Deleted");
+                    alert1.setContentText("Order Deleted Successfully..!!!");
+                    alert1.showAndWait();
+                    cartTable.setItems(placeOrderBoImpl.getAllOrderedProducts());
+                }
+            }
+        }else{
+            new Alert(Alert.AlertType.ERROR,"Please select the row if you want to delete").show();
+        }
     }
 }

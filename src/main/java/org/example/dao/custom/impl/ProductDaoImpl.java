@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.dao.custom.ProductDao;
 import org.example.entity.ProductEntity;
+import org.example.model.OrderHasItem;
 import org.example.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -116,5 +117,20 @@ public class ProductDaoImpl implements ProductDao {
         session.getTransaction().commit();
         session.close();
 
+    }
+
+    public boolean increseQty(ObservableList<OrderHasItem> productIdList) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("UPDATE product SET qty=qty+:qty WHERE id=:id");
+
+        productIdList.forEach(orderHasItem -> {
+            query.setParameter("qty",orderHasItem.getQty());
+            query.setParameter("id",orderHasItem.getProductId());
+            query.executeUpdate();
+        });
+        session.getTransaction().commit();
+        session.close();
+        return true;
     }
 }

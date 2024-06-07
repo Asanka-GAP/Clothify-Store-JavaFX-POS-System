@@ -87,4 +87,46 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
 
         return observableList;
     }
+
+    public boolean deleteByOrderId(String id) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("DELETE FROM order_has_items WHERE orderId=:id");
+        query.setParameter("id",id);
+        int i = query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+        return i>0;
+    }
+
+    public ObservableList<OrderHasItem> getProductIdsByOrderId(String id) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("FROM order_has_items WHERE orderId=:id");
+        query.setParameter("id",id);
+        List<OrderHasItemEntity> list = query.list();
+        session.close();
+
+        ObservableList<OrderHasItem> observableList=FXCollections.observableArrayList();
+
+        list.forEach(s -> {
+            observableList.add(new ObjectMapper().convertValue(s, OrderHasItem.class));
+        });
+
+        return observableList;
+    }
+
+    public boolean updateQtyAndAmount(int id, int qty, double newAmount) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("UPDATE order_has_items SET qty=qty+:qty, amount=amount+:amount WHERE id=:id");
+        query.setParameter("id",id);
+        query.setParameter("qty",qty);
+        query.setParameter("amount",newAmount);
+
+        int i = query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+        return  i>0;
+    }
 }
