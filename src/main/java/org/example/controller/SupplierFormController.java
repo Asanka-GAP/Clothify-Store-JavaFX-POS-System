@@ -172,6 +172,8 @@ public class SupplierFormController implements Initializable {
                 }
 
             }
+        }else {
+            new Alert(Alert.AlertType.WARNING,"Please select the row if you wanna delete");
         }
 
     }
@@ -203,9 +205,6 @@ public class SupplierFormController implements Initializable {
     void signOutBtnMouseClicked(MouseEvent event) {
 
     }
-
-
-    
 
     @FXML
     void userBtnMouseClicked(MouseEvent event) {
