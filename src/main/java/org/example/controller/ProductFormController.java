@@ -102,6 +102,7 @@ public class ProductFormController implements Initializable {
     private JFXButton updateBtn;
 
     ProductBoImpl productBoImpl = new ProductBoImpl();
+    SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
 
     byte[] image;
     String category;
@@ -207,13 +208,14 @@ public class ProductFormController implements Initializable {
     }
 
     @FXML
-    void manageCustomersBtnAction(ActionEvent event) {
+    void manageCustomersBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(customerWindow,"customer-form.fxml");
 
     }
 
     @FXML
-    void manageOrdersBtnAction(ActionEvent event) {
-
+    void manageOrdersBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(customerWindow,"manageOrder-form.fxml");
     }
 
     @FXML
@@ -233,13 +235,13 @@ public class ProductFormController implements Initializable {
     }
 
     @FXML
-    void manageSuppliersBtnAction(ActionEvent event) {
-
+    void manageSuppliersBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(customerWindow,"supplier-form.fxml");
     }
 
     @FXML
-    void placeSectionBtnAction(ActionEvent event) {
-
+    void placeSectionBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(customerWindow,"placeOrder-form.fxml");
     }
 
     @FXML
@@ -259,8 +261,8 @@ public class ProductFormController implements Initializable {
     }
 
     @FXML
-    void shoppingBagBtnMouseClicked(MouseEvent event) {
-
+    void shoppingBagBtnMouseClicked(MouseEvent event) throws IOException {
+        sceneSwitch.switchScene(customerWindow,"placeOrder-form.fxml");
     }
 
     @FXML

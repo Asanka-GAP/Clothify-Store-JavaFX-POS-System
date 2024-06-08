@@ -1,0 +1,165 @@
+package org.example.controller;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+import org.example.bo.BoFactory;
+import org.example.bo.custom.impl.PlaceOrderBoImpl;
+import org.example.model.Product;
+import org.example.util.BoType;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
+public class ViewProductFormController implements Initializable {
+
+    @FXML
+    private Text availableQTYTxt;
+
+    @FXML
+    private Text categoryTxt;
+
+    @FXML
+    private TableColumn<?, ?> priceCol;
+
+    @FXML
+    private Text priceTxt;
+
+    @FXML
+    private TableColumn<?, ?> proCategoryCol;
+
+    @FXML
+    private TableColumn<?, ?> proIdCol;
+
+    @FXML
+    private TableColumn<?, ?> proNameCol;
+
+    @FXML
+    private TableColumn<?, ?> proQTYCol;
+
+    @FXML
+    private TableColumn<?, ?> proSizeCol;
+
+    @FXML
+    private Text productIdTxt;
+
+    @FXML
+    private Text productNameTxt;
+
+    @FXML
+    private TableView<Product> productTable;
+
+    @FXML
+    private Text totalTxt;
+
+    @FXML
+    private AnchorPane viewProductWindow;
+
+    PlaceOrderBoImpl placeOrderBo = BoFactory.getInstance().getBo(BoType.CART);
+    SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        productIdTxt.setText("");
+        productNameTxt.setText("");
+        categoryTxt.setText("");
+        priceTxt.setText("");
+        availableQTYTxt.setText("");
+
+        productTable.setItems(placeOrderBo.getAllProducts());
+        proIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        proCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        proNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        proQTYCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        proSizeCol.setCellValueFactory(new PropertyValueFactory<>("size"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+    }
+
+    @FXML
+    void closeBtnAction(MouseEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Exit");
+        alert.setContentText("Are you sure want to exit..?");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            System.exit(0);
+        }
+    }
+
+    @FXML
+    void customerDetailsBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(viewProductWindow,"viewCustomer-form.fxml");
+    }
+
+    @FXML
+    void manageEmployeeBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(viewProductWindow,"adminDashBoard-form.fxml");
+    }
+
+    @FXML
+    void orderDetailsBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(viewProductWindow,"viewOrder-form.fxml");
+    }
+
+    @FXML
+    void productDetailsBtnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void shoppingBagBtnMouseClicked(MouseEvent event) throws IOException {
+        sceneSwitch.switchScene(viewProductWindow,"viewOrder-form.fxml");
+    }
+
+    @FXML
+    void signOutBtnMouseClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void suppliersDetailsBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(viewProductWindow,"viewSupplier-form.fxml");
+    }
+
+    @FXML
+    void tableMouseClickedAction(MouseEvent event) {
+
+
+        try{
+            int index = productTable.getSelectionModel().getSelectedIndex();
+            if(index < 0){
+                return;
+            }
+            String id = proIdCol.getCellData(index).toString();
+
+            Product product = placeOrderBo.getProductById(id);
+            productIdTxt.setText(id);
+            productNameTxt.setText(product.getName());
+            categoryTxt.setText(product.getCategory());
+            priceTxt.setText(Double.toString(product.getPrice()));
+            availableQTYTxt.setText(Integer.toString(product.getQty()));
+
+        }catch (Exception e){}
+
+    }
+
+    @FXML
+    void userBtnMouseClicked(MouseEvent event) throws IOException {
+        sceneSwitch.switchScene(viewProductWindow,"adminDashBoard-form.fxml");
+    }
+
+
+}

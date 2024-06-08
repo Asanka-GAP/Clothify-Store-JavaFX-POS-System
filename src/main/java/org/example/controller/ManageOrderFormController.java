@@ -29,6 +29,7 @@ import org.example.model.OrderHasItem;
 import org.example.model.Product;
 import org.example.util.BoType;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -102,6 +103,8 @@ public class ManageOrderFormController implements Initializable {
     PlaceOrderBoImpl placeOrderBoImpl = BoFactory.getInstance().getBo(BoType.CART);
     OrderBoImpl orderBoImpl = BoFactory.getInstance().getBo(BoType.ORDER);
     CustomerBoImpl customerBoImpl = BoFactory.getInstance().getBo(BoType.CUSTOMER);
+
+    SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -139,8 +142,8 @@ public class ManageOrderFormController implements Initializable {
     }
 
     @FXML
-    void manageCustomersBtnAction(ActionEvent event) {
-
+    void manageCustomersBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(manageOrderWindow,"customer-form.fxml");
     }
 
     @FXML
@@ -149,13 +152,13 @@ public class ManageOrderFormController implements Initializable {
     }
 
     @FXML
-    void manageProductsBtnAction(ActionEvent event) {
-
+    void manageProductsBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(manageOrderWindow,"product-form.fxml");
     }
 
     @FXML
-    void manageSuppliersBtnAction(ActionEvent event) {
-
+    void manageSuppliersBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(manageOrderWindow,"supplier-form.fxml");
     }
 
     @FXML
@@ -179,13 +182,13 @@ public class ManageOrderFormController implements Initializable {
     }
 
     @FXML
-    void placeSectionBtnAction(ActionEvent event) {
-
+    void placeSectionBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(manageOrderWindow,"placeOrder-form.fxml");
     }
 
     @FXML
-    void shoppingBagBtnMouseClicked(MouseEvent event) {
-
+    void shoppingBagBtnMouseClicked(MouseEvent event) throws IOException {
+        sceneSwitch.switchScene(manageOrderWindow,"placeOrder-form.fxml");
     }
 
     @FXML

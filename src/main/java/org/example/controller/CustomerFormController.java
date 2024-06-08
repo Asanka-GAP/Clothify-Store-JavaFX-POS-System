@@ -20,6 +20,7 @@ import org.example.bo.custom.impl.CustomerBoImpl;
 import org.example.model.Customer;
 import org.example.util.BoType;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -80,6 +81,7 @@ public class CustomerFormController implements Initializable {
 
     String selectedId;
     CustomerBoImpl customerBoImpl = BoFactory.getInstance().getBo(BoType.CUSTOMER);
+    SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateCusBtn.setVisible(false);
@@ -209,28 +211,29 @@ public class CustomerFormController implements Initializable {
     }
 
     @FXML
-    void manageOrdersBtnAction(ActionEvent event) {
+    void manageOrdersBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(customerWindow,"manageOrder-form.fxml");
+    }
+
+    @FXML
+    void manageProductsBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(customerWindow,"product-form.fxml");
 
     }
 
     @FXML
-    void manageProductsBtnAction(ActionEvent event) {
-
+    void manageSuppliersBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(customerWindow,"supplier-form.fxml");
     }
 
     @FXML
-    void manageSuppliersBtnAction(ActionEvent event) {
-
+    void placeSectionBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(customerWindow,"placeOrder-form.fxml");
     }
 
     @FXML
-    void placeSectionBtnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void shoppingBagBtnMouseClicked(MouseEvent event) {
-
+    void shoppingBagBtnMouseClicked(MouseEvent event) throws IOException {
+        sceneSwitch.switchScene(customerWindow,"viewProduct-form.fxml");
     }
 
     @FXML
@@ -262,7 +265,7 @@ public class CustomerFormController implements Initializable {
     }
 
     @FXML
-    void userBtnMouseClicked(MouseEvent event) {
+    void userBtnMouseClicked(MouseEvent event) throws IOException {
 
     }
 

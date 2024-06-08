@@ -20,6 +20,7 @@ import org.example.bo.custom.impl.SupplierBoImpl;
 import org.example.model.Supplier;
 import org.example.util.BoType;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -78,6 +79,7 @@ public class SupplierFormController implements Initializable {
     String selectedSupId;
 
     SupplierBoImpl supllierBo= BoFactory.getInstance().getBo(BoType.SUPPLIER);
+    SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -197,8 +199,8 @@ public class SupplierFormController implements Initializable {
 
 
     @FXML
-    void shoppingBagBtnMouseClicked(MouseEvent event) {
-
+    void shoppingBagBtnMouseClicked(MouseEvent event) throws IOException {
+        sceneSwitch.switchScene(supplierManageWindow,"placeOrder-form.fxml");
     }
 
     @FXML
@@ -252,10 +254,12 @@ public class SupplierFormController implements Initializable {
 
     }
 
-    public void placeSectionBtnAction(ActionEvent actionEvent) {
+    public void placeSectionBtnAction(ActionEvent actionEvent) throws IOException {
+        sceneSwitch.switchScene(supplierManageWindow,"placeOrder-form.fxml");
     }
 
-    public void manageOrdersBtnAction(ActionEvent actionEvent) {
+    public void manageOrdersBtnAction(ActionEvent actionEvent) throws IOException {
+        sceneSwitch.switchScene(supplierManageWindow,"manageOrder-form.fxml");
     }
 
     public void manageSuppliersBtnAction(ActionEvent actionEvent) {
@@ -270,10 +274,11 @@ public class SupplierFormController implements Initializable {
         supCompanytxt.setText("");
     }
 
-    public void manageCustomersBtnAction(ActionEvent actionEvent) {
+    public void manageCustomersBtnAction(ActionEvent actionEvent) throws IOException {
+        sceneSwitch.switchScene(supplierManageWindow,"customer-form.fxml");
     }
 
-    public void manageProductsBtnAction(ActionEvent actionEvent) {
-
+    public void manageProductsBtnAction(ActionEvent actionEvent) throws IOException {
+        sceneSwitch.switchScene(supplierManageWindow,"product-form.fxml");
     }
 }

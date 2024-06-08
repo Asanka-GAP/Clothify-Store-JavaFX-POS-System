@@ -47,11 +47,12 @@ public class AdminDashBoardController implements Initializable {
 
     UserBoImpl userBoImpl = new UserBoImpl();
     String selectedId;
+    SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        employeeIdComboBox.setVisible(false);
         employeeIdComboBox.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue) -> {
-            try {
+
                 User user = userBoImpl.getUserById((String) newValue);
 
                 empNametxt.setText(user.getName());
@@ -59,12 +60,13 @@ public class AdminDashBoardController implements Initializable {
                 empEmailtxt.setText(user.getEmail());
 
                 selectedId = (String) newValue;
-            }catch (Exception e){};
+
         });
+
         empIdtxt.setText(userBoImpl.generateEmployeeId());
         updayeEmployeeBtn.setVisible(false);
         deleteBtn.setVisible(false);
-        employeeIdComboBox.setVisible(false);
+
         errorMsgtxt.setVisible(false);
         employeeIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         employeeNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -123,9 +125,11 @@ public class AdminDashBoardController implements Initializable {
     }
 
     public void userBtnMouseClicked(MouseEvent mouseEvent) {
+
     }
 
-    public void shoppingBagBtnMouseClicked(MouseEvent mouseEvent) {
+    public void shoppingBagBtnMouseClicked(MouseEvent mouseEvent) throws IOException {
+        sceneSwitch.switchScene(adminDashboardWindow,"viewOrder-form.fxml");
     }
 
     public void signOutBtnMouseClicked(MouseEvent mouseEvent) throws IOException {
@@ -139,17 +143,20 @@ public class AdminDashBoardController implements Initializable {
         }
     }
 
-    public void customerDetailsBtnAction(ActionEvent actionEvent) {
-
+    public void customerDetailsBtnAction(ActionEvent actionEvent) throws IOException {
+        sceneSwitch.switchScene(adminDashboardWindow,"viewCustomer-form.fxml");
     }
 
-    public void suppliersDetailsBtnAction(ActionEvent actionEvent) {
+    public void suppliersDetailsBtnAction(ActionEvent actionEvent) throws IOException {
+        sceneSwitch.switchScene(adminDashboardWindow,"viewSupplier-form.fxml");
     }
 
-    public void productDetailsBtnAction(ActionEvent actionEvent) {
+    public void productDetailsBtnAction(ActionEvent actionEvent) throws IOException {
+        sceneSwitch.switchScene(adminDashboardWindow,"viewProduct-form.fxml");
     }
 
-    public void orderDetailsBtnAction(ActionEvent actionEvent) {
+    public void orderDetailsBtnAction(ActionEvent actionEvent) throws IOException {
+        sceneSwitch.switchScene(adminDashboardWindow,"viewOrder-form.fxml");
     }
 
     public void manageEmployeeBtnAction(ActionEvent actionEvent) {
@@ -238,4 +245,6 @@ public class AdminDashBoardController implements Initializable {
 
     }
 
+    public void tableMouseClick(MouseEvent mouseEvent) {
+    }
 }

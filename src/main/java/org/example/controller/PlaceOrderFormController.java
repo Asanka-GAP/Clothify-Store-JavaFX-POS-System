@@ -31,6 +31,7 @@ import org.example.model.OrderHasItem;
 import org.example.model.Product;
 import org.example.util.BoType;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -53,6 +54,8 @@ public class PlaceOrderFormController implements Initializable {
     CustomerBoImpl customerBoImpl = BoFactory.getInstance().getBo(BoType.CUSTOMER);
     PlaceOrderBoImpl placeOrderBoImpl = BoFactory.getInstance().getBo(BoType.CART);
     OrderBoImpl orderBoImpl = BoFactory.getInstance().getBo(BoType.ORDER);
+
+    SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
 
     @FXML
     private TableColumn<?, ?> amountCol;
@@ -179,23 +182,23 @@ public class PlaceOrderFormController implements Initializable {
 
 
     @FXML
-    void manageCustomersBtnAction(ActionEvent event) {
-
+    void manageCustomersBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(placeOrderWindow,"customer-form.fxml");
     }
 
     @FXML
-    void manageOrdersBtnAction(ActionEvent event) {
-
+    void manageOrdersBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(placeOrderWindow,"manageOrder-form.fxml");
     }
 
     @FXML
-    void manageProductsBtnAction(ActionEvent event) {
-
+    void manageProductsBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(placeOrderWindow,"product-form.fxml");
     }
 
     @FXML
-    void manageSuppliersBtnAction(ActionEvent event) {
-
+    void manageSuppliersBtnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(placeOrderWindow,"supplier-form.fxml");
     }
 
     @FXML
