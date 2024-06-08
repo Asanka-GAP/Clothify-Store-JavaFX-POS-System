@@ -166,3 +166,17 @@ k
 ;src/main/java/org/example/dao/custom/impl/OrderDaoImpl.java,c\f\cf21ed70fbee66209f77aa9b2537ca63de551580
 s
 Csrc/main/java/org/example/controller/ManageOrderFormController.java,c\9\c96e0c9dda43fa782d584935ec0e773372243cbd
+p
+@src/main/java/org/example/controller/SupplierFormController.java,1\b\1b9aa9b83bb5cc6f9f2d6a91bcf6c47fa0c2679e
+d
+4src/main/java/org/example/entity/SupplierEntity.java,9\0\901ea8d2d3be826ff9e0020a2366406cc670ef57
+]
+-src/main/java/org/example/model/Supplier.java,2\f\2fb77d19f9310ab4aeb5650c5a1b5074f4c3c7b4
+e
+5src/main/java/org/example/dao/custom/SupplierDao.java,1\6\16da5bf0bf787e5d73abfbfa7bc1e6a692427065
+n
+>src/main/java/org/example/dao/custom/impl/SupplierDaoImpl.java,b\0\b0c4ffb30154f61bf78b8beee80ff8b7f85c189c
+c
+3src/main/java/org/example/bo/custom/SupplierBo.java,e\e\ee6db7d968db1a6c8a01c2d9f8178ae493fd005c
+l
+<src/main/java/org/example/bo/custom/impl/SupplierBoImpl.java,c\d\cd1978ea5f27f291f99ec1feaacd68f8e42b668b

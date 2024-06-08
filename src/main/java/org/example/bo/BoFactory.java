@@ -1,9 +1,6 @@
 package org.example.bo;
 
-import org.example.bo.custom.impl.CustomerBoImpl;
-import org.example.bo.custom.impl.OrderBoImpl;
-import org.example.bo.custom.impl.PlaceOrderBoImpl;
-import org.example.bo.custom.impl.UserBoImpl;
+import org.example.bo.custom.impl.*;
 import org.example.util.BoType;
 
 public class BoFactory {
@@ -20,6 +17,7 @@ public class BoFactory {
             case CUSTOMER:return (T)new CustomerBoImpl();
             case CART:return (T)new PlaceOrderBoImpl();
             case ORDER:return (T)new OrderBoImpl();
+            case SUPPLIER:return (T)new SupplierBoImpl();
         }
         return null;
     }

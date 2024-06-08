@@ -51,13 +51,15 @@ public class AdminDashBoardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         employeeIdComboBox.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue) -> {
-            User user = userBoImpl.getUserById((String) newValue);
+            try {
+                User user = userBoImpl.getUserById((String) newValue);
 
-            empNametxt.setText(user.getName());
-            empAddresstxt.setText(user.getAddress());
-            empEmailtxt.setText(user.getEmail());
+                empNametxt.setText(user.getName());
+                empAddresstxt.setText(user.getAddress());
+                empEmailtxt.setText(user.getEmail());
 
-            selectedId = (String) newValue;
+                selectedId = (String) newValue;
+            }catch (Exception e){};
         });
         empIdtxt.setText(userBoImpl.generateEmployeeId());
         updayeEmployeeBtn.setVisible(false);
