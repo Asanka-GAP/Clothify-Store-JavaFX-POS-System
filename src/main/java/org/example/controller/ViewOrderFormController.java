@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,6 +23,8 @@ import org.example.model.OrderHasItem;
 import org.example.model.Product;
 import org.example.util.BoType;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -29,6 +32,7 @@ import java.util.ResourceBundle;
 
 public class ViewOrderFormController implements Initializable {
 
+    public JFXButton reportViewBtn;
     @FXML
     private Text orderDateTxt;
 
@@ -92,6 +96,8 @@ public class ViewOrderFormController implements Initializable {
 
     SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
 
+    String id;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -100,6 +106,7 @@ public class ViewOrderFormController implements Initializable {
         orderIdCol.setCellValueFactory(new PropertyValueFactory<>("orderId"));
         qtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
         amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        reportViewBtn.setDisable(true);
 
         cartTable.setItems(placeOrderBo.getAllOrderedProducts());
     }
@@ -154,10 +161,15 @@ public class ViewOrderFormController implements Initializable {
     void tableMouseClickedAction(MouseEvent event) {
         int index = cartTable.getSelectionModel().getSelectedIndex();
 
+
         try{
             String orderId = orderIdCol.getCellData(index).toString();
             String productId = productNameCol.getCellData(index).toString();
             Product product = placeOrderBo.getProductById(productId);
+
+            id = orderId;
+
+            reportViewBtn.setDisable(false);
 
             Order order = orderBo.getOrderById(orderId);
             Customer customer = customerBo.getUserById(order.getCusId());
@@ -189,4 +201,18 @@ public class ViewOrderFormController implements Initializable {
     }
 
 
+    public void reportViewOnAction(ActionEvent actionEvent) throws IOException {
+        File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\"+id+".pdf");
+
+        if (file.exists()){
+            if (Desktop.isDesktopSupported()){
+                Desktop.getDesktop().open(file);
+            }else {
+
+            }
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Report Not Found..!!!").show();
+        }
+
+    }
 }

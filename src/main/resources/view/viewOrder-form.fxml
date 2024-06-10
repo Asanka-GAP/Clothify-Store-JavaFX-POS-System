@@ -221,5 +221,10 @@
             <Font name="Calibri Light" size="15.0" />
          </font>
       </Text>
+      <JFXButton fx:id="reportViewBtn" layoutX="258.0" layoutY="272.0" onAction="#reportViewOnAction" prefHeight="27.0" prefWidth="125.0" style="-fx-border-color: #000; -fx-border-radius: 0; -fx-background-color: #09203f;" text="View Report" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
    </children>
 </AnchorPane>
