@@ -37,8 +37,6 @@ public class DashBoardController implements Initializable {
     public JFXPasswordField passwordField;
     public JFXButton signinBtn;
     public Text forgotPasswordLink;
-
-    //-------------------------------------------------------
     public Rectangle panel2;
     public JFXButton signinBtn2;
     public Rectangle panel3;

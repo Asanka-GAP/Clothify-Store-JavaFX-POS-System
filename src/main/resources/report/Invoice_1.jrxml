@@ -151,12 +151,12 @@
 				<textFieldExpression><![CDATA[$P{cusName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="80" y="145" width="100" height="15" uuid="e791636f-6678-43fd-bf17-e4636bea1f47"/>
+				<reportElement x="80" y="145" width="350" height="15" uuid="e791636f-6678-43fd-bf17-e4636bea1f47"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{email}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="80" y="160" width="100" height="15" uuid="a2b0c5f2-77cf-42f7-aa40-8a4990e226be"/>
+				<reportElement x="80" y="160" width="350" height="15" uuid="a2b0c5f2-77cf-42f7-aa40-8a4990e226be"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
 			</textField>

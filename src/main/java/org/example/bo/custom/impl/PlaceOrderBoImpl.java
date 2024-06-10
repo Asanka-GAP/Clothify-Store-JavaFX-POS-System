@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.bo.custom.PlaceOrderBo;
+import org.example.controller.DashBoardController;
 import org.example.dao.DaoFactory;
 import org.example.dao.custom.impl.OrderDaoImpl;
 import org.example.dao.custom.impl.PlaceOrderDaoImpl;
@@ -12,6 +13,14 @@ import org.example.entity.ProductEntity;
 import org.example.model.OrderHasItem;
 import org.example.model.Product;
 import org.example.util.DaoType;
+
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PlaceOrderBoImpl implements PlaceOrderBo {
 

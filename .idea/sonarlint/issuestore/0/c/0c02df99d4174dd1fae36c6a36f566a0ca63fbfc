@@ -1,13 +1,13 @@
 
 
-java:S63533"<Use concise character class syntax '\\d' instead of '[0-9]'.(èÃš±8ªœµœş1J$b8c4b580-3dbd-466f-978b-b1972cdbea06
+java:S63533"<Use concise character class syntax '\\d' instead of '[0-9]'.(èÃš±8ÿ’™€2J$d7478032-6424-4bdb-98b9-a25710a20e06
 m
-java:S5869_"*Remove duplicates in this character class.(ÀàÍ»8²œµœş1J$8ca457c0-ba1a-4d85-b51c-e4c0969ee3ae
+java:S5869`"*Remove duplicates in this character class.(ÀàÍ»8‰’™€2J$0ec1297c-3e20-42af-ac7f-f5a46f108129
 m
-java:S5869_"*Remove duplicates in this character class.(ÀàÍ»8²œµœş1J$43b3ab05-90b0-46fc-8bbc-cd9f28d0ba68
+java:S5869`"*Remove duplicates in this character class.(ÀàÍ»8‰’™€2J$bd9509cd-a1f1-4d65-ae25-bf10c14bb2bd
 
-java:S5998_"LRefactor this repetition that can lead to a stack overflow for large inputs.(ÀàÍ»8´œµœş1J$99bfedbf-c2b0-4c02-98f0-9e31feaac3a6
+java:S5998`"LRefactor this repetition that can lead to a stack overflow for large inputs.(ÀàÍ»8‹’™€2J$d6356f27-72bc-43c1-8225-e916fa30ba3a
 t
-java:S1602h",Remove useless curly braces around statement(›Äıÿÿÿÿ8µœµœş1J$9c194a91-8dd9-42e7-b651-9a8dbd290ff9
+java:S1602i",Remove useless curly braces around statement(›Äıÿÿÿÿ8’™€2J$282c8aa5-1d93-419b-8a32-bb01602babc8
 t
-java:S1602v",Remove useless curly braces around statement(›Äıÿÿÿÿ8·œµœş1J$bfb8a523-7669-4a0b-b166-4b7c451568bd
+java:S1602w",Remove useless curly braces around statement(›Äıÿÿÿÿ8’™€2J$c451f991-3f44-4869-b177-8ebf1e66189f

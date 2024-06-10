@@ -30,6 +30,8 @@ import org.example.bo.custom.impl.PlaceOrderBoImpl;
 import org.example.model.*;
 import org.example.util.BoType;
 
+import javax.mail.MessagingException;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -200,7 +202,7 @@ public class PlaceOrderFormController implements Initializable {
     }
 
     @FXML
-    void placeOrderOnAction(MouseEvent event) throws JRException {
+    void placeOrderOnAction(MouseEvent event) throws JRException, MessagingException {
 
 
         String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\invoice_1.jrxml";
@@ -250,7 +252,6 @@ public class PlaceOrderFormController implements Initializable {
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
         JasperPrint jasperPrint = JasperFillManager.fillReport(report,parameters,dataSource);
             JasperExportManager.exportReportToPdfFile(jasperPrint,savePath);
-
 
 
             invoiceCid = 1;
