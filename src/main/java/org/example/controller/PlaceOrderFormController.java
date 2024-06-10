@@ -21,23 +21,20 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.impl.CustomerBoImpl;
 import org.example.bo.custom.impl.OrderBoImpl;
 import org.example.bo.custom.impl.PlaceOrderBoImpl;
-import org.example.model.Customer;
-import org.example.model.Order;
-import org.example.model.OrderHasItem;
-import org.example.model.Product;
+import org.example.model.*;
 import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-import java.util.Date;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class PlaceOrderFormController implements Initializable {
 
@@ -111,6 +108,7 @@ public class PlaceOrderFormController implements Initializable {
      String productId,customerId,selectdColPID;
     boolean isAlreadyAdd =false;
     int index;
+    int invoiceCid = 1;
     Product product;
     int oid,seletedRowQty;
 
@@ -202,23 +200,60 @@ public class PlaceOrderFormController implements Initializable {
     }
 
     @FXML
-    void placeOrderOnAction(MouseEvent event) {
+    void placeOrderOnAction(MouseEvent event) throws JRException {
 
 
+        String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\invoice_1.jrxml";
+
+        Map<String,Object> parameters = new HashMap();
+
+
+        JasperReport report = JasperCompileManager.compileReport(path);
 
         Date date = new Date();
         Order order = new Order(orderIdtxt.getText(),customerId,"Pending",date,Double.parseDouble(totalTxt.getText()));
 
-       boolean isSaved = orderBoImpl.saveOrder(order);
+        String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\"+orderIdtxt.getText()+".pdf";
+
+        Customer customer = customerBoImpl.getUserById(customerId);
+        parameters.put("cusId",customerId);
+        parameters.put("cusName",customer.getName());
+        parameters.put("email",customer.getEmail());
+        parameters.put("address",customer.getAddress());
+        parameters.put("orderId",orderIdtxt.getText());
+        parameters.put("total",Double.parseDouble(totalTxt.getText()));
+
+        EmployeeData instance = EmployeeData.getInstance();
+
+        parameters.put("empId",instance.getId());
+        parameters.put("empName",instance.getName());
 
 
-        ObservableList<OrderHasItem> orderHasItemObservableList =FXCollections.observableArrayList();
+        boolean isSaved = orderBoImpl.saveOrder(order);
+
+
+       ObservableList<OrderHasItem> orderHasItemObservableList =FXCollections.observableArrayList();
+        List<Cart> list = new ArrayList<Cart>();
 
         cartList.forEach(orderHasItem -> {
+
+            Product product1 = placeOrderBoImpl.getProductById(orderHasItem.getProductId());
+
+             Cart cart = new Cart(invoiceCid++,product1.getId(),product1.getName(),orderHasItem.getQty(),orderHasItem.getAmount());
+
+            list.add(cart);
+
 
             orderHasItemObservableList.add(new OrderHasItem(oid++, orderIdtxt.getText(),orderHasItem.getProductId(),orderHasItem.getQty(),orderHasItem.getAmount()));
         });
 
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(report,parameters,dataSource);
+            JasperExportManager.exportReportToPdfFile(jasperPrint,savePath);
+
+
+
+            invoiceCid = 1;
 
         boolean isSavedOrderDetails = placeOrderBoImpl.saveOrderDetails(orderHasItemObservableList);
         if (isSavedOrderDetails && isSaved){

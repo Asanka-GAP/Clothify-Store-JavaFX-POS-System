@@ -70,7 +70,7 @@ public class DashBoardController implements Initializable {
 
     }
 
-    public void signinBtnAction(ActionEvent actionEvent) {
+    public void signinBtnAction(ActionEvent actionEvent) throws IOException {
 
         userBoImpl=BoFactory.getInstance().getBo(BoType.USER);
         UserEntity userEntity = userBoImpl.getUserByEmail(emailField.getText());
@@ -90,7 +90,11 @@ public class DashBoardController implements Initializable {
                     throw new RuntimeException(e);
                 }
             }else if (userEntity.getRole().equals("Employee") && password.equals(passwordField.getText())){
-                System.out.println("Employee");
+                EmployeeData instance = EmployeeData.getInstance();
+                instance.setId(userEntity.getId());
+                instance.setName(userEntity.getName());
+                instance.setEmail(userEntity.getEmail());
+                SceneSwitchController.getInstance().switchScene(dashboardWindow,"placeOrder-form.fxml");
             } else if (userEntity.getId()==null) {
                 System.out.println("Null");
             } else{

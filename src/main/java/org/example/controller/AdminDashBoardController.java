@@ -14,15 +14,14 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import net.sf.jasperreports.engine.*;
 import org.example.bo.custom.impl.UserBoImpl;
 import org.example.model.User;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
-import java.util.Optional;
-import java.util.Random;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class AdminDashBoardController implements Initializable {
 
@@ -77,7 +76,7 @@ public class AdminDashBoardController implements Initializable {
             employeeTable.setItems(userBoImpl.getAllUsers());
     }
 
-    public void addEmployeeBtnAction(ActionEvent actionEvent) throws SQLException {
+    public void addEmployeeBtnAction(ActionEvent actionEvent) throws SQLException, JRException {
 
         Random random = new Random();
         int p = random.nextInt(99999999) + 10000000;
@@ -88,6 +87,24 @@ public class AdminDashBoardController implements Initializable {
         User user = new User(empIdtxt.getText(), empNametxt.getText(), empEmailtxt.getText(), password, "Employee", empAddresstxt.getText());
 
         if (!empNametxt.getText().equals("") && userBoImpl.isValidEmail(empEmailtxt.getText()) && !empAddresstxt.getText().equals("")) {
+
+            String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\Emp_Re.jrxml";
+
+            Map<String,Object> parameters = new HashMap();
+            StringBuffer name = new StringBuffer(user.getName());
+            StringBuffer id = new StringBuffer(user.getId());
+            StringBuffer address = new StringBuffer(user.getAddress());
+            StringBuffer email = new StringBuffer(user.getEmail());
+            parameters.put("empName",name);
+            parameters.put("id",id);
+            parameters.put("add",address);
+            parameters.put("email",email);
+
+            JasperReport report = JasperCompileManager.compileReport(path);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(report,parameters);
+
+            String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\"+user.getId()+".pdf";
+            JasperExportManager.exportReportToPdfFile(jasperPrint,savePath);
 
             boolean isInsert = userBoImpl.insertUser(user);
 
