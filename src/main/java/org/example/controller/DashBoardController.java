@@ -115,6 +115,7 @@ public class DashBoardController implements Initializable {
     }
 
     public void signinBtn2Action(ActionEvent actionEvent) {
+        errormsg.setVisible(false);
         resetPasswordField(false);
     }
 
