@@ -25,5 +25,6 @@ public class Product {
     @Lob @Basic(fetch=LAZY)
     private byte[] image;
     private double price;
+    private String supId;
 
 }

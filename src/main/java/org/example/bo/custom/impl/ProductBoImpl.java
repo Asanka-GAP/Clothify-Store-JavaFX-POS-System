@@ -84,5 +84,13 @@ public class ProductBoImpl implements ProductBo {
     }
 
 
+    public ObservableList<Product> getProductBySupId(String text) {
+        ObservableList<ProductEntity> productEntityList = productDaoImpl.getProductBysID(text);
 
+        ObservableList<Product> products = FXCollections.observableArrayList();
+        productEntityList.forEach(productEntity -> {
+            products.add(new ObjectMapper().convertValue(productEntity, Product.class));
+        });
+        return products;
+    }
 }

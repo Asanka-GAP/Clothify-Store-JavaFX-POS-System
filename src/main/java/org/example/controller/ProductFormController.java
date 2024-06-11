@@ -23,6 +23,8 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.example.bo.custom.impl.ProductBoImpl;
+import org.example.bo.custom.impl.SupplierBoImpl;
+import org.example.model.Customer;
 import org.example.model.Product;
 
 import javax.swing.*;
@@ -41,6 +43,7 @@ public class ProductFormController implements Initializable {
     public JFXTextField priceTxt;
     public Text priceError;
     public TableColumn priceCol;
+    public JFXComboBox supplierIdComboBox;
     @FXML
     private JFXButton actionBtn;
 
@@ -104,9 +107,10 @@ public class ProductFormController implements Initializable {
     ProductBoImpl productBoImpl = new ProductBoImpl();
     SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
 
+
     byte[] image;
-    String category;
-    boolean isAction,isMouseClick,isPriceValid;
+    String category,supplierId;
+    boolean isAction,isMouseClick,isPriceValid,isSupplierSelect;
     @FXML
     void actionBtnAction(ActionEvent event) {
 
@@ -120,8 +124,8 @@ public class ProductFormController implements Initializable {
     @FXML
     void addProductOnAction(ActionEvent event) {
 
-            if (isPriceValid && !productNameTxt.getText().equals("") && !qtyTxt.getText().equals("") && !sizeTxt.getText().equals("") && image != null) {
-                Product product = new Product(proIdTxt.getText(), productNameTxt.getText(), Integer.parseInt(sizeTxt.getText()), Integer.parseInt(qtyTxt.getText()), category,image,Double.parseDouble(priceTxt.getText()));
+            if (isSupplierSelect && isPriceValid && !productNameTxt.getText().equals("") && !qtyTxt.getText().equals("") && !sizeTxt.getText().equals("") && image != null) {
+                Product product = new Product(proIdTxt.getText(), productNameTxt.getText(), Integer.parseInt(sizeTxt.getText()), Integer.parseInt(qtyTxt.getText()), category,image,Double.parseDouble(priceTxt.getText()),supplierId);
                 boolean isAdd = productBoImpl.addProduct(product);
                 if (isAdd) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -135,6 +139,7 @@ public class ProductFormController implements Initializable {
                     priceTxt.setText("");
                     proIdTxt.setText(productBoImpl.generateProductId());
                     productTable.setItems(productBoImpl.getAllProducts());
+                    isSupplierSelect = false;
                 }
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -274,7 +279,7 @@ public class ProductFormController implements Initializable {
     void updateOnAction(ActionEvent event) {
 
         if (isPriceValid && isMouseClick && !productNameTxt.getText().equals("") && !qtyTxt.getText().equals("") && !sizeTxt.getText().equals("") && image!=null){
-            Product product = new Product(proIdTxt.getText(),productNameTxt.getText(),Integer.parseInt(sizeTxt.getText()),Integer.parseInt(qtyTxt.getText()),category,image,Double.parseDouble(priceTxt.getText()));
+            Product product = new Product(proIdTxt.getText(),productNameTxt.getText(),Integer.parseInt(sizeTxt.getText()),Integer.parseInt(qtyTxt.getText()),category,image,Double.parseDouble(priceTxt.getText()),supplierId);
             boolean isUpdate = productBoImpl.updateProduct(product);
 
             if (isUpdate){
@@ -311,7 +316,9 @@ public class ProductFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        supplierIdComboBox.setItems(new SupplierBoImpl().getAllSupplierIds());
 
+        isSupplierSelect = false;
         isPriceValid = false;
         priceError.setVisible(false);
         isAction = false;
@@ -325,6 +332,11 @@ public class ProductFormController implements Initializable {
         categoryComboBox.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue) -> {
             category = (String) newValue;
             System.out.println(category);
+        });
+        supplierIdComboBox.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue) -> {
+            isSupplierSelect = true;
+            supplierId = (String) newValue;
+
         });
         proIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         proCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));

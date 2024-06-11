@@ -142,5 +142,6 @@
       <JFXComboBox fx:id="categoryComboBox" layoutX="544.0" layoutY="91.0" prefHeight="26.0" prefWidth="220.0" promptText="Category" />
       <JFXTextField fx:id="priceTxt" layoutX="545.0" layoutY="59.0" onKeyReleased="#priceKeyReleased" prefHeight="26.0" prefWidth="220.0" promptText="Price" />
       <Text fx:id="priceError" fill="#e10e0e" layoutX="686.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid Price" />
+      <JFXComboBox fx:id="supplierIdComboBox" layoutX="653.0" layoutY="159.0" prefHeight="26.0" prefWidth="111.0" promptText="Supplier Id" />
    </children>
 </AnchorPane>

@@ -215,7 +215,7 @@ public class PlaceOrderFormController implements Initializable {
         Date date = new Date();
         Order order = new Order(orderIdtxt.getText(),customerId,"Pending",date,Double.parseDouble(totalTxt.getText()));
 
-        String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\"+orderIdtxt.getText()+".pdf";
+        String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\orderReport\\"+orderIdtxt.getText()+".pdf";
 
         Customer customer = customerBoImpl.getUserById(customerId);
         parameters.put("cusId",customerId);
@@ -251,7 +251,7 @@ public class PlaceOrderFormController implements Initializable {
 
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
         JasperPrint jasperPrint = JasperFillManager.fillReport(report,parameters,dataSource);
-            JasperExportManager.exportReportToPdfFile(jasperPrint,savePath);
+        JasperExportManager.exportReportToPdfFile(jasperPrint,savePath);
 
 
             invoiceCid = 1;

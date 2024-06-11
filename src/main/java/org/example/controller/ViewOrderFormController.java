@@ -202,7 +202,7 @@ public class ViewOrderFormController implements Initializable {
 
 
     public void reportViewOnAction(ActionEvent actionEvent) throws IOException {
-        File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\"+id+".pdf");
+        File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\orderReport\\"+id+".pdf");
 
         if (file.exists()){
             if (Desktop.isDesktopSupported()){

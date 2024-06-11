@@ -28,4 +28,6 @@ public class ProductEntity {
     private byte[] image;
     @Column(name = "price")
     private double price;
+    @Column(name = "supId")
+    private String supId;
 }

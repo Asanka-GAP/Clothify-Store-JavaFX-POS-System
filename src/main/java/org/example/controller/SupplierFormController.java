@@ -3,6 +3,8 @@ package org.example.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,15 +17,20 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.example.bo.BoFactory;
+import org.example.bo.custom.impl.ProductBoImpl;
 import org.example.bo.custom.impl.SupplierBoImpl;
+import org.example.model.Cart;
+import org.example.model.OrderHasItem;
+import org.example.model.Product;
 import org.example.model.Supplier;
 import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class SupplierFormController implements Initializable {
 
@@ -110,9 +117,35 @@ public class SupplierFormController implements Initializable {
     }
 
     @FXML
-    void addSupplierBtnAction(ActionEvent event) {
+    void addSupplierBtnAction(ActionEvent event) throws JRException {
 
         if (!supNametxt.getText().equals("") && !supCompanytxt.getText().equals("") && !supEmailtxt.equals("")) {
+
+            String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\Supplier.jrxml";
+
+            Map<String,Object> parameters = new HashMap();
+
+            parameters.put("supId",supIdTxt.getText());
+            parameters.put("supName",supNametxt.getText());
+            parameters.put("email",supEmailtxt.getText());
+            parameters.put("company",supCompanytxt.getText());
+
+            JasperReport report = JasperCompileManager.compileReport(path);
+
+            String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\supplierReport\\"+supIdTxt.getText()+".pdf";
+
+            ObservableList<Product> productList = new ProductBoImpl().getProductBySupId(supIdTxt.getText());
+            List<Product> list = new ArrayList<Product>();
+
+            productList.forEach(product -> {
+                list.add(product);
+            });
+
+            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(report,parameters,dataSource);
+            JasperExportManager.exportReportToPdfFile(jasperPrint,savePath);
+
+
 
             Supplier supplier = new Supplier(supIdTxt.getText(),supNametxt.getText(),supEmailtxt.getText(),supCompanytxt.getText());
             boolean isAdded = supllierBo.addSupplier(supplier);
