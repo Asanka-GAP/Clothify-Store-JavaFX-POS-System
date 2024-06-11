@@ -19,23 +19,20 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.impl.CustomerBoImpl;
 import org.example.bo.custom.impl.OrderBoImpl;
 import org.example.bo.custom.impl.PlaceOrderBoImpl;
-import org.example.model.Customer;
-import org.example.model.Order;
-import org.example.model.OrderHasItem;
-import org.example.model.Product;
+import org.example.model.*;
 import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-import java.util.Date;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ManageOrderFormController implements Initializable {
 
@@ -60,7 +57,7 @@ public class ManageOrderFormController implements Initializable {
 
     @FXML
     private Text categoryTxt;
-    
+
     @FXML
     private Text dateLbl;
 
@@ -81,12 +78,11 @@ public class ManageOrderFormController implements Initializable {
 
     @FXML
     private Text priceTxt;
-    
+
 
     @FXML
     private TableColumn<?, ?> productNameCol;
 
-   
 
     @FXML
     private TableColumn<?, ?> qtyCol;
@@ -96,15 +92,19 @@ public class ManageOrderFormController implements Initializable {
 
     @FXML
     private Text totalTxt;
-    private boolean isRowSelect,isQtyValid;
-    int index,seletedRowQty,selectedCartId;
+    private boolean isRowSelect, isQtyValid;
+    int index, seletedRowQty, selectedCartId;
     String selectdColPID;
 
+    double selectedAmount;
+    int invoiceCid = 1;
+    int count = 0;
     PlaceOrderBoImpl placeOrderBoImpl = BoFactory.getInstance().getBo(BoType.CART);
     OrderBoImpl orderBoImpl = BoFactory.getInstance().getBo(BoType.ORDER);
     CustomerBoImpl customerBoImpl = BoFactory.getInstance().getBo(BoType.CUSTOMER);
 
     SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -116,7 +116,7 @@ public class ManageOrderFormController implements Initializable {
 
         cartTable.setItems(placeOrderBoImpl.getAllOrderedProducts());
 
-        isQtyValid =false;
+        isQtyValid = false;
         errorMsgtxt.setVisible(false);
         isRowSelect = false;
         loadDateTime();
@@ -137,13 +137,106 @@ public class ManageOrderFormController implements Initializable {
     }
 
     @FXML
-    void deleteOrderOnAction(MouseEvent event) {
+    void deleteOrderOnAction(MouseEvent event) throws JRException {
+        if (isRowSelect) {
+            Alert alertMain = new Alert(Alert.AlertType.CONFIRMATION);
+            alertMain.setTitle("Remove an item");
+            alertMain.setContentText("Are you sure want to remove this item ?");
+            Optional<ButtonType> type1 = alertMain.showAndWait();
+            if (type1.get()==ButtonType.OK) {
 
+                ObservableList<OrderHasItem> allOrderedProducts = placeOrderBoImpl.getAllOrderedProducts();
+
+                allOrderedProducts.forEach(orderHasItem -> {
+                    if (orderIDtxt.getText().equals(orderHasItem.getOrderId())) {
+                        count++;
+                    }
+                });
+
+                if (count > 1) {
+
+                    boolean isIncreseQty = placeOrderBoImpl.increaseQtyOfProduct(productIdTxt.getText(), seletedRowQty);
+                    boolean isDecreaseAmount = placeOrderBoImpl.decreaseAmountByOrderId(orderIDtxt.getText(), selectedAmount);
+                    boolean isRemoveFromCart = placeOrderBoImpl.removeFromCart(orderIDtxt.getText(), productIdTxt.getText());
+
+                    if (isIncreseQty && isDecreaseAmount && isRemoveFromCart) {
+                        new Alert(Alert.AlertType.INFORMATION, "Removed Successfully").show();
+
+                        String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\invoice_1.jrxml";
+                        Map<String, Object> parameters = new HashMap();
+                        JasperReport report = JasperCompileManager.compileReport(path);
+
+                        String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\orderReport\\" + orderIDtxt.getText() + ".pdf";
+
+                        parameters.put("cusId", cusIdTxt.getText());
+                        parameters.put("cusName", cusNameTxt.getText());
+                        parameters.put("email", cusEmailTxt.getText());
+                        parameters.put("address", cusAddressTxt.getText());
+                        parameters.put("orderId", orderIDtxt.getText());
+                        parameters.put("total", Double.parseDouble(totalTxt.getText()));
+
+                        EmployeeData instance = EmployeeData.getInstance();
+
+                        parameters.put("empId", instance.getId());
+                        parameters.put("empName", instance.getName());
+
+                        List<Cart> list = new ArrayList<Cart>();
+
+                        ObservableList<OrderHasItem> productIdsByOrderId = placeOrderBoImpl.getProductIdsByOrderId(orderIDtxt.getText());
+
+                        productIdsByOrderId.forEach(orderHasItem -> {
+                            Product product1 = placeOrderBoImpl.getProductById(orderHasItem.getProductId());
+
+                            Cart cart = new Cart(invoiceCid++, product1.getId(), product1.getName(), orderHasItem.getQty(), orderHasItem.getAmount());
+
+                            list.add(cart);
+                        });
+
+                        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
+                        JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, dataSource);
+                        JasperExportManager.exportReportToPdfFile(jasperPrint, savePath);
+
+                        invoiceCid = 1;
+
+                        cartTable.setItems(placeOrderBoImpl.getAllOrderedProducts());
+
+                        System.out.println("OK");
+                    }
+
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Delete Entire Order");
+                    alert.setContentText("Are you sure want wo delete this whole order ?");
+                    Optional<ButtonType> type = alert.showAndWait();
+
+                    if (type.get() == ButtonType.OK) {
+
+                        ObservableList<OrderHasItem> productIdList = placeOrderBoImpl.getProductIdsByOrderId(orderIDtxt.getText());
+
+                        boolean isUpdateQty = placeOrderBoImpl.increseQty(productIdList);
+
+                        boolean isDeleted = orderBoImpl.deleteOrderById(orderIDtxt.getText());
+
+                        boolean isDeleted2 = placeOrderBoImpl.deleteById(orderIDtxt.getText());
+
+                        if (isDeleted2 && isDeleted && isUpdateQty) {
+                            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                            alert1.setTitle("Order Deleted");
+                            alert1.setContentText("Order Deleted Successfully..!!!");
+                            alert1.showAndWait();
+                            cartTable.setItems(placeOrderBoImpl.getAllOrderedProducts());
+                        }
+                    }
+                }
+            }
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Please select the row if you want to remove").show();
+        }
     }
 
     @FXML
     void manageCustomersBtnAction(ActionEvent event) throws IOException {
-        sceneSwitch.switchScene(manageOrderWindow,"customer-form.fxml");
+        sceneSwitch.switchScene(manageOrderWindow, "customer-form.fxml");
     }
 
     @FXML
@@ -153,27 +246,27 @@ public class ManageOrderFormController implements Initializable {
 
     @FXML
     void manageProductsBtnAction(ActionEvent event) throws IOException {
-        sceneSwitch.switchScene(manageOrderWindow,"product-form.fxml");
+        sceneSwitch.switchScene(manageOrderWindow, "product-form.fxml");
     }
 
     @FXML
     void manageSuppliersBtnAction(ActionEvent event) throws IOException {
-        sceneSwitch.switchScene(manageOrderWindow,"supplier-form.fxml");
+        sceneSwitch.switchScene(manageOrderWindow, "supplier-form.fxml");
     }
 
     @FXML
     void orderQTYKeyReleased(KeyEvent event) {
 
-        if (isRowSelect){
+        if (isRowSelect) {
             try {
                 int qty = Integer.parseInt(orderingQtyTxt.getText());
                 errorMsgtxt.setVisible(false);
                 isQtyValid = true;
-                if (qty>Integer.parseInt(availableQTYTxt.getText()) || qty<1){
-                    isQtyValid =false;
+                if (qty > Integer.parseInt(availableQTYTxt.getText()) || qty < 1) {
+                    isQtyValid = false;
                     errorMsgtxt.setVisible(true);
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 isQtyValid = false;
                 errorMsgtxt.setVisible(true);
             }
@@ -183,12 +276,12 @@ public class ManageOrderFormController implements Initializable {
 
     @FXML
     void placeSectionBtnAction(ActionEvent event) throws IOException {
-        sceneSwitch.switchScene(manageOrderWindow,"placeOrder-form.fxml");
+        sceneSwitch.switchScene(manageOrderWindow, "placeOrder-form.fxml");
     }
 
     @FXML
     void shoppingBagBtnMouseClicked(MouseEvent event) throws IOException {
-        sceneSwitch.switchScene(manageOrderWindow,"placeOrder-form.fxml");
+        sceneSwitch.switchScene(manageOrderWindow, "placeOrder-form.fxml");
     }
 
     @FXML
@@ -205,7 +298,8 @@ public class ManageOrderFormController implements Initializable {
             selectdColPID = productNameCol.getCellData(index).toString();
             String orderId = orderIdCol.getCellData(index).toString();
             seletedRowQty = (int) qtyCol.getCellData(index);
-            selectedCartId =(int) cartIdCol.getCellData(index);
+            selectedCartId = (int) cartIdCol.getCellData(index);
+            selectedAmount = (double) amountCol.getCellData(index);
 
             Order order = orderBoImpl.getOrderById(orderId);
             Customer customer = customerBoImpl.getUserById(order.getCusId());
@@ -217,6 +311,7 @@ public class ManageOrderFormController implements Initializable {
             cusAddressTxt.setText(customer.getAddress());
 
             orderIDtxt.setText(order.getId());
+            totalTxt.setText(Double.toString(order.getAmount())+"0");
 
             productIdTxt.setText(product.getId());
             productNameTxt.setText(product.getName());
@@ -227,33 +322,72 @@ public class ManageOrderFormController implements Initializable {
             if (index < 0) {
                 return;
             }
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
 
     }
 
     @FXML
-    void updateOrderOnAction(MouseEvent event) {
+    void updateOrderOnAction(MouseEvent event) throws JRException {
 
-        if (isRowSelect && isQtyValid){
+        if (isRowSelect && isQtyValid) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Update Order");
             alert.setContentText("Are you want to Update this order ?");
             Optional<ButtonType> type = alert.showAndWait();
 
-            if (type.get()==ButtonType.OK){
-                boolean isUpdateQty = placeOrderBoImpl.updateNewQty(selectdColPID,Integer.parseInt(orderingQtyTxt.getText()));
-                double newAmount = Double.parseDouble(priceTxt.getText())*Integer.parseInt(orderingQtyTxt.getText());
+            if (type.get() == ButtonType.OK) {
+                boolean isUpdateQty = placeOrderBoImpl.updateNewQty(selectdColPID, Integer.parseInt(orderingQtyTxt.getText()));
+                double newAmount = Double.parseDouble(priceTxt.getText()) * Integer.parseInt(orderingQtyTxt.getText());
 
-                boolean isUpdateOrderAmount = placeOrderBoImpl.updateOrderAmount(orderIDtxt.getText(),newAmount);
-                boolean isUpdateCart = placeOrderBoImpl.updateCartById(selectedCartId,Integer.parseInt(orderingQtyTxt.getText()),newAmount);
+                boolean isUpdateOrderAmount = placeOrderBoImpl.updateOrderAmount(orderIDtxt.getText(), newAmount);
+                boolean isUpdateCart = placeOrderBoImpl.updateCartById(selectedCartId, Integer.parseInt(orderingQtyTxt.getText()), newAmount);
 
-                if (isUpdateOrderAmount && isUpdateCart && isUpdateQty){
+                if (isUpdateOrderAmount && isUpdateCart && isUpdateQty) {
                     cartTable.setItems(placeOrderBoImpl.getAllOrderedProducts());
-                    Alert alert1= new Alert(Alert.AlertType.INFORMATION);
+                    Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                     alert1.setTitle("Cart Update");
                     alert1.setContentText("Your Update Successfully");
                     alert1.showAndWait();
                     orderingQtyTxt.setText("");
+
+                    ObservableList<OrderHasItem> allOrderedProducts = placeOrderBoImpl.getProductIdsByOrderId(orderIDtxt.getText());
+
+
+                    String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\invoice_1.jrxml";
+                    Map<String, Object> parameters = new HashMap();
+                    JasperReport report = JasperCompileManager.compileReport(path);
+
+                    String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\orderReport\\" + orderIDtxt.getText() + ".pdf";
+
+                    parameters.put("cusId", cusIdTxt.getText());
+                    parameters.put("cusName", cusNameTxt.getText());
+                    parameters.put("email", cusEmailTxt.getText());
+                    parameters.put("address", cusAddressTxt.getText());
+                    parameters.put("orderId", orderIDtxt.getText());
+                    parameters.put("total", Double.parseDouble(totalTxt.getText()));
+
+                    EmployeeData instance = EmployeeData.getInstance();
+
+                    parameters.put("empId", instance.getId());
+                    parameters.put("empName", instance.getName());
+
+                    List<Cart> list = new ArrayList<Cart>();
+
+                    allOrderedProducts.forEach(orderHasItem -> {
+                        Product product1 = placeOrderBoImpl.getProductById(orderHasItem.getProductId());
+
+                        Cart cart = new Cart(invoiceCid++, product1.getId(), product1.getName(), orderHasItem.getQty(), orderHasItem.getAmount());
+
+                        list.add(cart);
+                    });
+
+                    JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, dataSource);
+                    JasperExportManager.exportReportToPdfFile(jasperPrint, savePath);
+
+                    invoiceCid = 1;
+
                 }
             }
         }
@@ -263,15 +397,16 @@ public class ManageOrderFormController implements Initializable {
     void userBtnMouseClicked(MouseEvent event) {
 
     }
-    private void loadDateTime(){
+
+    private void loadDateTime() {
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         dateLbl.setText(format.format(date));
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.ZERO, e->{
+        Timeline timeline = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             LocalTime localTime = LocalTime.now();
             timeLbl.setText(
-                    localTime.getHour()+" : "+localTime.getMinute()+" : "+localTime.getSecond()
+                    localTime.getHour() + " : " + localTime.getMinute() + " : " + localTime.getSecond()
             );
         }),
                 new KeyFrame(Duration.seconds(1))
@@ -290,10 +425,7 @@ public class ManageOrderFormController implements Initializable {
 
             if (type.get() == ButtonType.OK) {
 
-                ObservableList<OrderHasItem> productIdList = FXCollections.observableArrayList();
-
-                productIdList = placeOrderBoImpl.getProductIdsByOrderId(orderIDtxt.getText());
-
+                ObservableList<OrderHasItem> productIdList = placeOrderBoImpl.getProductIdsByOrderId(orderIDtxt.getText());
 
                 boolean isUpdateQty = placeOrderBoImpl.increseQty(productIdList);
 
@@ -309,8 +441,8 @@ public class ManageOrderFormController implements Initializable {
                     cartTable.setItems(placeOrderBoImpl.getAllOrderedProducts());
                 }
             }
-        }else{
-            new Alert(Alert.AlertType.ERROR,"Please select the row if you want to delete").show();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Please select the row if you want to delete").show();
         }
     }
 }

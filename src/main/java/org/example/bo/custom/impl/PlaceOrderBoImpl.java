@@ -142,4 +142,16 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
     }
 
 
+    public boolean increaseQtyOfProduct(String id, int qty) {
+
+        return productDao.updateQtyOfProduct(id,qty);
+    }
+
+    public boolean decreaseAmountByOrderId(String id, double amount) {
+        return orderDao.deacreseAmount(id,amount);
+    }
+
+    public boolean removeFromCart(String oId, String pId) {
+        return placeOrderDao.removeItem(oId,pId);
+    }
 }

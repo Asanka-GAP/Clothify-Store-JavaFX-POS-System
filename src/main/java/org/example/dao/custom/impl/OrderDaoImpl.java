@@ -75,4 +75,16 @@ public class OrderDaoImpl implements OrderDao {
         session.close();
         return i>0;
     }
+
+    public boolean deacreseAmount(String id, double amount) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("UPDATE order_table SET amount=amount-:amount WHERE id=:id");
+        query.setParameter("id",id);
+        query.setParameter("amount",amount);
+        int i = query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+        return i>0;
+    }
 }

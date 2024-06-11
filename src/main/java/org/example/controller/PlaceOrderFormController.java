@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -31,12 +32,14 @@ import org.example.model.*;
 import org.example.util.BoType;
 
 import javax.mail.MessagingException;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.List;
 
 public class PlaceOrderFormController implements Initializable {
 
@@ -50,6 +53,7 @@ public class PlaceOrderFormController implements Initializable {
     public Text timeLbl;
     public Text dateLbl;
     public FontAwesomeIconView binBtn;
+    public JFXButton reportViewBtn;
     CustomerBoImpl customerBoImpl = BoFactory.getInstance().getBo(BoType.CUSTOMER);
     PlaceOrderBoImpl placeOrderBoImpl = BoFactory.getInstance().getBo(BoType.CART);
     OrderBoImpl orderBoImpl = BoFactory.getInstance().getBo(BoType.ORDER);
@@ -107,7 +111,7 @@ public class PlaceOrderFormController implements Initializable {
     ObservableList<Product> productsList = FXCollections.observableArrayList();
     boolean isCustomerSelect,isProductSelect,isQtyValid,isRowSelect;
      int cid =1;
-     String productId,customerId,selectdColPID;
+     String productId,customerId,selectdColPID,orderid;
     boolean isAlreadyAdd =false;
     int index;
     int invoiceCid = 1;
@@ -212,6 +216,8 @@ public class PlaceOrderFormController implements Initializable {
 
         JasperReport report = JasperCompileManager.compileReport(path);
 
+        orderid = orderIdtxt.getText();
+
         Date date = new Date();
         Order order = new Order(orderIdtxt.getText(),customerId,"Pending",date,Double.parseDouble(totalTxt.getText()));
 
@@ -290,7 +296,16 @@ public class PlaceOrderFormController implements Initializable {
     }
 
     @FXML
-    void signOutBtnMouseClicked(MouseEvent event) {
+    void signOutBtnMouseClicked(MouseEvent event) throws IOException {
+
+        Alert alert =new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Sign Out");
+        alert.setContentText("Are you sure want to sign out ?");
+        Optional<ButtonType> type = alert.showAndWait();
+
+        if (type.get()==ButtonType.OK){
+            sceneSwitch.switchScene(placeOrderWindow,"dashBoard-form.fxml");
+        }
 
     }
 
@@ -433,4 +448,17 @@ public class PlaceOrderFormController implements Initializable {
     }
 
 
+    public void reportViewOnAction(ActionEvent actionEvent) throws IOException {
+        File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\orderReport\\"+orderid+".pdf");
+
+        if (file.exists()){
+            if (Desktop.isDesktopSupported()){
+                Desktop.getDesktop().open(file);
+            }else {
+
+            }
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Report Not Found..!!!").show();
+        }
+    }
 }

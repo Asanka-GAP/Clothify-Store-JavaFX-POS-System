@@ -66,6 +66,8 @@ public class DashBoardController implements Initializable {
         errormsg.setVisible(false);
         validmsg.setVisible(false);
 
+        new Alert(Alert.AlertType.INFORMATION,"If your first time to sign in to this, Please reset your password clicked forgot password button").show();
+
     }
 
     public void signinBtnAction(ActionEvent actionEvent) throws IOException {

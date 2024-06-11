@@ -129,4 +129,17 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
         session.close();
         return  i>0;
     }
+
+    public boolean removeItem(String oId, String pId) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("DELETE FROM order_has_items WHERE orderId=:oId AND productId=:pId");
+        query.setParameter("oId",oId);
+        query.setParameter("pId",pId);
+        int i = query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+
+        return i>0;
+    }
 }
