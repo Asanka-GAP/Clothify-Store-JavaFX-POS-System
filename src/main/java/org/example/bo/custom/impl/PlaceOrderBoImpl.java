@@ -16,7 +16,9 @@ import org.example.util.DaoType;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.io.File;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -92,4 +94,52 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
     public boolean updateCartById(int id, int i, double newAmount) {
         return placeOrderDao.updateQtyAndAmount(id,i,newAmount);
     }
+
+    public void sendEmail(String receiveEmail,String text,File file) throws MessagingException {
+
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth","true");
+        properties.put("mail.smtp.starttls.enable","true");
+        properties.put("mail.smtp.host","smtp.gmail.com");
+        properties.put("mail.smtp.port","587");
+
+        String myEmail = "asankapradeep0830@gmail.com";
+        String password = "tkmkeibffwnpwjcp";
+
+        Session session = Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(myEmail,password);
+            }
+        });
+
+        Message message = prepareMessage(session,myEmail,receiveEmail,text,file);
+        Transport.send(message);
+    }
+
+    public Message prepareMessage(Session session, String myEmail, String receiveEmail, String text,File file) {
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(myEmail));
+            message.setRecipients(Message.RecipientType.TO,new InternetAddress[]{
+                    new InternetAddress(receiveEmail)
+            });
+            message.setSubject("Your Order");
+            message.setText(text);
+
+            Multipart multipart = new MimeMultipart();
+            MimeBodyPart mimeBodyPart = new MimeBodyPart();
+            mimeBodyPart.attachFile(file);
+            multipart.addBodyPart(mimeBodyPart);
+
+            message.setContent(multipart);
+
+            return message;
+        }catch (Exception e){
+            Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE,null,e);
+        }
+        return null;
+    }
+
+
 }

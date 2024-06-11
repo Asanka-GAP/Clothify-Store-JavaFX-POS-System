@@ -262,6 +262,12 @@ public class PlaceOrderFormController implements Initializable {
             alert.setTitle("Order Placed..!!!");
             alert.setContentText("Order Placed Successfully");
             alert.showAndWait();
+
+            File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\"+orderIdtxt.getText()+".pdf");
+            placeOrderBoImpl.sendEmail(customer.getEmail(),"Your order Details",file);
+
+            new Alert(Alert.AlertType.INFORMATION,"Email sent").show();
+
             productsList = placeOrderBoImpl.getAllProducts();
             orderIdtxt.setText(placeOrderBoImpl.generateOrderId());
             cartList.clear();
