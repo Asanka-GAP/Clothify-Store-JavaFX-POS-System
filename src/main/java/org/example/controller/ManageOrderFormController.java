@@ -28,6 +28,8 @@ import org.example.bo.custom.impl.PlaceOrderBoImpl;
 import org.example.model.*;
 import org.example.util.BoType;
 
+import javax.mail.MessagingException;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -137,7 +139,7 @@ public class ManageOrderFormController implements Initializable {
     }
 
     @FXML
-    void deleteOrderOnAction(MouseEvent event) throws JRException {
+    void deleteOrderOnAction(MouseEvent event) throws JRException, MessagingException {
         if (isRowSelect) {
             Alert alertMain = new Alert(Alert.AlertType.CONFIRMATION);
             alertMain.setTitle("Remove an item");
@@ -197,6 +199,11 @@ public class ManageOrderFormController implements Initializable {
                         JasperExportManager.exportReportToPdfFile(jasperPrint, savePath);
 
                         invoiceCid = 1;
+
+                        File file = new File(savePath);
+                        placeOrderBoImpl.sendEmail(cusEmailTxt.getText(),"Your order Details",file);
+
+                        new Alert(Alert.AlertType.INFORMATION,"Email sent").show();
 
                         cartTable.setItems(placeOrderBoImpl.getAllOrderedProducts());
 
@@ -328,7 +335,7 @@ public class ManageOrderFormController implements Initializable {
     }
 
     @FXML
-    void updateOrderOnAction(MouseEvent event) throws JRException {
+    void updateOrderOnAction(MouseEvent event) throws JRException, MessagingException {
 
         if (isRowSelect && isQtyValid) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -387,6 +394,12 @@ public class ManageOrderFormController implements Initializable {
                     JasperExportManager.exportReportToPdfFile(jasperPrint, savePath);
 
                     invoiceCid = 1;
+
+                    File file = new File(savePath);
+                    placeOrderBoImpl.sendEmail(cusEmailTxt.getText(),"Your order Details",file);
+
+                    new Alert(Alert.AlertType.INFORMATION,"Email sent").show();
+
 
                 }
             }
