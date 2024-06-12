@@ -22,6 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.*;
 import org.example.bo.custom.impl.ProductBoImpl;
 import org.example.bo.custom.impl.SupplierBoImpl;
 import org.example.model.Customer;
@@ -32,6 +33,8 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.sql.Blob;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -122,7 +125,7 @@ public class ProductFormController implements Initializable {
     }
 
     @FXML
-    void addProductOnAction(ActionEvent event) {
+    void addProductOnAction(ActionEvent event) throws JRException {
 
             if (isSupplierSelect && isPriceValid && !productNameTxt.getText().equals("") && !qtyTxt.getText().equals("") && !sizeTxt.getText().equals("") && image != null) {
                 Product product = new Product(proIdTxt.getText(), productNameTxt.getText(), Integer.parseInt(sizeTxt.getText()), Integer.parseInt(qtyTxt.getText()), category,image,Double.parseDouble(priceTxt.getText()),supplierId);
@@ -133,11 +136,11 @@ public class ProductFormController implements Initializable {
                     alert.setContentText("Product Added successfully");
                     alert.showAndWait();
                     image = null;
+                    proIdTxt.setText(productBoImpl.generateProductId());
                     productNameTxt.setText("");
                     qtyTxt.setText("");
                     sizeTxt.setText("");
                     priceTxt.setText("");
-                    proIdTxt.setText(productBoImpl.generateProductId());
                     productTable.setItems(productBoImpl.getAllProducts());
                     isSupplierSelect = false;
                 }

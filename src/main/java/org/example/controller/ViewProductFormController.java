@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,13 +12,18 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.impl.PlaceOrderBoImpl;
+import org.example.model.Cart;
 import org.example.model.Product;
 import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -77,13 +83,37 @@ public class ViewProductFormController implements Initializable {
         priceTxt.setText("");
         availableQTYTxt.setText("");
 
-        productTable.setItems(placeOrderBo.getAllProducts());
+        ObservableList<Product> allProducts = placeOrderBo.getAllProducts();
+        productTable.setItems(allProducts);
         proIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         proCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
         proNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         proQTYCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
         proSizeCol.setCellValueFactory(new PropertyValueFactory<>("size"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\ProductView.jrxml";
+
+        JasperReport report = null;
+        try {
+            report = JasperCompileManager.compileReport(path);
+            String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\productSummaryReport\\ProductReport.pdf";
+
+            List<Product> list = new ArrayList<Product>();
+
+            allProducts.forEach(product -> {
+                list.add(product);
+            });
+
+
+            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(report,null,dataSource);
+            JasperExportManager.exportReportToPdfFile(jasperPrint,savePath);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
 
     }
 
