@@ -145,5 +145,10 @@
             <TableColumn fx:id="supCompanyCol" minWidth="0.0" prefWidth="152.0" text="Company" />
          </columns>
       </TableView>
+      <JFXButton fx:id="reportViewBtn" layoutX="701.0" layoutY="291.0" onAction="#reportViewOnAction" prefHeight="27.0" prefWidth="125.0" style="-fx-border-color: #000; -fx-border-radius: 0; -fx-background-color: #09203f;" text="View Report" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
    </children>
 </AnchorPane>

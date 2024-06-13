@@ -54,7 +54,6 @@ public class DashBoardController implements Initializable {
     public Text titleTxt;
     public FontAwesomeIconView mainCartIcon;
     public Text mainTitle;
-    public Text notification;
 
     private int otp;
 
@@ -118,6 +117,7 @@ public class DashBoardController implements Initializable {
 
     public void signinBtn2Action(ActionEvent actionEvent) {
         errormsg.setVisible(false);
+        validmsg.setVisible(false);
         resetPasswordField(false);
     }
 

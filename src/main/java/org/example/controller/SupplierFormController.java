@@ -121,31 +121,23 @@ public class SupplierFormController implements Initializable {
 
         if (!supNametxt.getText().equals("") && !supCompanytxt.getText().equals("") && !supEmailtxt.equals("")) {
 
-            String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\Supplier.jrxml";
+            String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\SReport.jrxml";
 
             Map<String,Object> parameters = new HashMap();
-
-            parameters.put("supId",supIdTxt.getText());
-            parameters.put("supName",supNametxt.getText());
-            parameters.put("email",supEmailtxt.getText());
-            parameters.put("company",supCompanytxt.getText());
+            StringBuffer name = new StringBuffer(supNametxt.getText());
+            StringBuffer id = new StringBuffer(supIdTxt.getText());
+            StringBuffer address = new StringBuffer(supCompanytxt.getText());
+            StringBuffer email = new StringBuffer(supEmailtxt.getText());
+            parameters.put("empName",name);
+            parameters.put("empId",id);
+            parameters.put("address",address);
+            parameters.put("emailAddress",email);
 
             JasperReport report = JasperCompileManager.compileReport(path);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(report,parameters);
 
             String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\supplierReport\\"+supIdTxt.getText()+".pdf";
-
-            ObservableList<Product> productList = new ProductBoImpl().getProductBySupId(supIdTxt.getText());
-            List<Product> list = new ArrayList<Product>();
-
-            productList.forEach(product -> {
-                list.add(product);
-            });
-
-            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(report,parameters,dataSource);
             JasperExportManager.exportReportToPdfFile(jasperPrint,savePath);
-
-
 
             Supplier supplier = new Supplier(supIdTxt.getText(),supNametxt.getText(),supEmailtxt.getText(),supCompanytxt.getText());
             boolean isAdded = supllierBo.addSupplier(supplier);

@@ -16,7 +16,6 @@ import org.example.bo.BoFactory;
 import org.example.bo.custom.impl.CustomerBoImpl;
 import org.example.bo.custom.impl.OrderBoImpl;
 import org.example.bo.custom.impl.PlaceOrderBoImpl;
-import org.example.bo.custom.impl.ProductBoImpl;
 import org.example.model.Customer;
 import org.example.model.Order;
 import org.example.model.OrderHasItem;

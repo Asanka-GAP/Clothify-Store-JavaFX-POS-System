@@ -16,6 +16,8 @@ import org.example.bo.custom.impl.SupplierBoImpl;
 import org.example.model.Supplier;
 import org.example.util.BoType;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -60,6 +62,7 @@ public class ViewSupplierFormController implements Initializable {
 
     SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
 
+    boolean isRowSelected;
     @FXML
     void closeBtnAction(MouseEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -120,6 +123,7 @@ public class ViewSupplierFormController implements Initializable {
         try {
             int index = supplierTable.getSelectionModel().getSelectedIndex();
 
+            isRowSelected = true;
 
             if(index < 0){
                 return;
@@ -156,5 +160,22 @@ public class ViewSupplierFormController implements Initializable {
         supNameTxt.setText("");
         emailTxt.setText("");
         companyTxt.setText("");
+        isRowSelected =false;
+    }
+
+    public void reportViewOnAction(ActionEvent actionEvent) throws IOException {
+        if (isRowSelected){
+            File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\supplierReport\\"+supIdTxt.getText()+".pdf");
+
+            if (file.exists()){
+                if (Desktop.isDesktopSupported()){
+                    Desktop.getDesktop().open(file);
+                }else {
+
+                }
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Report Not Found..!!!").show();
+            }
+        }
     }
 }

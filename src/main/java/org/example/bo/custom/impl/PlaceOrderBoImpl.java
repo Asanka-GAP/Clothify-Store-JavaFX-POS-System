@@ -11,7 +11,6 @@ import org.example.dao.DaoFactory;
 import org.example.dao.custom.impl.OrderDaoImpl;
 import org.example.dao.custom.impl.PlaceOrderDaoImpl;
 import org.example.dao.custom.impl.ProductDaoImpl;
-import org.example.entity.OrderHasItemEntity;
 import org.example.entity.ProductEntity;
 import org.example.model.OrderHasItem;
 import org.example.model.Product;
@@ -24,9 +23,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,6 +32,7 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
     PlaceOrderDaoImpl placeOrderDao = DaoFactory.getInstance().getDao(DaoType.CART);
     ProductDaoImpl productDao = DaoFactory.getInstance().getDao(DaoType.PRODUCT);
     OrderDaoImpl orderDao = DaoFactory.getInstance().getDao(DaoType.ORDER);
+
     public ObservableList<String> getProductIds() {
 
         return productDao.searchAllIds();
@@ -62,12 +60,13 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
         number++;
         return String.format("X%04d", number);
     }
+
     public boolean saveOrderDetails(ObservableList<OrderHasItem> orderHasItemObservableList) {
         return placeOrderDao.saveAll(orderHasItemObservableList);
     }
 
-    public int getLatestCartId(){
-        return placeOrderDao.getLatestId()+1;
+    public int getLatestCartId() {
+        return placeOrderDao.getLatestId() + 1;
     }
 
     public ObservableList<OrderHasItem> getAllOrderedProducts() {
@@ -88,26 +87,26 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
         return productDao.increseQty(productIdList);
     }
 
-    public boolean updateNewQty(String id,int qty) {
-        productDao.updateQty(id,qty);
+    public boolean updateNewQty(String id, int qty) {
+        productDao.updateQty(id, qty);
         return true;
     }
 
     public boolean updateOrderAmount(String id, double newAmount) {
-        return orderDao.updateAmountById(id,newAmount);
+        return orderDao.updateAmountById(id, newAmount);
     }
 
     public boolean updateCartById(int id, int i, double newAmount) {
-        return placeOrderDao.updateQtyAndAmount(id,i,newAmount);
+        return placeOrderDao.updateQtyAndAmount(id, i, newAmount);
     }
 
-    public void sendEmail(String receiveEmail,String text,File file) throws MessagingException {
+    public void sendEmail(String receiveEmail, String text, File file) throws MessagingException {
 
         Properties properties = new Properties();
-        properties.put("mail.smtp.auth","true");
-        properties.put("mail.smtp.starttls.enable","true");
-        properties.put("mail.smtp.host","smtp.gmail.com");
-        properties.put("mail.smtp.port","587");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
 
         String myEmail = "asankapradeep0830@gmail.com";
         String password = "tkmkeibffwnpwjcp";
@@ -115,19 +114,19 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(myEmail,password);
+                return new PasswordAuthentication(myEmail, password);
             }
         });
 
-        Message message = prepareMessage(session,myEmail,receiveEmail,text,file);
+        Message message = prepareMessage(session, myEmail, receiveEmail, text, file);
         Transport.send(message);
     }
 
-    public Message prepareMessage(Session session, String myEmail, String receiveEmail, String text,File file) {
+    public Message prepareMessage(Session session, String myEmail, String receiveEmail, String text, File file) {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myEmail));
-            message.setRecipients(Message.RecipientType.TO,new InternetAddress[]{
+            message.setRecipients(Message.RecipientType.TO, new InternetAddress[]{
                     new InternetAddress(receiveEmail)
             });
             message.setSubject("Your Order");
@@ -141,8 +140,8 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
             message.setContent(multipart);
 
             return message;
-        }catch (Exception e){
-            Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE,null,e);
+        } catch (Exception e) {
+            Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, e);
         }
         return null;
     }
@@ -150,15 +149,15 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
 
     public boolean increaseQtyOfProduct(String id, int qty) {
 
-        return productDao.updateQtyOfProduct(id,qty);
+        return productDao.updateQtyOfProduct(id, qty);
     }
 
     public boolean decreaseAmountByOrderId(String id, double amount) {
-        return orderDao.deacreseAmount(id,amount);
+        return orderDao.deacreseAmount(id, amount);
     }
 
     public boolean removeFromCart(String oId, String pId) {
-        return placeOrderDao.removeItem(oId,pId);
+        return placeOrderDao.removeItem(oId, pId);
     }
 
     public void generateProductChartReport() throws JRException {
@@ -178,8 +177,8 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
         });
 
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
-        JasperPrint jasperPrint = JasperFillManager.fillReport(report,null,dataSource);
-        JasperExportManager.exportReportToPdfFile(jasperPrint,savePath);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(report, null, dataSource);
+        JasperExportManager.exportReportToPdfFile(jasperPrint, savePath);
 
     }
 }
