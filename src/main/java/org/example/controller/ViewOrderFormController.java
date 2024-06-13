@@ -147,8 +147,15 @@ public class ViewOrderFormController implements Initializable {
     }
 
     @FXML
-    void signOutBtnMouseClicked(MouseEvent event) {
+    void signOutBtnMouseClicked(MouseEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Sign Out");
+        alert.setContentText("Are you sure want to Sign Out..?");
+        Optional<ButtonType> result = alert.showAndWait();
 
+        if (result.get() == ButtonType.OK) {
+            SceneSwitchController.getInstance().switchScene(viewOrderWindow, "dashBoard-form.fxml");
+        }
     }
 
     @FXML

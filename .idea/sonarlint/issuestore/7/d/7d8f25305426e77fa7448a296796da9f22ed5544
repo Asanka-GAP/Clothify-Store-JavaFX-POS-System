@@ -48,11 +48,11 @@ java:S1104,"VMake empIdLable a static final constant or non-public and provide 
 
 java:S1104-"UMake actionBtn a static final constant or non-public and provide accessors if needed.(ßöÇ¢úÿÿÿÿ8”£¬2J$021b09cf-7727-4842-bb93-069139f269d4
 
+java:S3655ö"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(ÃÇûŞ8µ£¬2J$3bc8431b-b370-44a2-9106-f6d94cfbf472
+
 java:S3655"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(ÃÇûŞ8µ£¬2J$b8b58215-682c-4060-a512-b76fdce7cdf9
 
 java:S3655Ó"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(ÃÇûŞ8µ£¬2J$8a47c521-c522-42f3-823f-1ebfa6b0172a
-
-java:S3655ö"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(ÃÇûŞ8µ£¬2J$3bc8431b-b370-44a2-9106-f6d94cfbf472
 Ê
 java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¢Ûğ¥ûÿÿÿÿ8¶£¬2J$ba3e1b62-c6cf-4aac-8a74-ed32b10e4e0a
 Ê

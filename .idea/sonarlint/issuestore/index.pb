@@ -196,5 +196,3 @@ o
 ?src/main/java/org/example/controller/LandingPageController.java,c\8\c82fa190683445c22d92394a57d5efbaa66968f7
 c
 3src/main/java/org/example/model/ProductSummary.java,9\5\95e109b9ca68e2cdc9764d542dabe4fe567b8b93
-a
-1src/main/java/org/example/model/OrderSummary.java,8\5\85b862c9b9f3da96a86983ac530c6fc5e9fcb84b

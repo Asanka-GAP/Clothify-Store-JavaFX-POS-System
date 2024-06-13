@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="customerWindow" prefHeight="429.0" prefWidth="849.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.ProductFormController">
+<AnchorPane fx:id="productWindow" prefHeight="429.0" prefWidth="849.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.ProductFormController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="523.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="220.0">
          <fill>

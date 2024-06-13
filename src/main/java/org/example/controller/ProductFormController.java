@@ -47,6 +47,7 @@ public class ProductFormController implements Initializable {
     public Text priceError;
     public TableColumn priceCol;
     public JFXComboBox supplierIdComboBox;
+    public AnchorPane productWindow;
     @FXML
     private JFXButton actionBtn;
 
@@ -274,8 +275,15 @@ public class ProductFormController implements Initializable {
     }
 
     @FXML
-    void signOutBtnMouseClicked(MouseEvent event) {
+    void signOutBtnMouseClicked(MouseEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Sign Out");
+        alert.setContentText("Are you sure want to Sign Out..?");
+        Optional<ButtonType> result = alert.showAndWait();
 
+        if (result.get() == ButtonType.OK) {
+            SceneSwitchController.getInstance().switchScene(productWindow, "dashBoard-form.fxml");
+        }
     }
 
     @FXML
