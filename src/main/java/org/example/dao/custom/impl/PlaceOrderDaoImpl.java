@@ -7,11 +7,13 @@ import org.example.dao.DaoFactory;
 import org.example.dao.custom.PlaceOrderDao;
 import org.example.entity.OrderHasItemEntity;
 import org.example.model.OrderHasItem;
+import org.example.model.ProductSummary;
 import org.example.util.DaoType;
 import org.example.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceOrderDaoImpl implements PlaceOrderDao {
@@ -24,7 +26,17 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
 
     @Override
     public ObservableList<OrderHasItemEntity> searchAll() {
-        return null;
+
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        List<OrderHasItemEntity> list = session.createQuery("FROM order_has_items").list();
+        session.close();
+
+        ObservableList<OrderHasItemEntity> observableList = FXCollections.observableArrayList();
+        list.forEach(orderHasItemEntity -> {
+            observableList.add(orderHasItemEntity);
+        });
+        return observableList;
     }
 
     @Override
@@ -112,8 +124,8 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
         list.forEach(s -> {
             observableList.add(new ObjectMapper().convertValue(s, OrderHasItem.class));
         });
-
         return observableList;
+
     }
 
     public boolean updateQtyAndAmount(int id, int qty, double newAmount) {
@@ -131,6 +143,7 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
     }
 
     public boolean removeItem(String oId, String pId) {
+
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
         Query query = session.createQuery("DELETE FROM order_has_items WHERE orderId=:oId AND productId=:pId");
@@ -141,5 +154,26 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
         session.close();
 
         return i>0;
+    }
+
+    public ObservableList<ProductSummary> findMaxQty(ObservableList<String> idList) {
+
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("SELECT MAX(qty) FROM order_has_items WHERE productId=:pId");
+
+        ObservableList<ProductSummary> observableList = FXCollections.observableArrayList();
+
+        idList.forEach(id -> {
+            query.setParameter("pId",id);
+            Integer result = (Integer) query.uniqueResult();
+            if (result != null){
+                ProductSummary productSummary = new ProductSummary(result,id);
+                observableList.add(productSummary);
+            }
+
+        });
+
+        return observableList;
     }
 }

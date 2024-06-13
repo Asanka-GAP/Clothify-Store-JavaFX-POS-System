@@ -20,6 +20,8 @@ import org.example.model.Cart;
 import org.example.model.Product;
 import org.example.util.BoType;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -82,6 +84,12 @@ public class ViewProductFormController implements Initializable {
         categoryTxt.setText("");
         priceTxt.setText("");
         availableQTYTxt.setText("");
+
+        try {
+            placeOrderBo.generateProductChartReport();
+        } catch (JRException e) {
+            System.out.println(e);
+        }
 
         ObservableList<Product> allProducts = placeOrderBo.getAllProducts();
         productTable.setItems(allProducts);
@@ -192,4 +200,32 @@ public class ViewProductFormController implements Initializable {
     }
 
 
+    public void viewReportOnAction(ActionEvent actionEvent) throws IOException {
+
+
+        File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\productSummaryReport\\ProductReport.pdf");
+        if (file.exists()){
+            if (Desktop.isDesktopSupported()){
+                Desktop.getDesktop().open(file);
+            }else {
+
+            }
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Report Not Found..!!!").show();
+        }
+    }
+
+    public void viewProgressOnAction(ActionEvent actionEvent) throws IOException{
+
+        File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\productSummaryReport\\ProductChart.pdf");
+        if (file.exists()){
+            if (Desktop.isDesktopSupported()){
+                Desktop.getDesktop().open(file);
+            }else {
+
+            }
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Report Not Found..!!!").show();
+        }
+    }
 }

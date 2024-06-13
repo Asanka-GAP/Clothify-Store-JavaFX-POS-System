@@ -38,7 +38,7 @@ public class UserDaoImpl implements UserDao {
     public UserEntity search(String s){
 
         Session session = HibernateUtil.getSession();
-        session.getTransaction();
+        session.getTransaction().begin();
 
         Query query = session.createQuery("FROM user WHERE email=:email");
         query.setParameter("email",s);
@@ -51,7 +51,7 @@ public class UserDaoImpl implements UserDao {
     public ObservableList<UserEntity> searchAll(){
 
         Session session = HibernateUtil.getSession();
-        session.getTransaction();
+        session.getTransaction().begin();
         List<UserEntity> userList = session.createQuery("FROM user").list();
         ObservableList<UserEntity> list= FXCollections.observableArrayList();
         session.close();

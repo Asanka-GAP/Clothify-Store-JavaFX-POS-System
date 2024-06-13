@@ -3,15 +3,19 @@ package org.example.bo.custom.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.example.bo.custom.PlaceOrderBo;
 import org.example.controller.DashBoardController;
 import org.example.dao.DaoFactory;
 import org.example.dao.custom.impl.OrderDaoImpl;
 import org.example.dao.custom.impl.PlaceOrderDaoImpl;
 import org.example.dao.custom.impl.ProductDaoImpl;
+import org.example.entity.OrderHasItemEntity;
 import org.example.entity.ProductEntity;
 import org.example.model.OrderHasItem;
 import org.example.model.Product;
+import org.example.model.ProductSummary;
 import org.example.util.DaoType;
 
 import javax.mail.*;
@@ -20,6 +24,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -153,5 +159,27 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
 
     public boolean removeFromCart(String oId, String pId) {
         return placeOrderDao.removeItem(oId,pId);
+    }
+
+    public void generateProductChartReport() throws JRException {
+        String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\ProductChart.jrxml";
+        JasperReport report = JasperCompileManager.compileReport(path);
+
+        String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\productSummaryReport\\ProductChart.pdf";
+
+        List<ProductSummary> list = new ArrayList<ProductSummary>();
+
+        ObservableList<String> observableList1 = productDao.searchAllIds();
+
+        ObservableList<ProductSummary> maxQty = placeOrderDao.findMaxQty(observableList1);
+
+        maxQty.forEach(productSummary -> {
+            list.add(productSummary);
+        });
+
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(report,null,dataSource);
+        JasperExportManager.exportReportToPdfFile(jasperPrint,savePath);
+
     }
 }

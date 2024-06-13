@@ -194,3 +194,5 @@ f
 6src/main/java/org/example/controller/EmployeeData.java,6\4\64472285ce3e4e44bf1073cdd6ff6bd3a8bd0b7d
 o
 ?src/main/java/org/example/controller/LandingPageController.java,c\8\c82fa190683445c22d92394a57d5efbaa66968f7
+c
+3src/main/java/org/example/model/ProductSummary.java,9\5\95e109b9ca68e2cdc9764d542dabe4fe567b8b93

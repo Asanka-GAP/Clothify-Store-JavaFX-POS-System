@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ProductChart" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f3ccbd8d-52e9-4ded-9582-9ee59521adf3">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<queryString language="SQL">
+		<![CDATA[select * from PRODUCT;]]>
+	</queryString>
+	<field name="qty" class="java.lang.Integer"/>
+	<field name="productId" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="380" y="40" width="150" height="30" uuid="4828605c-ad8f-46fd-b0a7-0869be1c97d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Best Sold Product]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="0" width="265" height="25" uuid="cfaa2e00-40a1-4168-bae0-c9e4bf05b24c">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clothify Store (PVT) Ltd]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="25" width="205" height="15" uuid="c6eef9a0-84fe-4971-a53a-188d10ec2870"/>
+				<text><![CDATA[Owned By: Mr. Sheshan Thilakshana]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="40" width="205" height="15" uuid="4fb48e76-9bab-4f8a-84fa-edf3e2ca18a9"/>
+				<text><![CDATA[Panadura, Kalutara, Sri Lanka]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="55" width="205" height="15" uuid="f517cb59-a9c3-475e-a13c-5eb265bff781"/>
+				<text><![CDATA[+94 123 456 789 , clothify@sample.com]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="465" y="10" width="84" height="20" uuid="5f31d419-ab80-407c-9f0c-9a54a3034950"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="415" y="10" width="50" height="20" uuid="60e87240-1be1-41aa-a13a-8cc6a7501170"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Date:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="249" splitType="Stretch">
+			<barChart>
+				<chart evaluationTime="Report">
+					<reportElement x="10" y="30" width="535" height="200" uuid="c455fe08-28e8-4c47-8e44-6b55662b5343"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{productId}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{productId}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{qty}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

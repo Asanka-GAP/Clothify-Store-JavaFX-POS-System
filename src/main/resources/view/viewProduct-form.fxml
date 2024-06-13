@@ -157,5 +157,15 @@
             <TableColumn fx:id="priceCol" minWidth="0.0" prefWidth="124.800048828125" text="Price" />
          </columns>
       </TableView>
+      <JFXButton layoutX="706.0" layoutY="307.0" onAction="#viewReportOnAction" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #09203f;" text="View Report" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="581.0" layoutY="307.0" onAction="#viewProgressOnAction" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #09203f;" text="View Progress" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
    </children>
 </AnchorPane>
