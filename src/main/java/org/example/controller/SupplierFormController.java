@@ -241,8 +241,8 @@ public class SupplierFormController implements Initializable {
     }
 
     @FXML
-    void userBtnMouseClicked(MouseEvent event) {
-
+    void userBtnMouseClicked(MouseEvent event) throws IOException {
+        sceneSwitch.switchScene(supplierManageWindow,"customer-form.fxml");
     }
 
     public void updateBtnAction(ActionEvent actionEvent) {

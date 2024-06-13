@@ -271,7 +271,7 @@ public class ProductFormController implements Initializable {
 
     @FXML
     void shoppingBagBtnMouseClicked(MouseEvent event) throws IOException {
-        sceneSwitch.switchScene(customerWindow,"placeOrder-form.fxml");
+        sceneSwitch.switchScene(productWindow,"placeOrder-form.fxml");
     }
 
     @FXML
@@ -311,8 +311,8 @@ public class ProductFormController implements Initializable {
     }
 
     @FXML
-    void userBtnMouseClicked(MouseEvent event) {
-
+    void userBtnMouseClicked(MouseEvent event) throws IOException {
+        sceneSwitch.switchScene(productWindow,"customer-form.fxml");
     }
 
     private ObservableList<String> categoryLoad(){

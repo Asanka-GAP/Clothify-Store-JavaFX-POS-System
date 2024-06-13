@@ -233,7 +233,7 @@ public class CustomerFormController implements Initializable {
 
     @FXML
     void shoppingBagBtnMouseClicked(MouseEvent event) throws IOException {
-        sceneSwitch.switchScene(customerWindow,"viewProduct-form.fxml");
+        sceneSwitch.switchScene(customerWindow,"placeOrder-form.fxml");
     }
 
     @FXML

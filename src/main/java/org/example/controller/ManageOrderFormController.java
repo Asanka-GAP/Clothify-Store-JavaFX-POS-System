@@ -414,8 +414,9 @@ public class ManageOrderFormController implements Initializable {
     }
 
     @FXML
-    void userBtnMouseClicked(MouseEvent event) {
+    void userBtnMouseClicked(MouseEvent event) throws IOException {
 
+        sceneSwitch.switchScene(manageOrderWindow,"customer-form.fxml");
     }
 
     private void loadDateTime() {

@@ -310,8 +310,8 @@ public class PlaceOrderFormController implements Initializable {
     }
 
     @FXML
-    void userBtnMouseClicked(MouseEvent event) {
-
+    void userBtnMouseClicked(MouseEvent event) throws IOException {
+        sceneSwitch.switchScene(placeOrderWindow,"customer-form.fxml");
     }
 
     @Override
