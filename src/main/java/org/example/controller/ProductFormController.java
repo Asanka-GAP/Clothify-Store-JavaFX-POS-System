@@ -64,9 +64,6 @@ public class ProductFormController implements Initializable {
     private Text cusIdLable;
 
     @FXML
-    private AnchorPane customerWindow;
-
-    @FXML
     private JFXButton deleteBtn;
 
     @FXML
@@ -218,13 +215,13 @@ public class ProductFormController implements Initializable {
 
     @FXML
     void manageCustomersBtnAction(ActionEvent event) throws IOException {
-        sceneSwitch.switchScene(customerWindow,"customer-form.fxml");
+        sceneSwitch.switchScene(productWindow,"customer-form.fxml");
 
     }
 
     @FXML
     void manageOrdersBtnAction(ActionEvent event) throws IOException {
-        sceneSwitch.switchScene(customerWindow,"manageOrder-form.fxml");
+        sceneSwitch.switchScene(productWindow,"manageOrder-form.fxml");
     }
 
     @FXML
@@ -245,12 +242,12 @@ public class ProductFormController implements Initializable {
 
     @FXML
     void manageSuppliersBtnAction(ActionEvent event) throws IOException {
-        sceneSwitch.switchScene(customerWindow,"supplier-form.fxml");
+        sceneSwitch.switchScene(productWindow,"supplier-form.fxml");
     }
 
     @FXML
     void placeSectionBtnAction(ActionEvent event) throws IOException {
-        sceneSwitch.switchScene(customerWindow,"placeOrder-form.fxml");
+        sceneSwitch.switchScene(productWindow,"placeOrder-form.fxml");
     }
 
     @FXML
@@ -265,7 +262,6 @@ public class ProductFormController implements Initializable {
             addProductBtn.setDisable(true);
             updateBtn.setDisable(true);
         }
-
 
 
     }
