@@ -5,6 +5,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
@@ -97,12 +98,12 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Text fill="#057b38" layoutX="579.0" layoutY="454.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available QTY :">
+      <Text fill="#057b38" layoutX="579.0" layoutY="482.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available QTY :">
          <font>
             <Font name="System Bold" size="11.0" />
          </font>
       </Text>
-      <Text fx:id="availableQTYTxt" fill="#8f0764" layoutX="662.0" layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="188.00006103515625">
+      <Text fx:id="availableQTYTxt" fill="#8f0764" layoutX="662.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="188.00006103515625">
          <font>
             <Font size="14.0" />
          </font>
@@ -150,22 +151,24 @@
       <TableView fx:id="productTable" layoutX="260.0" layoutY="38.0" onMouseClicked="#tableMouseClickedAction" prefHeight="258.0" prefWidth="561.0">
          <columns>
             <TableColumn fx:id="proIdCol" prefWidth="59.99993896484375" text="ID" />
-            <TableColumn fx:id="proNameCol" prefWidth="127.199951171875" text="Name" />
-            <TableColumn fx:id="proCategoryCol" prefWidth="122.39999389648438" text="Category" />
-            <TableColumn fx:id="proSizeCol" prefWidth="60.79998779296875" text="Size" />
-            <TableColumn fx:id="proQTYCol" minWidth="0.0" prefWidth="69.60003662109375" text="QTY" />
-            <TableColumn fx:id="priceCol" minWidth="0.0" prefWidth="124.800048828125" text="Price" />
+            <TableColumn fx:id="proNameCol" prefWidth="115.20001220703125" text="Name" />
+            <TableColumn fx:id="proCategoryCol" prefWidth="101.5999755859375" text="Category" />
+            <TableColumn fx:id="proSizeCol" prefWidth="64.79998779296875" text="Size" />
+            <TableColumn fx:id="proQTYCol" minWidth="0.0" prefWidth="64.0" text="QTY" />
+            <TableColumn fx:id="priceCol" minWidth="0.0" prefWidth="68.79998779296875" text="Price" />
+            <TableColumn fx:id="supIdCol" minWidth="0.0" prefWidth="90.4000244140625" text="Sup Id" />
          </columns>
       </TableView>
-      <JFXButton layoutX="706.0" layoutY="307.0" onAction="#viewReportOnAction" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #09203f;" text="View Report" textFill="WHITE">
+      <JFXButton layoutX="385.0" layoutY="444.0" onAction="#viewReportOnAction" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #09203f;" text="View Report" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton layoutX="581.0" layoutY="307.0" onAction="#viewProgressOnAction" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #09203f;" text="View Progress" textFill="WHITE">
+      <JFXButton layoutX="252.0" layoutY="443.0" onAction="#viewProgressOnAction" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #09203f;" text="View Progress" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="618.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

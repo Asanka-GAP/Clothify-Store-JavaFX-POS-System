@@ -23,9 +23,8 @@ public class ProductEntity {
     private int size;
     private int qty;
     private String category;
-    @Lob @Basic(fetch=LAZY)
-    @Column(name="image", columnDefinition="BLOB NOT NULL")
-    private byte[] image;
+    @Column(name="image", columnDefinition="LONGTEXT NOT NULL")
+    private String  image;
     @Column(name = "price")
     private double price;
     @Column(name = "supId")

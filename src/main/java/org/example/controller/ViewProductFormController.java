@@ -9,6 +9,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -22,15 +24,16 @@ import org.example.util.BoType;
 
 import java.awt.*;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
 
 public class ViewProductFormController implements Initializable {
 
+    public ImageView imageView;
+    public TableColumn supIdCol;
     @FXML
     private Text availableQTYTxt;
 
@@ -99,6 +102,7 @@ public class ViewProductFormController implements Initializable {
         proQTYCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
         proSizeCol.setCellValueFactory(new PropertyValueFactory<>("size"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        supIdCol.setCellValueFactory(new PropertyValueFactory<>("supId"));
 
         String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\ProductView.jrxml";
 
@@ -196,6 +200,26 @@ public class ViewProductFormController implements Initializable {
             categoryTxt.setText(product.getCategory());
             priceTxt.setText(Double.toString(product.getPrice()));
             availableQTYTxt.setText(Integer.toString(product.getQty()));
+
+
+            byte[] data;
+            try{
+                data = Base64.getDecoder().decode(new String(product.getImage()));
+            }catch (Exception e){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Image not found");
+                alert.setContentText("Sorry this product image not found..!!");
+                alert.showAndWait();
+                return;
+            }
+
+            String savePath = "C:\\Users\\HP\\Pictures\\ClothifyStore\\image.jpg";
+            FileOutputStream fileOutputStream = new FileOutputStream(savePath);
+            fileOutputStream.write(data);
+            fileOutputStream.close();
+
+            javafx.scene.image.Image image1 = new Image(savePath);
+            imageView.setImage(image1);
 
         }catch (Exception e){}
 

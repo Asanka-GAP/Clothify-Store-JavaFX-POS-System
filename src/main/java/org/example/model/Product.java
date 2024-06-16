@@ -22,8 +22,7 @@ public class Product {
     private int qty;
     private String category;
 
-    @Lob @Basic(fetch=LAZY)
-    private byte[] image;
+    private String image;
     private double price;
     private String supId;
 

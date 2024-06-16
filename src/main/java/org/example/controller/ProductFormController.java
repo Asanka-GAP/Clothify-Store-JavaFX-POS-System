@@ -33,10 +33,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.sql.Blob;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ProductFormController implements Initializable {
 
@@ -109,9 +106,9 @@ public class ProductFormController implements Initializable {
     SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
 
 
-    byte[] image;
+    String image;
     String category,supplierId;
-    boolean isAction,isMouseClick,isPriceValid,isSupplierSelect;
+    boolean isAction,isMouseClick,isPriceValid,isSupplierSelect,isCategorySelect;
     @FXML
     void actionBtnAction(ActionEvent event) {
 
@@ -123,11 +120,17 @@ public class ProductFormController implements Initializable {
     }
 
     @FXML
-    void addProductOnAction(ActionEvent event) throws JRException {
+    void addProductOnAction(ActionEvent event) throws Exception {
 
             if (isSupplierSelect && isPriceValid && !productNameTxt.getText().equals("") && !qtyTxt.getText().equals("") && !sizeTxt.getText().equals("") && image != null) {
-                Product product = new Product(proIdTxt.getText(), productNameTxt.getText(), Integer.parseInt(sizeTxt.getText()), Integer.parseInt(qtyTxt.getText()), category,image,Double.parseDouble(priceTxt.getText()),supplierId);
-                boolean isAdd = productBoImpl.addProduct(product);
+                Product product = new Product(proIdTxt.getText(), productNameTxt.getText(), Integer.parseInt(sizeTxt.getText()), Integer.parseInt(qtyTxt.getText()), category,productBoImpl.encodeImage(image),Double.parseDouble(priceTxt.getText()),supplierId);
+                boolean isAdd ;
+                try {
+                    isAdd = productBoImpl.addProduct(product);
+                }catch (Exception e){
+                    new Alert(Alert.AlertType.WARNING,"Your image size is out of range..please try another image").show();
+                    return;
+                }
                 if (isAdd) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Product Added");
@@ -204,12 +207,11 @@ public class ProductFormController implements Initializable {
 
         File file = fileChooser.showOpenDialog(new Stage());
 
-        image = new byte[(int)file.length()];
-        System.out.println(image);
-
-        Image photo = new Image(file.getPath());
-
-        imageView.setImage(photo);
+        try{
+            image = file.getPath();
+            Image photo = new Image(file.getPath());
+            imageView.setImage(photo);
+        }catch (Exception e){}
 
     }
 
@@ -284,10 +286,10 @@ public class ProductFormController implements Initializable {
     }
 
     @FXML
-    void updateOnAction(ActionEvent event) {
+    void updateOnAction(ActionEvent event) throws Exception {
 
-        if (isPriceValid && isMouseClick && !productNameTxt.getText().equals("") && !qtyTxt.getText().equals("") && !sizeTxt.getText().equals("") && image!=null){
-            Product product = new Product(proIdTxt.getText(),productNameTxt.getText(),Integer.parseInt(sizeTxt.getText()),Integer.parseInt(qtyTxt.getText()),category,image,Double.parseDouble(priceTxt.getText()),supplierId);
+        if (isSupplierSelect && isCategorySelect && isPriceValid && isMouseClick && !productNameTxt.getText().equals("") && !qtyTxt.getText().equals("") && !sizeTxt.getText().equals("") && image!=null){
+            Product product = new Product(proIdTxt.getText(),productNameTxt.getText(),Integer.parseInt(sizeTxt.getText()),Integer.parseInt(qtyTxt.getText()),category,productBoImpl.encodeImage(image),Double.parseDouble(priceTxt.getText()),supplierId);
             boolean isUpdate = productBoImpl.updateProduct(product);
 
             if (isUpdate){
@@ -331,6 +333,7 @@ public class ProductFormController implements Initializable {
         priceError.setVisible(false);
         isAction = false;
         isMouseClick = false;
+        isCategorySelect = false;
         proIdTxt.setText(productBoImpl.generateProductId());
         updateBtn.setVisible(false);
         deleteBtn.setVisible(false);
@@ -339,6 +342,7 @@ public class ProductFormController implements Initializable {
         categoryComboBox.setItems(categoryLoad());
         categoryComboBox.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue) -> {
             category = (String) newValue;
+            isCategorySelect=true;
             System.out.println(category);
         });
         supplierIdComboBox.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue) -> {
@@ -379,28 +383,36 @@ public class ProductFormController implements Initializable {
         String id = proIdCol.getCellData(index).toString();
 
         if (isAction){
+            isPriceValid = true;
             Product product = productBoImpl.getProductById(id);
             productNameTxt.setText(product.getName());
             qtyTxt.setText(Integer.toString(product.getQty()));
             sizeTxt.setText(Integer.toString(product.getSize()));
             proIdTxt.setText(product.getId());
-//            System.out.println(product.getImage());
-//
-//            image = product.getImage();
-//            System.out.println(productBoImpl.getExampleByteArray());
-//            BufferedImage bufferedImage = productBoImpl.byteArrayToBufferedImage(image);
-//            InputStream inputStream = productBoImpl.bufferedImageToInputStream(bufferedImage);
-//            Image image1 = new Image(inputStream);
-//
-//            imageView.setImage(image1);
+            priceTxt.setText(Double.toString(product.getPrice()));
+            byte[] data;
+            try{
+                data = Base64.getDecoder().decode(new String(product.getImage()));
+            }catch (Exception e){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Image not found");
+                alert.setContentText("Sorry this product image not found..!!");
+                alert.showAndWait();
+                return;
+            }
+
+            String savePath = "C:\\Users\\HP\\Pictures\\ClothifyStore\\image.jpg";
+            FileOutputStream fileOutputStream = new FileOutputStream(savePath);
+            fileOutputStream.write(data);
+            fileOutputStream.close();
+
+            Image image1 = new Image(savePath);
+            imageView.setImage(image1);
 
             if (!product.getId().equals("")){
                 isMouseClick = true;
             }
         }
-
-
-
 
     }
 

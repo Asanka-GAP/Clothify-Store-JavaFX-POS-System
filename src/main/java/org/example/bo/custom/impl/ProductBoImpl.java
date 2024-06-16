@@ -13,10 +13,8 @@ import org.example.util.DaoType;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.Base64;
 
 public class ProductBoImpl implements ProductBo {
 
@@ -97,4 +95,12 @@ public class ProductBoImpl implements ProductBo {
         });
         return products;
     }
+
+    public String encodeImage(String path) throws Exception {
+        FileInputStream inputStream = new FileInputStream(path);
+        byte[] data = inputStream.readAllBytes();
+
+        return Base64.getEncoder().encodeToString(data);
+    }
+
 }
