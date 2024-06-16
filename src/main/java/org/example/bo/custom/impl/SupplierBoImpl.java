@@ -21,9 +21,13 @@ public class SupplierBoImpl implements SupplierBo {
 
     public String generateSupplierId() {
 
-        String lastEmployeeId = supplierDao.getLatestId();
+        String lastSupplierId = supplierDao.getLatestId();
 
-        int number = Integer.parseInt(lastEmployeeId.split("S")[1]);
+        if (lastSupplierId==null){
+            return "S0001";
+        }
+
+        int number = Integer.parseInt(lastSupplierId.split("S")[1]);
         number++;
         return String.format("S%04d", number);
     }

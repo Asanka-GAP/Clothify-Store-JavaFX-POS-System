@@ -15,9 +15,12 @@ public class CustomerBoImpl implements CustomerBo {
     CustomerDaoImpl customerDaoImpl = DaoFactory.getInstance().getDao(DaoType.CUSTOMER);
 
     public String generateCustomerId(){
-        String lastEmployeeId = customerDaoImpl.getLatestId();
 
-        int number = Integer.parseInt(lastEmployeeId.split("C")[1]);
+        String lastCustomerId = customerDaoImpl.getLatestId();
+        if (lastCustomerId==null){
+            return "C0001";
+        }
+        int number = Integer.parseInt(lastCustomerId.split("C")[1]);
         number++;
         return String.format("C%04d", number);
     }

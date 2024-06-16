@@ -134,6 +134,9 @@ public class UserBoImpl implements UserBo {
     public String generateEmployeeId() {
 
         String lastEmployeeId = userDaoImpl.getLatestId();
+        if (lastEmployeeId==null){
+            return "U0001";
+        }
 
         int number = Integer.parseInt(lastEmployeeId.split("U")[1]);
         number++;

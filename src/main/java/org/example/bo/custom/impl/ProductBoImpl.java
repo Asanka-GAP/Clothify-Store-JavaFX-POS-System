@@ -28,6 +28,10 @@ public class ProductBoImpl implements ProductBo {
     public String generateProductId() {
         String id = productDaoImpl.getLatestId();
 
+        if (id == null){
+            return "P0001";
+        }
+
         int number = Integer.parseInt(id.split("P")[1]);
         number++;
         return String.format("P%04d", number);

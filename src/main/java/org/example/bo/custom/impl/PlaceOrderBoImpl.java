@@ -56,6 +56,9 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
     public String generateOrderId() {
         String id = new OrderDaoImpl().getLatestOrderId();
 
+        if (id==null){
+            return "X0001";
+        }
         int number = Integer.parseInt(id.split("X")[1]);
         number++;
         return String.format("X%04d", number);
