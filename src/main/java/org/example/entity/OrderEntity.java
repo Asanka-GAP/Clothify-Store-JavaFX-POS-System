@@ -24,4 +24,5 @@ public class OrderEntity {
     private String status;
     private Date date;
     private double amount;
+    private String empId;
 }

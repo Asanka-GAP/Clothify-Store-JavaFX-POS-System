@@ -17,4 +17,5 @@ public class Order {
     private String status;
     private Date date;
     private Double amount;
+    private String empId;
 }

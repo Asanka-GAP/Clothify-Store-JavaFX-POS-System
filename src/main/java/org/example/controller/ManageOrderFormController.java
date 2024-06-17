@@ -116,7 +116,9 @@ public class ManageOrderFormController implements Initializable {
         qtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
         amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
 
-        cartTable.setItems(placeOrderBoImpl.getAllOrderedProducts());
+        String id = EmployeeData.getInstance().getId();
+        System.out.println(id);
+        cartTable.setItems(placeOrderBoImpl.getAllOrderedProductsByEmpId(id));
 
         isQtyValid = false;
         errorMsgtxt.setVisible(false);

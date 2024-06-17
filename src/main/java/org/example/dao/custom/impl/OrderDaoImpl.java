@@ -1,6 +1,5 @@
 package org.example.dao.custom.impl;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.dao.custom.OrderDao;
 import org.example.entity.OrderEntity;
@@ -8,7 +7,6 @@ import org.example.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import java.util.Date;
 import java.util.List;
 
 public class OrderDaoImpl implements OrderDao {
@@ -20,7 +18,6 @@ public class OrderDaoImpl implements OrderDao {
         query.setParameter("id",s);
         return (OrderEntity)query.uniqueResult();
     }
-
     @Override
     public ObservableList<OrderEntity> searchAll() {
 
@@ -90,5 +87,14 @@ public class OrderDaoImpl implements OrderDao {
         session.getTransaction().commit();
         session.close();
         return i>0;
+    }
+    public List<String> getOrderIdsByEmpId(String id){
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("SELECT id FROM order_table WHERE empId=:id");
+        query.setParameter("id",id);
+        List<String > list = query.list();
+        session.close();
+        return list;
     }
 }

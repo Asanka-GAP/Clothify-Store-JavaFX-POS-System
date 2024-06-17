@@ -13,7 +13,6 @@ import org.example.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceOrderDaoImpl implements PlaceOrderDao {
@@ -42,9 +41,6 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
     @Override
     public boolean insert(OrderHasItemEntity orderHasItemEntity) {
 
-//        Session session = HibernateUtil.getSession();
-//        session.getTransaction().begin();
-//        session.persist((OrderHasItem));
         return true;
     }
 
@@ -79,11 +75,14 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
         session.getTransaction().begin();
 
         Query query = session.createQuery("SELECT id FROM order_has_items ORDER BY id DESC LIMIT 1");
-        int id = (int) query.uniqueResult();
+        try {
+            int id = (int) query.uniqueResult();
 
-        session.close();
+            return id;
+        }catch (NullPointerException e){
+            return 0;
+        }
 
-        return id;
     }
 
     public ObservableList<OrderHasItem> getAll() {
@@ -175,5 +174,26 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
         });
 
         return observableList;
+    }
+    public ObservableList<OrderHasItem> getProductIdsByOrderIds(List<String> orderIdList) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("FROM order_has_items WHERE orderId=:id");
+        ObservableList<OrderHasItemEntity> list2 = FXCollections.observableArrayList();
+        orderIdList.forEach(id -> {
+            query.setParameter("id",id);
+            List<OrderHasItemEntity> list1 = query.list();
+            list2.addAll(list1);
+
+        });
+        session.close();
+
+        ObservableList<OrderHasItem> observableList=FXCollections.observableArrayList();
+
+        list2.forEach(s -> {
+            observableList.add(new ObjectMapper().convertValue(s, OrderHasItem.class));
+        });
+        return observableList;
+
     }
 }

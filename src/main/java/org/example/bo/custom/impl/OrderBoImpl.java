@@ -7,7 +7,6 @@ import org.example.dao.custom.impl.OrderDaoImpl;
 import org.example.entity.OrderEntity;
 import org.example.model.Order;
 import org.example.util.DaoType;
-
 public class OrderBoImpl implements OrderBo {
 
     OrderDaoImpl orderDaoImpl = DaoFactory.getInstance().getDao(DaoType.ORDER);

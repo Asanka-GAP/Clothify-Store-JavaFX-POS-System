@@ -4,15 +4,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.criteria.CriteriaBuilder;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity(name = "order_has_items")
 @Table(name = "order_has_items")
 public class OrderHasItemEntity {

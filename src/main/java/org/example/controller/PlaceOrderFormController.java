@@ -219,7 +219,8 @@ public class PlaceOrderFormController implements Initializable {
         orderid = orderIdtxt.getText();
 
         Date date = new Date();
-        Order order = new Order(orderIdtxt.getText(),customerId,"Pending",date,Double.parseDouble(totalTxt.getText()));
+        String id = EmployeeData.getInstance().getId();
+        Order order = new Order(orderIdtxt.getText(),customerId,"Pending",date,Double.parseDouble(totalTxt.getText()),id);
 
         String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\orderReport\\"+orderIdtxt.getText()+".pdf";
 

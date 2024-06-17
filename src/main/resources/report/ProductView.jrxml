@@ -244,7 +244,7 @@
 	<detail>
 		<band height="26">
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="1" y="0" width="60" height="25" uuid="9026dc04-2d2b-4f9b-a7ae-f9f066d74b82">
+				<reportElement style="Detail" positionType="Float" x="1" y="-1" width="60" height="26" uuid="9026dc04-2d2b-4f9b-a7ae-f9f066d74b82">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c95e6437-2e07-4c2a-b737-adec28c96fc6"/>
 				</reportElement>
 				<box>
@@ -259,7 +259,7 @@
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="61" y="0" width="120" height="25" uuid="12fa72d0-9574-4ca8-afda-984822a06093">
+				<reportElement style="Detail" positionType="Float" x="61" y="-1" width="120" height="26" uuid="12fa72d0-9574-4ca8-afda-984822a06093">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="42c0981a-d8f3-4cb6-a5cb-7a659b296ce7"/>
 				</reportElement>
 				<box>
@@ -274,7 +274,7 @@
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="181" y="0" width="110" height="25" uuid="38d7ac75-6046-4650-9a82-994c613aac32">
+				<reportElement style="Detail" positionType="Float" x="181" y="-1" width="110" height="26" uuid="38d7ac75-6046-4650-9a82-994c613aac32">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9e3eb2bb-f5b7-4488-82c4-b1607f43ba80"/>
 				</reportElement>
 				<box>
@@ -289,7 +289,7 @@
 				<textFieldExpression><![CDATA[$F{category}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="291" y="0" width="70" height="25" uuid="6a0c15a9-c6c0-46a5-8358-e33c210bb621">
+				<reportElement style="Detail" positionType="Float" x="291" y="-1" width="70" height="26" uuid="6a0c15a9-c6c0-46a5-8358-e33c210bb621">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9e3eb2bb-f5b7-4488-82c4-b1607f43ba80"/>
 				</reportElement>
 				<box>
@@ -304,7 +304,7 @@
 				<textFieldExpression><![CDATA[$F{size}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="361" y="0" width="58" height="25" uuid="76e92ca1-9808-4d3e-991d-041874116a99">
+				<reportElement style="Detail" positionType="Float" x="361" y="-1" width="58" height="26" uuid="76e92ca1-9808-4d3e-991d-041874116a99">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9e3eb2bb-f5b7-4488-82c4-b1607f43ba80"/>
 				</reportElement>
 				<box>
@@ -319,7 +319,7 @@
 				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="419" y="0" width="70" height="25" uuid="434b51b8-844d-43ec-b896-c71a5296e7b6">
+				<reportElement style="Detail" positionType="Float" x="419" y="-1" width="70" height="26" uuid="434b51b8-844d-43ec-b896-c71a5296e7b6">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9e3eb2bb-f5b7-4488-82c4-b1607f43ba80"/>
 				</reportElement>
 				<box>
@@ -334,7 +334,7 @@
 				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="489" y="0" width="66" height="25" uuid="315b1b80-5647-4dea-85fd-59ed69de363d">
+				<reportElement style="Detail" positionType="Float" x="489" y="-1" width="66" height="26" uuid="315b1b80-5647-4dea-85fd-59ed69de363d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9e3eb2bb-f5b7-4488-82c4-b1607f43ba80"/>
 				</reportElement>
 				<box>

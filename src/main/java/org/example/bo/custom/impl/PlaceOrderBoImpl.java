@@ -184,4 +184,9 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
         JasperExportManager.exportReportToPdfFile(jasperPrint, savePath);
 
     }
+
+    public ObservableList<OrderHasItem> getAllOrderedProductsByEmpId(String id) {
+        List<String> orderIdList = orderDao.getOrderIdsByEmpId(id);
+        return placeOrderDao.getProductIdsByOrderIds(orderIdList);
+    }
 }
