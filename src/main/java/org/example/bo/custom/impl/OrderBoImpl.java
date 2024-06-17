@@ -7,6 +7,9 @@ import org.example.dao.custom.impl.OrderDaoImpl;
 import org.example.entity.OrderEntity;
 import org.example.model.Order;
 import org.example.util.DaoType;
+
+import java.util.List;
+
 public class OrderBoImpl implements OrderBo {
 
     OrderDaoImpl orderDaoImpl = DaoFactory.getInstance().getDao(DaoType.ORDER);
@@ -24,5 +27,13 @@ public class OrderBoImpl implements OrderBo {
 
     public boolean deleteOrderById(String id) {
         return orderDaoImpl.delete(id);
+    }
+
+    public List<Long> getOrderCount() {
+        return orderDaoImpl.getOrderCount();
+    }
+
+    public List<String> getEmpIds() {
+        return orderDaoImpl.getEmpIds();
     }
 }

@@ -12,20 +12,21 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.impl.CustomerBoImpl;
 import org.example.bo.custom.impl.OrderBoImpl;
 import org.example.bo.custom.impl.PlaceOrderBoImpl;
-import org.example.model.Customer;
-import org.example.model.Order;
-import org.example.model.OrderHasItem;
-import org.example.model.Product;
+import org.example.model.*;
 import org.example.util.BoType;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -108,6 +109,39 @@ public class ViewOrderFormController implements Initializable {
         reportViewBtn.setDisable(true);
 
         cartTable.setItems(placeOrderBo.getAllOrderedProducts());
+
+        List<Long> orderCount = orderBo.getOrderCount();
+        List<String> empIds = orderBo.getEmpIds();
+
+        String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\EmpOrderChart.jrxml";
+
+        JasperReport report = null;
+        try {
+            report = JasperCompileManager.compileReport(path);
+            String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\orderReport\\BestEmployeeReport.pdf";
+
+            List<EmployeeProgress> list = new ArrayList<EmployeeProgress>();
+
+            orderCount.forEach(count -> {
+                EmployeeProgress employeeProgress = new EmployeeProgress();
+                employeeProgress.setCount(count);
+                list.add(employeeProgress);
+            });
+
+            empIds.forEach(id -> {
+                int index = empIds.indexOf(id);
+                EmployeeProgress employeeProgress = list.get(index);
+                employeeProgress.setId(id);
+                list.set(index,employeeProgress);
+            });
+
+
+            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(report,null,dataSource);
+            JasperExportManager.exportReportToPdfFile(jasperPrint,savePath);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
     @FXML
     void closeBtnAction(MouseEvent event) {
@@ -220,5 +254,19 @@ public class ViewOrderFormController implements Initializable {
             new Alert(Alert.AlertType.ERROR,"Report Not Found..!!!").show();
         }
 
+    }
+
+    public void bestEmpViewOnAction(ActionEvent actionEvent) throws IOException {
+        File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\orderReport\\BestEmployeeReport.pdf");
+
+        if (file.exists()){
+            if (Desktop.isDesktopSupported()){
+                Desktop.getDesktop().open(file);
+            }else {
+
+            }
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Report Not Found..!!!").show();
+        }
     }
 }

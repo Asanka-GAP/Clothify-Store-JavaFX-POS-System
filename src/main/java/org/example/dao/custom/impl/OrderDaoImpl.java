@@ -97,4 +97,18 @@ public class OrderDaoImpl implements OrderDao {
         session.close();
         return list;
     }
+
+    public List<Long> getOrderCount(){
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        List<Long> list = session.createQuery("SELECT COUNT(*) FROM order_table GROUP BY empId").list();
+        return list;
+    }
+
+    public List<String> getEmpIds(){
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        List<String> list = session.createQuery("SELECT empId FROM order_table GROUP BY empId").list();
+        return list;
+    }
 }

@@ -196,3 +196,5 @@ o
 ?src/main/java/org/example/controller/LandingPageController.java,c\8\c82fa190683445c22d92394a57d5efbaa66968f7
 c
 3src/main/java/org/example/model/ProductSummary.java,9\5\95e109b9ca68e2cdc9764d542dabe4fe567b8b93
+e
+5src/main/java/org/example/model/EmployeeProgress.java,c\3\c33e8caedc9343007f6c28b2d09bcc88b580f68a
