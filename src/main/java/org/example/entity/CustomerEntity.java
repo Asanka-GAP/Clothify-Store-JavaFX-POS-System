@@ -22,4 +22,5 @@ public class CustomerEntity {
     private String name;
     private String email;
     private String address;
+    private String empId;
 }

@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 
 public class ViewCustomerFormController implements Initializable {
 
+    public TableColumn empIdCol;
     @FXML
     private TableColumn<?, ?> cusAddressCol;
 
@@ -125,6 +126,7 @@ public class ViewCustomerFormController implements Initializable {
         cusNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         cusEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         cusAddressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+        empIdCol.setCellValueFactory(new PropertyValueFactory<>("empId"));
 
         customerTable.setItems(customerBoImpl.getAllCustomer());
         cusIdTxt.setText("");

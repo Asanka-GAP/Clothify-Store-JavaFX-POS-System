@@ -55,8 +55,8 @@ public class CustomerBoImpl implements CustomerBo {
         return new ObjectMapper().convertValue(customerEntity, Customer.class);
     }
 
-    public ObservableList<String> getAllCustomerIds() {
-        ObservableList<CustomerEntity> customerEntities = customerDaoImpl.searchAll();
+    public ObservableList<String> getAllCustomerIds(String id) {
+        ObservableList<CustomerEntity> customerEntities = customerDaoImpl.searchAllByEmpId(id);
         ObservableList<String> idList = FXCollections.observableArrayList();
 
         customerEntities.forEach(customerEntity -> {
@@ -71,5 +71,23 @@ public class CustomerBoImpl implements CustomerBo {
 
     public boolean deleteCustomerById(String id) {
         return customerDaoImpl.delete(id);
+    }
+
+    public ObservableList<Customer> getAllCustomerByEmpId(String id) {
+        ObservableList<CustomerEntity> customerEntities = customerDaoImpl.getCustomersByEmpId(id);
+        ObservableList<Customer> customers = FXCollections.observableArrayList();
+        customerEntities.forEach(customerEntity -> {
+            customers.add(new ObjectMapper().convertValue(customerEntity, Customer.class));
+        });
+        return customers;
+    }
+
+    public ObservableList<String> getAllCustomerId() {
+        ObservableList<CustomerEntity> customerEntities = customerDaoImpl.searchAll();
+        ObservableList<String> idList = FXCollections.observableArrayList();
+        customerEntities.forEach(customerEntity -> {
+            idList.add(customerEntity.getId());
+        });
+        return idList;
     }
 }

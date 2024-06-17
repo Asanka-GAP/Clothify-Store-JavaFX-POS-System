@@ -335,7 +335,7 @@ public class PlaceOrderFormController implements Initializable {
         errorMsgtxt.setVisible(false);
         isCustomerSelect = false;
         isProductSelect = false;
-        cusIdComboBox.setItems(customerBoImpl.getAllCustomerIds());
+        cusIdComboBox.setItems(customerBoImpl.getAllCustomerId());
         proIdComboBox.setItems(placeOrderBoImpl.getProductIds());
         cusEmailTxt.setDisable(true);
         cusAddressTxt.setDisable(true);
@@ -421,12 +421,16 @@ public class PlaceOrderFormController implements Initializable {
     }
 
     public void tableMouseClickedAction(MouseEvent mouseEvent) {
-         index = cartTable.getSelectionModel().getSelectedIndex();
+        try {
+            index = cartTable.getSelectionModel().getSelectedIndex();
 
-        selectdColPID = productNameCol.getCellData(index).toString();
-        seletedRowQty = (int) qtyCol.getCellData(index);
-         isRowSelect = true;
-        if(index < 0){
+            selectdColPID = productNameCol.getCellData(index).toString();
+            seletedRowQty = (int) qtyCol.getCellData(index);
+            isRowSelect = true;
+            if (index < 0) {
+                return;
+            }
+        }catch (Exception e){
             return;
         }
     }

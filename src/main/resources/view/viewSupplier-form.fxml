@@ -137,12 +137,13 @@
             <Font name="Century Gothic" size="15.0" />
          </font>
       </Text>
-      <TableView fx:id="supplierTable" layoutX="263.0" layoutY="41.0" onMouseClicked="#tableMouseClickedOnAction" prefHeight="244.0" prefWidth="563.0">
+      <TableView fx:id="supplierTable" layoutX="277.0" layoutY="41.0" onMouseClicked="#tableMouseClickedOnAction" prefHeight="244.0" prefWidth="521.0">
          <columns>
-            <TableColumn fx:id="supIdCol" prefWidth="107.20001220703125" text="ID" />
-            <TableColumn fx:id="supNameCol" prefWidth="124.79998779296875" text="Name" />
-            <TableColumn fx:id="supEmailCol" prefWidth="178.4000244140625" text="Email Address" />
-            <TableColumn fx:id="supCompanyCol" minWidth="0.0" prefWidth="152.0" text="Company" />
+            <TableColumn fx:id="supIdCol" text="ID" />
+            <TableColumn fx:id="supNameCol" prefWidth="117.5999755859375" text="Name" />
+            <TableColumn fx:id="supEmailCol" prefWidth="154.39996337890625" text="Email Address" />
+            <TableColumn fx:id="supCompanyCol" minWidth="0.0" prefWidth="119.20001220703125" text="Company" />
+            <TableColumn fx:id="empIdCol" minWidth="0.0" prefWidth="92.0" text="Emp Id" />
          </columns>
       </TableView>
       <JFXButton fx:id="reportViewBtn" layoutX="701.0" layoutY="291.0" onAction="#reportViewOnAction" prefHeight="27.0" prefWidth="125.0" style="-fx-border-color: #000; -fx-border-radius: 0; -fx-background-color: #09203f;" text="View Report" textFill="WHITE">

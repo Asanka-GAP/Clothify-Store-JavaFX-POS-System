@@ -1,9 +1,11 @@
 package org.example.dao.custom.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.dao.custom.SupplierDao;
 import org.example.entity.SupplierEntity;
+import org.example.model.Supplier;
 import org.example.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -88,5 +90,20 @@ public class SupplierDaoImpl implements SupplierDao {
             idList.add(s);
         });
         return idList;
+    }
+
+    public ObservableList<Supplier> getAllSupplierByEId(String id) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("FROM supplier WHERE empId=:id");
+        query.setParameter("id",id);
+        List<SupplierEntity> list = query.list();
+        session.close();
+        ObservableList<Supplier> supplierEntityList = FXCollections.observableArrayList();
+
+        list.forEach(supplierEntity -> {
+            supplierEntityList.add(new ObjectMapper().convertValue(supplierEntity, Supplier.class));
+        });
+        return supplierEntityList;
     }
 }

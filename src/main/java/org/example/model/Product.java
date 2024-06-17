@@ -25,5 +25,6 @@ public class Product {
     private String image;
     private double price;
     private String supId;
+    private String empId;
 
 }

@@ -58,4 +58,8 @@ public class SupplierBoImpl implements SupplierBo {
 
         return supplierDao.getAllIds();
     }
+
+    public ObservableList<Supplier> getAllSuppliersByEmpId(String id) {
+        return supplierDao.getAllSupplierByEId(id);
+    }
 }

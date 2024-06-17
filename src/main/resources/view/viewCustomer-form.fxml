@@ -99,10 +99,11 @@
       </Text>
       <TableView fx:id="customerTable" layoutX="263.0" layoutY="61.0" onMouseClicked="#mouseAction" prefHeight="244.0" prefWidth="563.0">
          <columns>
-            <TableColumn fx:id="cusIdCol" prefWidth="107.20001220703125" text="ID" />
-            <TableColumn fx:id="cusNameCol" prefWidth="124.79998779296875" text="Name" />
-            <TableColumn fx:id="cusEmailCol" prefWidth="178.4000244140625" text="Email Address" />
-            <TableColumn fx:id="cusAddressCol" minWidth="0.0" prefWidth="152.0" text="Address" />
+            <TableColumn fx:id="cusIdCol" prefWidth="74.39996337890625" text="ID" />
+            <TableColumn fx:id="cusNameCol" prefWidth="120.0" text="Name" />
+            <TableColumn fx:id="cusEmailCol" prefWidth="173.5999755859375" text="Email Address" />
+            <TableColumn fx:id="cusAddressCol" minWidth="0.0" prefWidth="119.20001220703125" text="Address" />
+            <TableColumn fx:id="empIdCol" minWidth="0.0" prefWidth="73.60009765625" text="Emp Id" />
          </columns>
       </TableView>
       <Text layoutX="263.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Id :">
@@ -130,7 +131,7 @@
             <Font name="Century Gothic" size="15.0" />
          </font>
       </Text>
-      <Text fx:id="cusEmailTxt" fill="#001aff" layoutX="554.0" layoutY="416.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="180.8056640625001">
+      <Text fx:id="cusEmailTxt" fill="#001aff" layoutX="554.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="283.2056884765626">
          <font>
             <Font name="Century Gothic" size="15.0" />
          </font>

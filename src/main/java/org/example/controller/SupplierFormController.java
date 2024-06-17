@@ -90,6 +90,7 @@ public class SupplierFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        String id = EmployeeData.getInstance().getId();
         isAction =false;
         isRowSelect = false;
         updateBtn.setVisible(false);
@@ -103,7 +104,7 @@ public class SupplierFormController implements Initializable {
         supEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         supCompanyCol.setCellValueFactory(new PropertyValueFactory<>("company"));
 
-        supplierTable.setItems(supllierBo.getAllSuppliers());
+        supplierTable.setItems(supllierBo.getAllSuppliersByEmpId(id));
     }
 
     @FXML
@@ -139,7 +140,9 @@ public class SupplierFormController implements Initializable {
             String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\supplierReport\\"+supIdTxt.getText()+".pdf";
             JasperExportManager.exportReportToPdfFile(jasperPrint,savePath);
 
-            Supplier supplier = new Supplier(supIdTxt.getText(),supNametxt.getText(),supEmailtxt.getText(),supCompanytxt.getText());
+            String id1 = EmployeeData.getInstance().getId();
+
+            Supplier supplier = new Supplier(supIdTxt.getText(),supNametxt.getText(),supEmailtxt.getText(),supCompanytxt.getText(),id1);
             boolean isAdded = supllierBo.addSupplier(supplier);
 
             if (isAdded) {
@@ -187,6 +190,7 @@ public class SupplierFormController implements Initializable {
                 boolean isDeleted = supllierBo.deleteSupplierById(selectedSupId);
 
                 if (isDeleted){
+                    String id = EmployeeData.getInstance().getId();
                     Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                     alert1.setTitle("Supplier deleted");
                     alert1.setContentText("Supplier Deleted Successfully");
@@ -195,7 +199,7 @@ public class SupplierFormController implements Initializable {
                     supNametxt.setText("");
                     supEmailtxt.setText("");
                     supCompanytxt.setText("");
-                    supplierTable.setItems(supllierBo.getAllSuppliers());
+                    supplierTable.setItems(supllierBo.getAllSuppliersByEmpId(id));
                 }
 
             }
@@ -248,7 +252,8 @@ public class SupplierFormController implements Initializable {
     public void updateBtnAction(ActionEvent actionEvent) {
 
         if (isRowSelect && !supNametxt.getText().equals("") && !supCompanytxt.getText().equals("") && !supEmailtxt.equals("")){
-            Supplier supplier = new Supplier(supIdTxt.getText(),supNametxt.getText(),supEmailtxt.getText(),supCompanytxt.getText());
+            String id = EmployeeData.getInstance().getId();
+            Supplier supplier = new Supplier(supIdTxt.getText(),supNametxt.getText(),supEmailtxt.getText(),supCompanytxt.getText(),id);
             boolean isUpdate = supllierBo.updateSupplier(supplier);
 
             if (isUpdate){
@@ -260,7 +265,7 @@ public class SupplierFormController implements Initializable {
                 supNametxt.setText("");
                 supEmailtxt.setText("");
                 supCompanytxt.setText("");
-                supplierTable.setItems(supllierBo.getAllSuppliers());
+                supplierTable.setItems(supllierBo.getAllSuppliersByEmpId(id));
             }
         }else {
             new Alert(Alert.AlertType.WARNING,"Please select the row if you wanna update");

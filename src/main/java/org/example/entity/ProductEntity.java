@@ -29,4 +29,5 @@ public class ProductEntity {
     private double price;
     @Column(name = "supId")
     private String supId;
+    private String empId;
 }

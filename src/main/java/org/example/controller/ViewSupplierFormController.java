@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
 
 public class ViewSupplierFormController implements Initializable {
 
+    public TableColumn empIdCol;
     @FXML
     private Text companyTxt;
 
@@ -153,6 +154,7 @@ public class ViewSupplierFormController implements Initializable {
         supNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         supEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         supCompanyCol.setCellValueFactory(new PropertyValueFactory<>("company"));
+        empIdCol.setCellValueFactory(new PropertyValueFactory<>("empId"));
 
         supplierTable.setItems(supplierBo.getAllSuppliers());
 

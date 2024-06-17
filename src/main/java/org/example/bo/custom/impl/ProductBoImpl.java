@@ -103,4 +103,12 @@ public class ProductBoImpl implements ProductBo {
         return Base64.getEncoder().encodeToString(data);
     }
 
+    public ObservableList<Product> getAllProductsByEmpId(String id) {
+        ObservableList<ProductEntity> productEntities = productDaoImpl.getProductByEmpId(id);
+        ObservableList<Product> products = FXCollections.observableArrayList();
+        productEntities.forEach(productEntity -> {
+            products.add(new ObjectMapper().convertValue(productEntity, Product.class));
+        });
+        return products;
+    }
 }

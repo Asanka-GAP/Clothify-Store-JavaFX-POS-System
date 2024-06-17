@@ -26,6 +26,7 @@ import net.sf.jasperreports.engine.*;
 import org.example.bo.custom.impl.ProductBoImpl;
 import org.example.bo.custom.impl.SupplierBoImpl;
 import org.example.model.Customer;
+import org.example.model.EmployeeProgress;
 import org.example.model.Product;
 
 import javax.swing.*;
@@ -123,7 +124,8 @@ public class ProductFormController implements Initializable {
     void addProductOnAction(ActionEvent event) throws Exception {
 
             if (isSupplierSelect && isPriceValid && !productNameTxt.getText().equals("") && !qtyTxt.getText().equals("") && !sizeTxt.getText().equals("") && image != null) {
-                Product product = new Product(proIdTxt.getText(), productNameTxt.getText(), Integer.parseInt(sizeTxt.getText()), Integer.parseInt(qtyTxt.getText()), category,productBoImpl.encodeImage(image),Double.parseDouble(priceTxt.getText()),supplierId);
+                String id = EmployeeData.getInstance().getId();
+                Product product = new Product(proIdTxt.getText(), productNameTxt.getText(), Integer.parseInt(sizeTxt.getText()), Integer.parseInt(qtyTxt.getText()), category,productBoImpl.encodeImage(image),Double.parseDouble(priceTxt.getText()),supplierId,id);
                 boolean isAdd ;
                 try {
                     isAdd = productBoImpl.addProduct(product);
@@ -142,7 +144,7 @@ public class ProductFormController implements Initializable {
                     qtyTxt.setText("");
                     sizeTxt.setText("");
                     priceTxt.setText("");
-                    productTable.setItems(productBoImpl.getAllProducts());
+                    productTable.setItems(productBoImpl.getAllProductsByEmpId(id));
                     isSupplierSelect = false;
                 }
             } else {
@@ -189,7 +191,8 @@ public class ProductFormController implements Initializable {
                     qtyTxt.setText("");
                     sizeTxt.setText("");
                     priceTxt.setText("");
-                    productTable.setItems(productBoImpl.getAllProducts());
+                    String id = EmployeeData.getInstance().getId();
+                    productTable.setItems(productBoImpl.getAllProductsByEmpId(id));
                     image = null;
                 }
             }
@@ -289,7 +292,8 @@ public class ProductFormController implements Initializable {
     void updateOnAction(ActionEvent event) throws Exception {
 
         if (isSupplierSelect && isCategorySelect && isPriceValid && isMouseClick && !productNameTxt.getText().equals("") && !qtyTxt.getText().equals("") && !sizeTxt.getText().equals("") && image!=null){
-            Product product = new Product(proIdTxt.getText(),productNameTxt.getText(),Integer.parseInt(sizeTxt.getText()),Integer.parseInt(qtyTxt.getText()),category,productBoImpl.encodeImage(image),Double.parseDouble(priceTxt.getText()),supplierId);
+            String id = EmployeeData.getInstance().getId();
+            Product product = new Product(proIdTxt.getText(),productNameTxt.getText(),Integer.parseInt(sizeTxt.getText()),Integer.parseInt(qtyTxt.getText()),category,productBoImpl.encodeImage(image),Double.parseDouble(priceTxt.getText()),supplierId,id);
             boolean isUpdate = productBoImpl.updateProduct(product);
 
             if (isUpdate){
@@ -301,7 +305,7 @@ public class ProductFormController implements Initializable {
                 productNameTxt.setText("");
                 qtyTxt.setText("");
                 sizeTxt.setText("");
-                productTable.setItems(productBoImpl.getAllProducts());
+                productTable.setItems(productBoImpl.getAllProductsByEmpId(id));
                 image = null;
             }
         }else {
@@ -327,6 +331,7 @@ public class ProductFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         supplierIdComboBox.setItems(new SupplierBoImpl().getAllSupplierIds());
+        String id = EmployeeData.getInstance().getId();
 
         isSupplierSelect = false;
         isPriceValid = false;
@@ -357,7 +362,7 @@ public class ProductFormController implements Initializable {
         proSizeCol.setCellValueFactory(new PropertyValueFactory<>("size"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        productTable.setItems(productBoImpl.getAllProducts());
+        productTable.setItems(productBoImpl.getAllProductsByEmpId(id));
     }
 
     public void sizeKeyReleased(KeyEvent keyEvent) {

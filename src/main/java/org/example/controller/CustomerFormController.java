@@ -95,7 +95,9 @@ public class CustomerFormController implements Initializable {
         cusEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         cusAddressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
 
-        customerTable.setItems(customerBoImpl.getAllCustomer());
+        String id = EmployeeData.getInstance().getId();
+
+        customerTable.setItems(customerBoImpl.getAllCustomerByEmpId(id));
 
         cusIdComboBox.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue) -> {
             Customer user = customerBoImpl.getUserById((String) newValue);
@@ -117,13 +119,15 @@ public class CustomerFormController implements Initializable {
         cusIdComboBox.setVisible(true);
         deleteBtn.setVisible(true);
         updateCusBtn.setVisible(true);
-        cusIdComboBox.setItems(customerBoImpl.getAllCustomerIds());
+        String id = EmployeeData.getInstance().getId();
+        cusIdComboBox.setItems(customerBoImpl.getAllCustomerIds(id));
     }
 
     @FXML
     void addCusOnAction(ActionEvent event) {
         if (!cusAddressTxt.getText().equals("") && !cusEmailTxt.getText().equals("") && !cusNameTxt.getText().equals("")){
-            Customer customer = new Customer(cusIdTxt.getText(), cusNameTxt.getText(), cusEmailTxt.getText(), cusAddressTxt.getText());
+            String id = EmployeeData.getInstance().getId();
+            Customer customer = new Customer(cusIdTxt.getText(), cusNameTxt.getText(), cusEmailTxt.getText(), cusAddressTxt.getText(),id);
 
             boolean isAdd = customerBoImpl.insertCustomer(customer);
 
@@ -136,7 +140,7 @@ public class CustomerFormController implements Initializable {
                 cusAddressTxt.setText("");
                 cusEmailTxt.setText("");
                 cusNameTxt.setText("");
-                customerTable.setItems(customerBoImpl.getAllCustomer());
+                customerTable.setItems(customerBoImpl.getAllCustomerByEmpId(id));
             }
         }
     }
@@ -173,8 +177,9 @@ public class CustomerFormController implements Initializable {
                     cusAddressTxt.setText("");
                     cusEmailTxt.setText("");
                     alert2.showAndWait();
-                    customerTable.setItems(customerBoImpl.getAllCustomer());
-                    cusIdComboBox.setItems(customerBoImpl.getAllCustomerIds());
+                    String id = EmployeeData.getInstance().getId();
+                    customerTable.setItems(customerBoImpl.getAllCustomerByEmpId(id));
+                    cusIdComboBox.setItems(customerBoImpl.getAllCustomerIds(id));
 
                 }
             }
@@ -251,7 +256,8 @@ public class CustomerFormController implements Initializable {
     @FXML
     void updateCusOnAction(ActionEvent event) {
         if (!cusEmailTxt.getText().equals("") && !cusAddressTxt.getText().equals("") && !cusNameTxt.getText().equals("")){
-            Customer customer = new Customer(selectedId,cusNameTxt.getText(),cusEmailTxt.getText(),cusAddressTxt.getText());
+            String id = EmployeeData.getInstance().getId();
+            Customer customer = new Customer(selectedId,cusNameTxt.getText(),cusEmailTxt.getText(),cusAddressTxt.getText(),id);
             boolean isUpdated = customerBoImpl.updateCustomer(customer);
             if (isUpdated){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -261,7 +267,7 @@ public class CustomerFormController implements Initializable {
                 cusEmailTxt.setText("");
                 cusAddressTxt.setText("");
                 cusNameTxt.setText("");
-                customerTable.setItems(customerBoImpl.getAllCustomer());
+                customerTable.setItems(customerBoImpl.getAllCustomerByEmpId(id));
             }
         }else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

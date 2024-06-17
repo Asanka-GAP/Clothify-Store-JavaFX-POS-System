@@ -2,7 +2,6 @@ package org.example.dao.custom.impl;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.example.bo.BoFactory;
 import org.example.dao.custom.CustomerDao;
 import org.example.entity.CustomerEntity;
 import org.example.util.HibernateUtil;
@@ -90,5 +89,37 @@ public class CustomerDaoImpl implements CustomerDao {
 
         session.close();
         return id;
+    }
+
+    public ObservableList<CustomerEntity> getCustomersByEmpId(String id) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("FROM customer WHERE empId=:id");
+        query.setParameter("id",id);
+        List<CustomerEntity> list = query.list();
+        session.close();
+
+        ObservableList<CustomerEntity> customerEntityList =FXCollections.observableArrayList();
+
+        list.forEach(customerEntity -> {
+            customerEntityList.add(customerEntity);
+        });
+        return customerEntityList;
+    }
+
+    public ObservableList<CustomerEntity> searchAllByEmpId(String id) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("FROM customer WHERE empId=:id");
+        query.setParameter("id",id);
+        List<CustomerEntity> list = query.list();
+        session.close();
+
+        ObservableList<CustomerEntity> customerEntityList =FXCollections.observableArrayList();
+
+        list.forEach(customerEntity -> {
+            customerEntityList.add(customerEntity);
+        });
+        return customerEntityList;
     }
 }
