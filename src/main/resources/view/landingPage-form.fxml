@@ -73,7 +73,7 @@
             </LinearGradient>
          </fill>
       </Text>
-      <JFXButton layoutX="345.0" layoutY="335.0" onAction="#exploreBtnOnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #fff; -fx-border-radius: 20;" text="Explore" textFill="WHITE">
+      <JFXButton layoutX="251.0" layoutY="335.0" onAction="#exploreBtnOnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #fff; -fx-border-radius: 20;" text="Explore" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -86,5 +86,13 @@
             <Cursor fx:constant="CLOSED_HAND" />
          </cursor>
       </Text>
+      <JFXButton layoutX="436.0" layoutY="335.0" onAction="#visitStoreBtnOnAction" prefHeight="44.0" prefWidth="160.0" style="-fx-border-color: #fff; -fx-border-radius: 20; -fx-background-color: #fff;" text="Visit Store">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

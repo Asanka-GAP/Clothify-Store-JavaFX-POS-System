@@ -54,4 +54,8 @@ public class LandingPageController implements Initializable {
             System.exit(0);
         }
     }
+
+    public void visitStoreBtnOnAction(ActionEvent actionEvent) throws IOException {
+        SceneSwitchController.getInstance().switchScene(landingWindow,"imageWall-form.fxml");
+    }
 }

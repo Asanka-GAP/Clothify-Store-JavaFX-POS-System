@@ -54,6 +54,7 @@ public class DashBoardController implements Initializable {
     public Text titleTxt;
     public FontAwesomeIconView mainCartIcon;
     public Text mainTitle;
+    public JFXButton visitStoreBtn;
 
     private int otp;
 
@@ -115,6 +116,7 @@ public class DashBoardController implements Initializable {
         resetPasswordField(true);
         emailField2.setText(emailField.getText());
         emailField2.setDisable(true);
+        visitStoreBtn.setVisible(false);
 
     }
 
@@ -122,6 +124,7 @@ public class DashBoardController implements Initializable {
         errormsg.setVisible(false);
         validmsg.setVisible(false);
         resetPasswordField(false);
+        visitStoreBtn.setVisible(true);
     }
 
     public void otpBtnAction(ActionEvent actionEvent) {
@@ -214,5 +217,9 @@ public class DashBoardController implements Initializable {
         if (result.get() == ButtonType.OK){
             System.exit(0);
         }
+    }
+
+    public void visitStoreOnAction(ActionEvent actionEvent) throws IOException {
+        SceneSwitchController.getInstance().switchScene(dashboardWindow,"imageWall-form.fxml");
     }
 }
