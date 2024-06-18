@@ -125,9 +125,14 @@ public class CustomerFormController implements Initializable {
 
     @FXML
     void addCusOnAction(ActionEvent event) {
-        if (!cusAddressTxt.getText().equals("") && !cusEmailTxt.getText().equals("") && !cusNameTxt.getText().equals("")){
+        if (!cusAddressTxt.getText().equals("") && !cusEmailTxt.getText().equals("")
+                && !cusNameTxt.getText().equals("")){
             String id = EmployeeData.getInstance().getId();
-            Customer customer = new Customer(cusIdTxt.getText(), cusNameTxt.getText(), cusEmailTxt.getText(), cusAddressTxt.getText(),id);
+            Customer customer = new Customer(cusIdTxt.getText(),
+                    cusNameTxt.getText(),
+                    cusEmailTxt.getText(),
+                    cusAddressTxt.getText(),
+                    id);
 
             boolean isAdd = customerBoImpl.insertCustomer(customer);
 
@@ -255,9 +260,14 @@ public class CustomerFormController implements Initializable {
 
     @FXML
     void updateCusOnAction(ActionEvent event) {
-        if (!cusEmailTxt.getText().equals("") && !cusAddressTxt.getText().equals("") && !cusNameTxt.getText().equals("")){
+        if (!cusEmailTxt.getText().equals("") && !cusAddressTxt.getText().equals("")
+                && !cusNameTxt.getText().equals("")){
             String id = EmployeeData.getInstance().getId();
-            Customer customer = new Customer(selectedId,cusNameTxt.getText(),cusEmailTxt.getText(),cusAddressTxt.getText(),id);
+            Customer customer = new Customer(selectedId,
+                    cusNameTxt.getText(),
+                    cusEmailTxt.getText(),
+                    cusAddressTxt.getText(),
+                    id);
             boolean isUpdated = customerBoImpl.updateCustomer(customer);
             if (isUpdated){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

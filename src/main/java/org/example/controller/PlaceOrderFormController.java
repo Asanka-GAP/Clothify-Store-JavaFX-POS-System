@@ -142,7 +142,11 @@ public class PlaceOrderFormController implements Initializable {
                         newQty += qty;
                         amount += totalAmount;
 
-                        OrderHasItem updateOrderHasItem = new OrderHasItem(orderHasItem.getId(), cusNameTxt.getText(), pId.getText(), newQty, amount);
+                        OrderHasItem updateOrderHasItem = new OrderHasItem(orderHasItem.getId(),
+                                cusNameTxt.getText(),
+                                pId.getText(),
+                                newQty,
+                                amount);
 
                         cartList.set(i, updateOrderHasItem);
                         isAlreadyAdd = true;
@@ -150,7 +154,12 @@ public class PlaceOrderFormController implements Initializable {
                     }
                 }
                 if (!isAlreadyAdd) {
-                    OrderHasItem cart = new OrderHasItem(cid++, cusNameTxt.getText(), pId.getText(), qty, totalAmount);
+                    OrderHasItem cart = new OrderHasItem(cid++,
+                            cusNameTxt.getText(),
+                            pId.getText(),
+                            qty,
+                            totalAmount);
+
                     cartList.add(cart);
                 }
                 cartTable.setItems(cartList);
@@ -209,7 +218,8 @@ public class PlaceOrderFormController implements Initializable {
     void placeOrderOnAction(MouseEvent event) throws JRException, MessagingException {
 
 
-        String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\invoice_1.jrxml";
+        String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                "\\src\\main\\resources\\report\\invoice_1.jrxml";
 
         Map<String,Object> parameters = new HashMap();
 
@@ -220,9 +230,15 @@ public class PlaceOrderFormController implements Initializable {
 
         Date date = new Date();
         String id = EmployeeData.getInstance().getId();
-        Order order = new Order(orderIdtxt.getText(),customerId,"Pending",date,Double.parseDouble(totalTxt.getText()),id);
+        Order order = new Order(orderIdtxt.getText(),
+                customerId,
+                "Pending",
+                date,
+                Double.parseDouble(totalTxt.getText()),
+                id);
 
-        String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\orderReport\\"+orderIdtxt.getText()+".pdf";
+        String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                "\\src\\main\\resources\\reportPdf\\orderReport\\"+orderIdtxt.getText()+".pdf";
 
         Customer customer = customerBoImpl.getUserById(customerId);
         parameters.put("cusId",customerId);
@@ -248,12 +264,20 @@ public class PlaceOrderFormController implements Initializable {
 
             Product product1 = placeOrderBoImpl.getProductById(orderHasItem.getProductId());
 
-             Cart cart = new Cart(invoiceCid++,product1.getId(),product1.getName(),orderHasItem.getQty(),orderHasItem.getAmount());
+             Cart cart = new Cart(invoiceCid++,
+                     product1.getId(),
+                     product1.getName(),
+                     orderHasItem.getQty(),
+                     orderHasItem.getAmount());
 
             list.add(cart);
 
 
-            orderHasItemObservableList.add(new OrderHasItem(oid++, orderIdtxt.getText(),orderHasItem.getProductId(),orderHasItem.getQty(),orderHasItem.getAmount()));
+            orderHasItemObservableList.add(new OrderHasItem(oid++,
+                    orderIdtxt.getText(),
+                    orderHasItem.getProductId(),
+                    orderHasItem.getQty(),
+                    orderHasItem.getAmount()));
         });
 
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
@@ -454,7 +478,8 @@ public class PlaceOrderFormController implements Initializable {
 
 
     public void reportViewOnAction(ActionEvent actionEvent) throws IOException {
-        File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\orderReport\\"+orderid+".pdf");
+        File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                "\\src\\main\\resources\\reportPdf\\orderReport\\"+orderid+".pdf");
 
         if (file.exists()){
             if (Desktop.isDesktopSupported()){

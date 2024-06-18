@@ -122,7 +122,8 @@ public class SupplierFormController implements Initializable {
 
         if (!supNametxt.getText().equals("") && !supCompanytxt.getText().equals("") && !supEmailtxt.equals("")) {
 
-            String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\SReport.jrxml";
+            String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                    "\\src\\main\\resources\\report\\SReport.jrxml";
 
             Map<String,Object> parameters = new HashMap();
             StringBuffer name = new StringBuffer(supNametxt.getText());
@@ -137,12 +138,17 @@ public class SupplierFormController implements Initializable {
             JasperReport report = JasperCompileManager.compileReport(path);
             JasperPrint jasperPrint = JasperFillManager.fillReport(report,parameters);
 
-            String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\supplierReport\\"+supIdTxt.getText()+".pdf";
+            String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                    "\\src\\main\\resources\\reportPdf\\supplierReport\\"+supIdTxt.getText()+".pdf";
             JasperExportManager.exportReportToPdfFile(jasperPrint,savePath);
 
             String id1 = EmployeeData.getInstance().getId();
 
-            Supplier supplier = new Supplier(supIdTxt.getText(),supNametxt.getText(),supEmailtxt.getText(),supCompanytxt.getText(),id1);
+            Supplier supplier = new Supplier(supIdTxt.getText(),
+                    supNametxt.getText(),
+                    supEmailtxt.getText(),
+                    supCompanytxt.getText(),
+                    id1);
             boolean isAdded = supllierBo.addSupplier(supplier);
 
             if (isAdded) {
@@ -251,9 +257,14 @@ public class SupplierFormController implements Initializable {
 
     public void updateBtnAction(ActionEvent actionEvent) {
 
-        if (isRowSelect && !supNametxt.getText().equals("") && !supCompanytxt.getText().equals("") && !supEmailtxt.equals("")){
+        if (isRowSelect && !supNametxt.getText().equals("")
+                && !supCompanytxt.getText().equals("") && !supEmailtxt.equals("")){
             String id = EmployeeData.getInstance().getId();
-            Supplier supplier = new Supplier(supIdTxt.getText(),supNametxt.getText(),supEmailtxt.getText(),supCompanytxt.getText(),id);
+            Supplier supplier = new Supplier(supIdTxt.getText(),
+                    supNametxt.getText(),
+                    supEmailtxt.getText(),
+                    supCompanytxt.getText(),
+                    id);
             boolean isUpdate = supllierBo.updateSupplier(supplier);
 
             if (isUpdate){

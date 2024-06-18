@@ -13,7 +13,8 @@ public class HibernateUtil {
     private static SessionFactory session = createSession();
 
     private static SessionFactory createSession() {
-        StandardServiceRegistry build = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+        StandardServiceRegistry build = new StandardServiceRegistryBuilder().
+                configure("hibernate.cfg.xml").build();
 
         Metadata metadata = new MetadataSources(build)
                 .addAnnotatedClass(UserEntity.class)

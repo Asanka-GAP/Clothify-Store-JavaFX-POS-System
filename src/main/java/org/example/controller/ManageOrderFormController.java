@@ -159,18 +159,23 @@ public class ManageOrderFormController implements Initializable {
 
                 if (count > 1) {
 
-                    boolean isIncreseQty = placeOrderBoImpl.increaseQtyOfProduct(productIdTxt.getText(), seletedRowQty);
-                    boolean isDecreaseAmount = placeOrderBoImpl.decreaseAmountByOrderId(orderIDtxt.getText(), selectedAmount);
-                    boolean isRemoveFromCart = placeOrderBoImpl.removeFromCart(orderIDtxt.getText(), productIdTxt.getText());
+                    boolean isIncreseQty = placeOrderBoImpl.increaseQtyOfProduct(productIdTxt.getText(),
+                            seletedRowQty);
+                    boolean isDecreaseAmount = placeOrderBoImpl.decreaseAmountByOrderId(orderIDtxt.getText(),
+                            selectedAmount);
+                    boolean isRemoveFromCart = placeOrderBoImpl.removeFromCart(orderIDtxt.getText(),
+                            productIdTxt.getText());
 
                     if (isIncreseQty && isDecreaseAmount && isRemoveFromCart) {
                         new Alert(Alert.AlertType.INFORMATION, "Removed Successfully").show();
 
-                        String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\invoice_1.jrxml";
+                        String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\" +
+                                "src\\main\\resources\\report\\invoice_1.jrxml";
                         Map<String, Object> parameters = new HashMap();
                         JasperReport report = JasperCompileManager.compileReport(path);
 
-                        String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\orderReport\\" + orderIDtxt.getText() + ".pdf";
+                        String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                                "\\src\\main\\resources\\reportPdf\\orderReport\\" + orderIDtxt.getText() + ".pdf";
 
                         parameters.put("cusId", cusIdTxt.getText());
                         parameters.put("cusName", cusNameTxt.getText());
@@ -186,12 +191,17 @@ public class ManageOrderFormController implements Initializable {
 
                         List<Cart> list = new ArrayList<Cart>();
 
-                        ObservableList<OrderHasItem> productIdsByOrderId = placeOrderBoImpl.getProductIdsByOrderId(orderIDtxt.getText());
+                        ObservableList<OrderHasItem> productIdsByOrderId = placeOrderBoImpl.getProductIdsByOrderId(
+                                orderIDtxt.getText());
 
                         productIdsByOrderId.forEach(orderHasItem -> {
                             Product product1 = placeOrderBoImpl.getProductById(orderHasItem.getProductId());
 
-                            Cart cart = new Cart(invoiceCid++, product1.getId(), product1.getName(), orderHasItem.getQty(), orderHasItem.getAmount());
+                            Cart cart = new Cart(invoiceCid++,
+                                    product1.getId(),
+                                    product1.getName(),
+                                    orderHasItem.getQty(),
+                                    orderHasItem.getAmount());
 
                             list.add(cart);
                         });
@@ -220,7 +230,8 @@ public class ManageOrderFormController implements Initializable {
 
                     if (type.get() == ButtonType.OK) {
 
-                        ObservableList<OrderHasItem> productIdList = placeOrderBoImpl.getProductIdsByOrderId(orderIDtxt.getText());
+                        ObservableList<OrderHasItem> productIdList = placeOrderBoImpl.getProductIdsByOrderId(
+                                orderIDtxt.getText());
 
                         boolean isUpdateQty = placeOrderBoImpl.increseQty(productIdList);
 
@@ -353,11 +364,15 @@ public class ManageOrderFormController implements Initializable {
             Optional<ButtonType> type = alert.showAndWait();
 
             if (type.get() == ButtonType.OK) {
-                boolean isUpdateQty = placeOrderBoImpl.updateNewQty(selectdColPID, Integer.parseInt(orderingQtyTxt.getText()));
+                boolean isUpdateQty = placeOrderBoImpl.updateNewQty(selectdColPID,
+                        Integer.parseInt(orderingQtyTxt.getText()));
                 double newAmount = Double.parseDouble(priceTxt.getText()) * Integer.parseInt(orderingQtyTxt.getText());
 
                 boolean isUpdateOrderAmount = placeOrderBoImpl.updateOrderAmount(orderIDtxt.getText(), newAmount);
-                boolean isUpdateCart = placeOrderBoImpl.updateCartById(selectedCartId, Integer.parseInt(orderingQtyTxt.getText()), newAmount);
+                boolean isUpdateCart = placeOrderBoImpl.updateCartById(
+                        selectedCartId,
+                        Integer.parseInt(orderingQtyTxt.getText()),
+                        newAmount);
 
                 if (isUpdateOrderAmount && isUpdateCart && isUpdateQty) {
                     cartTable.setItems(placeOrderBoImpl.getAllOrderedProducts());
@@ -367,14 +382,17 @@ public class ManageOrderFormController implements Initializable {
                     alert1.showAndWait();
                     orderingQtyTxt.setText("");
 
-                    ObservableList<OrderHasItem> allOrderedProducts = placeOrderBoImpl.getProductIdsByOrderId(orderIDtxt.getText());
+                    ObservableList<OrderHasItem> allOrderedProducts = placeOrderBoImpl.getProductIdsByOrderId(
+                            orderIDtxt.getText());
 
 
-                    String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\invoice_1.jrxml";
+                    String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                            "\\src\\main\\resources\\report\\invoice_1.jrxml";
                     Map<String, Object> parameters = new HashMap();
                     JasperReport report = JasperCompileManager.compileReport(path);
 
-                    String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\orderReport\\" + orderIDtxt.getText() + ".pdf";
+                    String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                            "\\src\\main\\resources\\reportPdf\\orderReport\\" + orderIDtxt.getText() + ".pdf";
 
                     parameters.put("cusId", cusIdTxt.getText());
                     parameters.put("cusName", cusNameTxt.getText());
@@ -393,7 +411,11 @@ public class ManageOrderFormController implements Initializable {
                     allOrderedProducts.forEach(orderHasItem -> {
                         Product product1 = placeOrderBoImpl.getProductById(orderHasItem.getProductId());
 
-                        Cart cart = new Cart(invoiceCid++, product1.getId(), product1.getName(), orderHasItem.getQty(), orderHasItem.getAmount());
+                        Cart cart = new Cart(invoiceCid++,
+                                product1.getId(),
+                                product1.getName(),
+                                orderHasItem.getQty(),
+                                orderHasItem.getAmount());
 
                         list.add(cart);
                     });
@@ -448,7 +470,8 @@ public class ManageOrderFormController implements Initializable {
 
             if (type.get() == ButtonType.OK) {
 
-                ObservableList<OrderHasItem> productIdList = placeOrderBoImpl.getProductIdsByOrderId(orderIDtxt.getText());
+                ObservableList<OrderHasItem> productIdList = placeOrderBoImpl.getProductIdsByOrderId(
+                        orderIDtxt.getText());
 
                 boolean isUpdateQty = placeOrderBoImpl.increseQty(productIdList);
 

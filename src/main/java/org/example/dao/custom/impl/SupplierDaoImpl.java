@@ -46,7 +46,8 @@ public class SupplierDaoImpl implements SupplierDao {
     public boolean update(SupplierEntity supplierEntity) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Query query = session.createQuery("UPDATE supplier SET name=:name ,email=:email ,company=:company WHERE id=:id");
+        Query query = session.createQuery("UPDATE supplier SET name=:name ," +
+                "email=:email ,company=:company WHERE id=:id");
         query.setParameter("name",supplierEntity.getName());
         query.setParameter("email",supplierEntity.getEmail());
         query.setParameter("company",supplierEntity.getCompany());

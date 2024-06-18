@@ -84,11 +84,19 @@ public class AdminDashBoardController implements Initializable {
         String encrypt = Integer.toString(p);
         String password = userBoImpl.passwordEncrypt(encrypt);
 
-        User user = new User(empIdtxt.getText(), empNametxt.getText(), empEmailtxt.getText(), password, "Employee", empAddresstxt.getText());
+        User user = new User(empIdtxt.getText(),
+                empNametxt.getText(),
+                empEmailtxt.getText(),
+                password,
+                "Employee",
+                empAddresstxt.getText());
 
-        if (!empNametxt.getText().equals("") && userBoImpl.isValidEmail(empEmailtxt.getText()) && !empAddresstxt.getText().equals("")) {
+        if (!empNametxt.getText().equals("") &&
+                userBoImpl.isValidEmail(empEmailtxt.getText()) &&
+                !empAddresstxt.getText().equals("")) {
 
-            String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\Emp_Re.jrxml";
+            String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                    "\\src\\main\\resources\\report\\Emp_Re.jrxml";
 
             Map<String,Object> parameters = new HashMap();
             StringBuffer name = new StringBuffer(user.getName());
@@ -103,7 +111,8 @@ public class AdminDashBoardController implements Initializable {
             JasperReport report = JasperCompileManager.compileReport(path);
             JasperPrint jasperPrint = JasperFillManager.fillReport(report,parameters);
 
-            String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\"+user.getId()+".pdf";
+            String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                    "\\src\\main\\resources\\reportPdf\\"+user.getId()+".pdf";
             JasperExportManager.exportReportToPdfFile(jasperPrint,savePath);
 
             boolean isInsert = userBoImpl.insertUser(user);
@@ -214,8 +223,14 @@ public class AdminDashBoardController implements Initializable {
     }
 
     public void updateEmployeeBtnAction(ActionEvent actionEvent) {
-        if (!empEmailtxt.getText().equals("") && !empAddresstxt.getText().equals("") && !empNametxt.getText().equals("")){
-            User user = new User(selectedId,empNametxt.getText(),empEmailtxt.getText(),null,null,empAddresstxt.getText());
+        if (!empEmailtxt.getText().equals("") && !empAddresstxt.getText().equals("")
+                && !empNametxt.getText().equals("")){
+            User user = new User(selectedId,
+                    empNametxt.getText(),
+                    empEmailtxt.getText(),
+                    null,
+                    null,
+                    empAddresstxt.getText());
             boolean isUpdated = userBoImpl.updateUser(user);
             if (isUpdated){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

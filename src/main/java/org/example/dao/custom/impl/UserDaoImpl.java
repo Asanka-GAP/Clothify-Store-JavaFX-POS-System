@@ -91,7 +91,8 @@ public class UserDaoImpl implements UserDao {
     public boolean update(UserEntity userEntity){
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Query query = session.createQuery("UPDATE user SET name =:name,address =:address,email =:email WHERE id =:id");
+        Query query = session.createQuery("UPDATE user " +
+                "SET name =:name,address =:address,email =:email WHERE id =:id");
         query.setParameter("name",userEntity.getName());
         query.setParameter("address",userEntity.getAddress());
         query.setParameter("email",userEntity.getEmail());

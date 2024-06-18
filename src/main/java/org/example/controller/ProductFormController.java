@@ -123,14 +123,24 @@ public class ProductFormController implements Initializable {
     @FXML
     void addProductOnAction(ActionEvent event) throws Exception {
 
-            if (isSupplierSelect && isPriceValid && !productNameTxt.getText().equals("") && !qtyTxt.getText().equals("") && !sizeTxt.getText().equals("") && image != null) {
+            if (isSupplierSelect && isPriceValid && !productNameTxt.getText().equals("")
+                    && !qtyTxt.getText().equals("") && !sizeTxt.getText().equals("") && image != null)
+            {
                 String id = EmployeeData.getInstance().getId();
-                Product product = new Product(proIdTxt.getText(), productNameTxt.getText(), Integer.parseInt(sizeTxt.getText()), Integer.parseInt(qtyTxt.getText()), category,productBoImpl.encodeImage(image),Double.parseDouble(priceTxt.getText()),supplierId,id);
+                Product product = new Product(proIdTxt.getText(),
+                        productNameTxt.getText(),
+                        Integer.parseInt(sizeTxt.getText()),
+                        Integer.parseInt(qtyTxt.getText()),
+                        category,
+                        productBoImpl.encodeImage(image),
+                        Double.parseDouble(priceTxt.getText()),
+                        supplierId,id);
                 boolean isAdd ;
                 try {
                     isAdd = productBoImpl.addProduct(product);
                 }catch (Exception e){
-                    new Alert(Alert.AlertType.WARNING,"Your image size is out of range..please try another image").show();
+                    new Alert(Alert.AlertType.WARNING,
+                            "Your image size is out of range..please try another image").show();
                     return;
                 }
                 if (isAdd) {
@@ -206,7 +216,11 @@ public class ProductFormController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Upload an Image");
         fileChooser.setInitialDirectory(new File("C:\\"));
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPEG Image","*.jpg"));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JPEG Image","*.jpg")
+                ,new FileChooser.ExtensionFilter("PNG Image","*.png")
+                ,new FileChooser.ExtensionFilter("All Images","*.jpg","*.png")
+        );
 
         File file = fileChooser.showOpenDialog(new Stage());
 
@@ -291,9 +305,19 @@ public class ProductFormController implements Initializable {
     @FXML
     void updateOnAction(ActionEvent event) throws Exception {
 
-        if (isSupplierSelect && isCategorySelect && isPriceValid && isMouseClick && !productNameTxt.getText().equals("") && !qtyTxt.getText().equals("") && !sizeTxt.getText().equals("") && image!=null){
+        if (isSupplierSelect && isCategorySelect &&
+                isPriceValid && isMouseClick &&
+                !productNameTxt.getText().equals("") && !qtyTxt.getText().equals("") &&
+                !sizeTxt.getText().equals("") && image!=null){
             String id = EmployeeData.getInstance().getId();
-            Product product = new Product(proIdTxt.getText(),productNameTxt.getText(),Integer.parseInt(sizeTxt.getText()),Integer.parseInt(qtyTxt.getText()),category,productBoImpl.encodeImage(image),Double.parseDouble(priceTxt.getText()),supplierId,id);
+            Product product = new Product(proIdTxt.getText(),
+                    productNameTxt.getText(),
+                    Integer.parseInt(sizeTxt.getText()),
+                    Integer.parseInt(qtyTxt.getText()),
+                    category,
+                    productBoImpl.encodeImage(image),
+                    Double.parseDouble(priceTxt.getText()),
+                    supplierId,id);
             boolean isUpdate = productBoImpl.updateProduct(product);
 
             if (isUpdate){

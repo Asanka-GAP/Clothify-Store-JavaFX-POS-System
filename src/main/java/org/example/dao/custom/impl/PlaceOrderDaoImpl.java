@@ -130,7 +130,8 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
     public boolean updateQtyAndAmount(int id, int qty, double newAmount) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Query query = session.createQuery("UPDATE order_has_items SET qty=qty+:qty, amount=amount+:amount WHERE id=:id");
+        Query query = session.createQuery("UPDATE order_has_items " +
+                "SET qty=qty+:qty, amount=amount+:amount WHERE id=:id");
         query.setParameter("id",id);
         query.setParameter("qty",qty);
         query.setParameter("amount",newAmount);

@@ -96,6 +96,7 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
     }
 
     public boolean updateOrderAmount(String id, double newAmount) {
+
         return orderDao.updateAmountById(id, newAmount);
     }
 
@@ -156,18 +157,22 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
     }
 
     public boolean decreaseAmountByOrderId(String id, double amount) {
+
         return orderDao.deacreseAmount(id, amount);
     }
 
     public boolean removeFromCart(String oId, String pId) {
+
         return placeOrderDao.removeItem(oId, pId);
     }
 
     public void generateProductChartReport() throws JRException {
-        String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\ProductChart.jrxml";
+        String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                "\\src\\main\\resources\\report\\ProductChart.jrxml";
         JasperReport report = JasperCompileManager.compileReport(path);
 
-        String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\productSummaryReport\\ProductChart.pdf";
+        String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                "\\src\\main\\resources\\reportPdf\\productSummaryReport\\ProductChart.pdf";
 
         List<ProductSummary> list = new ArrayList<ProductSummary>();
 

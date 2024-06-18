@@ -54,7 +54,8 @@ public class CustomerDaoImpl implements CustomerDao {
     public boolean update(CustomerEntity customerEntity){
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Query query = session.createQuery("UPDATE customer SET name =:name,address =:address,email =:email WHERE id =:id");
+        Query query = session.createQuery("UPDATE customer " +
+                "SET name =:name,address =:address,email =:email WHERE id =:id");
         query.setParameter("name",customerEntity.getName());
         query.setParameter("address",customerEntity.getAddress());
         query.setParameter("email",customerEntity.getEmail());

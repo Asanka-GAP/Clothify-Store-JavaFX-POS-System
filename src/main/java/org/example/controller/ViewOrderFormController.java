@@ -113,12 +113,14 @@ public class ViewOrderFormController implements Initializable {
         List<Long> orderCount = orderBo.getOrderCount();
         List<String> empIds = orderBo.getEmpIds();
 
-        String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\EmpOrderChart.jrxml";
+        String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                "\\src\\main\\resources\\report\\EmpOrderChart.jrxml";
 
         JasperReport report = null;
         try {
             report = JasperCompileManager.compileReport(path);
-            String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\orderReport\\BestEmployeeReport.pdf";
+            String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                    "\\src\\main\\resources\\reportPdf\\orderReport\\BestEmployeeReport.pdf";
 
             List<EmployeeProgress> list = new ArrayList<EmployeeProgress>();
 
@@ -242,7 +244,8 @@ public class ViewOrderFormController implements Initializable {
 
 
     public void reportViewOnAction(ActionEvent actionEvent) throws IOException {
-        File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\orderReport\\"+id+".pdf");
+        File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                "\\src\\main\\resources\\reportPdf\\orderReport\\"+id+".pdf");
 
         if (file.exists()){
             if (Desktop.isDesktopSupported()){
@@ -257,7 +260,8 @@ public class ViewOrderFormController implements Initializable {
     }
 
     public void bestEmpViewOnAction(ActionEvent actionEvent) throws IOException {
-        File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\orderReport\\BestEmployeeReport.pdf");
+        File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                "\\src\\main\\resources\\reportPdf\\orderReport\\BestEmployeeReport.pdf");
 
         if (file.exists()){
             if (Desktop.isDesktopSupported()){

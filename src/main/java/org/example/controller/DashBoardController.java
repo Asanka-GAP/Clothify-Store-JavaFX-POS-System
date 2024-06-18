@@ -65,7 +65,10 @@ public class DashBoardController implements Initializable {
         errormsg.setVisible(false);
         validmsg.setVisible(false);
 
-        new Alert(Alert.AlertType.INFORMATION,"If your first time to sign in to this, Please reset your password clicked forgot password button").show();
+        new Alert(Alert.AlertType.INFORMATION,
+                "If your first time to sign in to this, " +
+                        "Please reset your password clicked forgot password button")
+                .show();
 
     }
 
@@ -160,7 +163,8 @@ public class DashBoardController implements Initializable {
         try {
             if (passwordField1.getText().equals(reEnterPasswordField.getText())){
                 if (otp==Integer.parseInt(otpTextField.getText())){
-                    boolean isUpdatePassword = userBoImpl.isUpdatePassword(emailField2.getText(),passwordField1.getText());
+                    boolean isUpdatePassword = userBoImpl.isUpdatePassword(emailField2.getText(),
+                            passwordField1.getText());
                     if (isUpdatePassword){
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Reset Password");

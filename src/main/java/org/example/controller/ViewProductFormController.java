@@ -104,12 +104,14 @@ public class ViewProductFormController implements Initializable {
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         supIdCol.setCellValueFactory(new PropertyValueFactory<>("supId"));
 
-        String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\report\\ProductView.jrxml";
+        String path = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                "\\src\\main\\resources\\report\\ProductView.jrxml";
 
         JasperReport report = null;
         try {
             report = JasperCompileManager.compileReport(path);
-            String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\productSummaryReport\\ProductReport.pdf";
+            String savePath = "D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                    "\\src\\main\\resources\\reportPdf\\productSummaryReport\\ProductReport.pdf";
 
             List<Product> list = new ArrayList<Product>();
 
@@ -234,7 +236,8 @@ public class ViewProductFormController implements Initializable {
     public void viewReportOnAction(ActionEvent actionEvent) throws IOException {
 
 
-        File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\productSummaryReport\\ProductReport.pdf");
+        File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                "\\src\\main\\resources\\reportPdf\\productSummaryReport\\ProductReport.pdf");
         if (file.exists()){
             if (Desktop.isDesktopSupported()){
                 Desktop.getDesktop().open(file);
@@ -248,7 +251,8 @@ public class ViewProductFormController implements Initializable {
 
     public void viewProgressOnAction(ActionEvent actionEvent) throws IOException{
 
-        File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\productSummaryReport\\ProductChart.pdf");
+        File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                "\\src\\main\\resources\\reportPdf\\productSummaryReport\\ProductChart.pdf");
         if (file.exists()){
             if (Desktop.isDesktopSupported()){
                 Desktop.getDesktop().open(file);

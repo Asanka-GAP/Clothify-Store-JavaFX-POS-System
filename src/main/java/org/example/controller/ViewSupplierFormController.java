@@ -167,7 +167,8 @@ public class ViewSupplierFormController implements Initializable {
 
     public void reportViewOnAction(ActionEvent actionEvent) throws IOException {
         if (isRowSelected){
-            File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store\\src\\main\\resources\\reportPdf\\supplierReport\\"+supIdTxt.getText()+".pdf");
+            File file = new File("D:\\Notes\\ICD\\StandAlone Application\\END\\Colthify-Store" +
+                    "\\src\\main\\resources\\reportPdf\\supplierReport\\"+supIdTxt.getText()+".pdf");
 
             if (file.exists()){
                 if (Desktop.isDesktopSupported()){
