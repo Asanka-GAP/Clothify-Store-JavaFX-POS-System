@@ -398,6 +398,7 @@ public class PlaceOrderFormController implements Initializable {
             if (product.getQty()<=0){
                 new Alert(Alert.AlertType.ERROR,"Sorry..!! This Item is out of stock..Please try another Item").show();
             }
+
         });
     }
 
