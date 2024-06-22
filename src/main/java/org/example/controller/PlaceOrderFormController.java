@@ -395,7 +395,9 @@ public class PlaceOrderFormController implements Initializable {
             pId.setText(product.getId());
             priceTxt.setVisible(true);
 
-
+            if (product.getQty()<=0){
+                new Alert(Alert.AlertType.ERROR,"Sorry..!! This Item is out of stock..Please try another Item").show();
+            }
         });
     }
 
