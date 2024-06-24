@@ -80,7 +80,7 @@ public class DashBoardController implements Initializable {
 
 
         if (userEntity==null){
-            new Alert(Alert.AlertType.ERROR,"Invalid Email Address or Password").show();
+            new Alert(Alert.AlertType.ERROR,"Invalid Email Address").show();
             return;
         }
         String password = userBoImpl.passwordDecrypt(userEntity.getPassword());
@@ -97,8 +97,6 @@ public class DashBoardController implements Initializable {
                 instance.setName(userEntity.getName());
                 instance.setEmail(userEntity.getEmail());
                 SceneSwitchController.getInstance().switchScene(dashboardWindow,"placeOrder-form.fxml");
-            } else if (userEntity.getId()==null) {
-                System.out.println("Null");
             } else{
                 new Alert(Alert.AlertType.ERROR,"Invalid Password").show();
             }

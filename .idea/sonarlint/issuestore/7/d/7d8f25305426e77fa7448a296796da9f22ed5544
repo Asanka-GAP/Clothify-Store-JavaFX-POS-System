@@ -48,11 +48,11 @@ java:S1104,"VMake empIdLable a static final constant or non-public and provide 
 
 java:S1104-"UMake actionBtn a static final constant or non-public and provide accessors if needed.(ßöÇ¢úÿÿÿÿ8”£¬2J$094f922d-23c9-4d06-9680-4907d5e71733
 
-java:S3655Ü"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(ÃÇûŞ8µ£¬2J$008dd990-bc22-4614-ae32-91233c5e382a
+java:S3655…"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(ÃÇûŞ8µ£¬2J$f0ddedfe-ad10-4787-8d7b-e3fb10eb94c3
 
 java:S3655§"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(ÃÇûŞ8µ£¬2J$10a107d2-4815-489a-9b7c-484732b848b4
 
-java:S3655…"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(ÃÇûŞ8µ£¬2J$f0ddedfe-ad10-4787-8d7b-e3fb10eb94c3
+java:S3655Ü"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(ÃÇûŞ8µ£¬2J$008dd990-bc22-4614-ae32-91233c5e382a
 Ê
 java:S1186™"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¢Ûğ¥ûÿÿÿÿ8¶£¬2J$36a5ae13-9f15-42bc-8ed5-d36bebfee000
 Ê
