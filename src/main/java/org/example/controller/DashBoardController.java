@@ -86,7 +86,6 @@ public class DashBoardController implements Initializable {
         String password = userBoImpl.passwordDecrypt(userEntity.getPassword());
 
             if (userEntity.getRole().equals("Admin") && password.equals(passwordField.getText())){
-                System.out.println("Logged");
                 try {
                     SceneSwitchController.getInstance().switchScene(dashboardWindow,"adminDashBoard-form.fxml");
                 } catch (IOException e) {

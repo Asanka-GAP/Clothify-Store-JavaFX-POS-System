@@ -160,7 +160,7 @@ public class SupplierFormController implements Initializable {
                 supNametxt.setText("");
                 supEmailtxt.setText("");
                 supCompanytxt.setText("");
-                supplierTable.setItems(supllierBo.getAllSuppliers());
+                supplierTable.setItems(supllierBo.getAllSuppliersByEmpId(EmployeeData.getInstance().getId()));
             }
         }else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
